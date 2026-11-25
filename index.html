@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>Hogwarts Legacy — Guia passo a passo e 100% · v24</title>
+<title>Hogwarts Legacy — Guia passo a passo e 100% · v25</title>
 <style>
 :root{--bg:#100e1b;--panel:#1c1930;--panel2:#26213d;--text:#f4f0ff;--muted:#b8b1ce;--gold:#e7c46a;--green:#75d5a0;--border:#393252;--accent:#9c83f7}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#17132a,#0e1420 65%,#101b20);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
@@ -48,7 +48,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 </head>
 <body>
 <header>
-<h1>🪄 Hogwarts Legacy — Guia completo e 100% · v24</h1>
+<h1>🪄 Hogwarts Legacy — Guia completo e 100% · v25</h1>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
 </header>
 <main>
@@ -393,7 +393,7 @@ const puzzles=document.createElement('section');puzzles.className='group';puzzle
 ['Mesas de Astronomia','Desbloqueadas na aula de Astronomia. Só funcionam à noite: alinha a constelação rodando e ajustando o zoom do telescópio.']
 ];puzzleData.forEach((v,i)=>{const d=document.createElement('details');d.className='quest-card';const su=document.createElement('summary');su.textContent=v[0];const b=document.createElement('div');b.className='quest-body';const para=document.createElement('p');para.textContent=v[1];b.appendChild(para);b.appendChild(guideCheck('puzzle.'+i,'Já resolvi este tipo de puzzle / verifiquei as localizações'));d.appendChild(su);d.appendChild(b);pi.appendChild(d)});content.appendChild(puzzles);
 // Mini-puzzles com localizações individualizadas e checkboxes próprias (v18).
-const miniLocations=document.createElement('section');miniLocations.className='group';miniLocations.innerHTML='<h3>📍 Mini-puzzles — listas com localização individual</h3><p class="footer">Abre cada lista para ver o ponto de partida, a localização do objecto e requisitos. Cada item tem o seu próprio check.</p>';
+const miniLocations=document.createElement('section');miniLocations.className='group';miniLocations.innerHTML='<h3>📍 Mini-puzzles — localização de cada puzzle</h3><p class="footer">Esta é a primeira secção do menu Mini-puzzles. Cada entrada indica a zona, ponto de referência/percurso e requisitos quando conhecidos. Abre as listas e assinala cada local individualmente. Para puzzles cuja localização varia ou não está suficientemente identificada, usa o mapa ligado à lista — não é apresentada uma localização inventada.</p>';
 const miniLists=[
 {title:'🦋 15 enxames de Borboletas',source:'https://emmiejacob.com/hogwarts-legacy-butterfly-locations-map-and-list/',items:[
 'North Ford Bog — Pitt-Upon-Ford: segue a estrada para nordeste, para fora da aldeia.',
@@ -467,6 +467,7 @@ const miniLists=[
 'Depulso Puzzle Room 1 — Ala do Campanário, junto à sala de Aritmância/pátio do Campanário; entrada escondida por mecanismo Depulso.',
 'Depulso Puzzle Room 2 — Ala de Astronomia, acesso por mecanismo Depulso em parede do corredor. Requer explorar e puxar/empurrar blocos para alcançar o botão/entrada.' ]}
 ];
+const missingMiniInfo=document.createElement('div');missingMiniInfo.className='guide-note';missingMiniInfo.innerHTML='<b>Também incluído no percurso:</b> os 3 Segredos de Hogwarts (Viaduto, Torre do Relógio e Gabinete do Director), Provas de Merlin, cofres com puzzles, plataformas de aterragem, mesas de Astronomia, balões e Pontos de Magia Antiga. Estes desafios estão agrupados no menu <b>Desafios</b> e <b>Exploração e regiões</b>; para obter a localização individual de cada marcador, abre o mapa interactivo e filtra pelo tipo. A lista não deve ser considerada completa enquanto os 95 locais de Provas de Merlin não forem transcritos individualmente para o guia.';miniLocations.appendChild(missingMiniInfo);
 miniLists.forEach((list,li)=>{const det=document.createElement('details');det.className='quest-card';const sum=document.createElement('summary');sum.textContent=list.title+' — '+list.items.length+' locais';det.appendChild(sum);const body=document.createElement('div');body.className='quest-body';const ul=document.createElement('div');ul.className='items';list.items.forEach((loc,idx)=>ul.appendChild(guideCheck('v18.minipuzzle.'+li+'.'+idx,loc)));body.appendChild(ul);const source=document.createElement('p');source.className='footer';source.innerHTML='<a href="'+list.source+'" target="_blank" rel="noopener">Consultar guia de origem / mapas</a>';body.appendChild(source);det.appendChild(body);miniLocations.appendChild(det)});content.appendChild(miniLocations);
 const maps=document.createElement('section');maps.className='group';maps.innerHTML='<h3>🗺️ Exploração fora do castelo — o que limpar em cada região</h3><div class="items"><p>Em cada região do mapa, abre os filtros e verifica os contadores. Conclui os elementos abaixo e consulta o mapa interactivo para a localização individual:</p><ul><li>Chamas de Flu e aldeias;</li><li>Baús de coleção, cofres do tesouro e baús com olho;</li><li>Provas de Merlin e Pontos de Magia Antiga;</li><li>Estátuas Demiguise (recolher à noite; Alohomora I/II/III);</li><li>Balões, plataformas de aterragem, mesas de astronomia e borboletas;</li><li>Acampamentos de bandidos, inimigos infames, covis de criaturas e masmorras;</li><li>Missões secundárias locais e páginas Revelio.</li></ul><div class="guide-links"><a href="https://wand.com/maps/hogwarts-legacy" target="_blank" rel="noopener">Abrir mapa e filtrar por região</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-guide-full-game-walkthrough-and-100percent-collectibles" target="_blank" rel="noopener">Guias de coleccionáveis por região</a></div></div>';content.appendChild(maps);
 // Locais com nomes concretos transcritos de guias de localização consultados.
@@ -907,7 +908,7 @@ Array.from(completionNode.children).forEach(child=>{
 const categoryDefs=[
  {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1],nodes[2]]},
  {name:'Missões secundárias',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
- {name:'Mini-puzzles',icon:'🧩',nodes:[puzzlesNode,miniLocationsNode]},
+ {name:'Mini-puzzles e localizações',icon:'🧩',nodes:[miniLocationsNode,puzzlesNode]},
  {name:'Desafios',icon:'🏅',nodes:[challengePanel,routeNode]},
  {name:'Exploração e regiões',icon:'🗺️',nodes:[regionsNode,mapsNode,flooPanel,demNode,valleyNode]},
  {name:'Notas',icon:'ℹ️',nodes:[footerNode]}

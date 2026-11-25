@@ -10,7 +10,7 @@ HOGWARTS LEGACY — GUIA DE PROGRESSO (V22)
 2. Actualizacao no telemovel
 - Antes de substituir os ficheiros, usa Exportar progresso na APP antiga para guardar uma copia JSON.
 - Actualiza os ficheiros no GitHub.
-- Fecha a APP, abre-a novamente com internet e aguarda a cache v24.
+- Fecha a APP, abre-a novamente com internet e aguarda a cache v25.
 - Se continuar a mostrar a versao antiga, fecha a APP instalada e abre o site no Chrome; depois limpa os dados/cache do site ou remove e volta a adicionar o atalho.
 - Importa o JSON de progresso se necessario.
 
@@ -44,7 +44,7 @@ AUDITORIA FINAL V15
 VERSAO 17 - CORRECAO DE NAVEGACAO
 Menus em grelha de duas colunas, sem scroll horizontal.
 
-V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borboletas, Quadros de Tracas (espelhos), Chaves Daedalianas, portas de Aritmancia e salas Depulso/Herodiana. Cache v24.
+V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borboletas, Quadros de Tracas (espelhos), Chaves Daedalianas, portas de Aritmancia e salas Depulso/Herodiana. Cache v25.
 
 
 VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por categoria ao mapa interactivo filtrável e aos guias individuais de Field Guide Pages, Merlin Trials, Balloons, Demiguise, Astronomy Tables, Landing Platforms, Ancient Magic Hotspots e Butterfly Chests. As checklists não devem ser confundidas com descrições de coordenadas completas; o mapa/guia externo fornece os marcadores individuais.
@@ -67,10 +67,13 @@ VERSAO 22 — CORRECCAO DAS CHECKBOXES E DO PERCURSO
 - Guia 100% e História Principal mostram apenas o percurso cronológico por capítulos e missões.
 - Não existe checklist geral de coleccionáveis nestas duas áreas: baús, páginas e desvios permanecem dentro da missão onde podem ser recolhidos.
 - O estado anterior continua guardado na chave localStorage hlTracker; as novas caixas mantêm os seus identificadores.
-- Cache da aplicação actualizada para v24.
+- Cache da aplicação actualizada para v25.
 
 
-Versão v24: o menu Guia 100% apresenta as áreas complementares: missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração regional. A checklist geral de todos os coleccionáveis e a duplicação dos capítulos da História Principal ficam fora do Guia 100%. A História Principal mantém o percurso cronológico por capítulos.
+Versão v25: o menu Guia 100% apresenta as áreas complementares: missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração regional. A checklist geral de todos os coleccionáveis e a duplicação dos capítulos da História Principal ficam fora do Guia 100%. A História Principal mantém o percurso cronológico por capítulos.
 
 
-Versão v24: nomes das 57 missões secundárias traduzidos para português de Portugal. Os identificadores de progresso foram mantidos, preservando as marcações existentes.
+Versão v25: nomes das 57 missões secundárias traduzidos para português de Portugal. Os identificadores de progresso foram mantidos, preservando as marcações existentes.
+
+
+Versão v25: mini-puzzles e listas de localizações aparecem primeiro no menu Mini-puzzles. Foi adicionada uma nota clara sobre os tipos que ainda dependem do mapa interactivo; as 95 Provas de Merlin não estão todas transcritas individualmente.
