@@ -51,3 +51,8 @@ ALTERACOES V18 — MINI-PUZZLES COM LOCALIZACOES
 
 
 VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por categoria ao mapa interactivo filtrável e aos guias individuais de Field Guide Pages, Merlin Trials, Balloons, Demiguise, Astronomy Tables, Landing Platforms, Ancient Magic Hotspots e Butterfly Chests. As checklists não devem ser confundidas com descrições de coordenadas completas; o mapa/guia externo fornece os marcadores individuais.
+
+
+VERSAO 20 — HISTORIA PRINCIPAL
+Fontes principais: PowerPyx, lista completa de missões e walkthroughs individuais (https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/); The Path to Hogwarts (https://www.powerpyx.com/hogwarts-legacy-the-path-to-hogwarts-walkthrough/); Welcome to Hogwarts; Charms Class; Defence Against the Dark Arts; Professor Ronen Assignment; Welcome to Hogsmeade; Secrets of the Restricted Section; Jackdaw’s Rest; Percival Rackham’s Trial; Helm of Urtkot; High Keep; Charles Rookwood’s Trial; In the Shadow of the Mine; It’s All Gobbledegook; In the Shadow of the Mountain; Lodgok’s Loyalty.
+Critério: números só são apresentados quando confirmados pela fonte; restantes missões mostram “contagem não confirmada” e checklist de verificação, para não inventar quantidades. As recolhas têm checks independentes do check de missão.

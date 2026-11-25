@@ -48,3 +48,7 @@ V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borbole
 
 
 VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por categoria ao mapa interactivo filtrável e aos guias individuais de Field Guide Pages, Merlin Trials, Balloons, Demiguise, Astronomy Tables, Landing Platforms, Ancient Magic Hotspots e Butterfly Chests. As checklists não devem ser confundidas com descrições de coordenadas completas; o mapa/guia externo fornece os marcadores individuais.
+
+
+VERSAO 20 — HISTORIA PRINCIPAL POR MISSAO
+Cada missão tem agora uma checklist de recolhas/desvios própria. O Prólogo inclui os 9 baús com localização individual. Outras missões incluem localizações de baús e puzzles quando descritos por guias de walkthrough; nos casos sem contagem publicada, a aplicação identifica a limitação em vez de inventar totais. Os checks de recolha são independentes do check de missão, e o estado da missão permanece sincronizado com o Guia 100%.
