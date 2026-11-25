@@ -60,3 +60,9 @@ Critério: números só são apresentados quando confirmados pela fonte; restant
 
 VERSAO 21 — ALTERACAO DE ESTRUTURA
 A navegação Guia 100% / História Principal foi reorganizada para mostrar apenas o percurso cronológico por capítulos e missões. As listas gerais de coleccionáveis, contagens regionais e checklists agregadas deixam de ser apresentadas nessa área. As listas de localização por missão continuam sujeitas à validação individual indicada nas notas v20; esta versão não declara concluída a auditoria de todas as missões secundárias nem de todos os baús/páginas.
+
+
+VERSAO 22 — ALTERACOES DE INTERFACE
+- Correcao: ao marcar uma checkbox, o render preserva o estado aberto/fechado de cada elemento details, evitando recolher o capítulo ou a missão em edição.
+- Guia 100% e História Principal usam exclusivamente a estrutura cronológica por capítulos; não apresentam uma checklist geral de coleccionáveis.
+- Esta correcao de interface não acrescenta novas localizações nem altera o estado dos itens já guardados.

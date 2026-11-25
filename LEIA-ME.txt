@@ -1,4 +1,4 @@
-HOGWARTS LEGACY — GUIA DE PROGRESSO (V21)
+HOGWARTS LEGACY — GUIA DE PROGRESSO (V22)
 
 1. Publicacao no GitHub Pages
 - Extrai o ZIP.
@@ -10,7 +10,7 @@ HOGWARTS LEGACY — GUIA DE PROGRESSO (V21)
 2. Actualizacao no telemovel
 - Antes de substituir os ficheiros, usa Exportar progresso na APP antiga para guardar uma copia JSON.
 - Actualiza os ficheiros no GitHub.
-- Fecha a APP, abre-a novamente com internet e aguarda a cache v15.
+- Fecha a APP, abre-a novamente com internet e aguarda a cache v22.
 - Se continuar a mostrar a versao antiga, fecha a APP instalada e abre o site no Chrome; depois limpa os dados/cache do site ou remove e volta a adicionar o atalho.
 - Importa o JSON de progresso se necessario.
 
@@ -44,7 +44,7 @@ AUDITORIA FINAL V15
 VERSAO 17 - CORRECAO DE NAVEGACAO
 Menus em grelha de duas colunas, sem scroll horizontal.
 
-V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borboletas, Quadros de Tracas (espelhos), Chaves Daedalianas, portas de Aritmancia e salas Depulso/Herodiana. Cache v18.
+V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borboletas, Quadros de Tracas (espelhos), Chaves Daedalianas, portas de Aritmancia e salas Depulso/Herodiana. Cache v22.
 
 
 VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por categoria ao mapa interactivo filtrável e aos guias individuais de Field Guide Pages, Merlin Trials, Balloons, Demiguise, Astronomy Tables, Landing Platforms, Ancient Magic Hotspots e Butterfly Chests. As checklists não devem ser confundidas com descrições de coordenadas completas; o mapa/guia externo fornece os marcadores individuais.
@@ -60,3 +60,11 @@ VERSAO 21 — ESTRUTURA CRONOLOGICA POR CAPITULOS
 - Foi retirada da navegação do Guia 100% a checklist geral de todos os coleccionáveis. Não são apresentados baús/páginas como uma lista global separada da história.
 - A conclusão da missão continua independente da conclusão de cada baú, página ou desvio. O progresso anterior é preservado.
 - Nota: esta versão altera a organização e a navegação; não significa que todas as localizações individuais das 47 missões estejam já validadas. Os casos sem localização confirmada continuam assinalados como tal.
+
+
+VERSAO 22 — CORRECCAO DAS CHECKBOXES E DO PERCURSO
+- Ao assinalar uma caixa, os capítulos e missões que estavam abertos mantêm-se abertos; a aplicação já não recolhe a seleção após guardar.
+- Guia 100% e História Principal mostram apenas o percurso cronológico por capítulos e missões.
+- Não existe checklist geral de coleccionáveis nestas duas áreas: baús, páginas e desvios permanecem dentro da missão onde podem ser recolhidos.
+- O estado anterior continua guardado na chave localStorage hlTracker; as novas caixas mantêm os seus identificadores.
+- Cache da aplicação actualizada para v22.
