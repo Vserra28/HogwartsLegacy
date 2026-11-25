@@ -39,3 +39,7 @@ AUDITORIA FINAL V15
 - Ao marcar uma missao no Guia 100%, o estado dessa mesma missao e actualizado automaticamente na janela Historia principal; o inverso tambem funciona. As tarefas dos professores que correspondem a missoes da campanha partilham o mesmo estado.
 - O progresso sincroniza automaticamente entre separadores/janelas do mesmo site e navegador, no mesmo dispositivo, usando armazenamento local e BroadcastChannel. Nao e sincronizacao na nuvem entre dispositivos diferentes. Para mudar de dispositivo, usa Exportar/Importar progresso.
 - As caixas de verificacao de tarefas diferentes (por exemplo, verificar desvios/coleccionaveis numa missao) continuam separadas: concluir uma missao nao assinala automaticamente coleccionaveis que ainda nao recolheste.
+
+
+VERSAO 17 - CORRECAO DE NAVEGACAO
+Menus em grelha de duas colunas, sem scroll horizontal.
