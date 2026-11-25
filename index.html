@@ -289,6 +289,82 @@ const puzzles=document.createElement('section');puzzles.className='group';puzzle
 ['Borboletas','Segue o enxame até ao local escondido e usa Revelio para confirmar o baú de Conjuração. Em regra, o enxame não aparece no mapa como marcador normal.'],
 ['Mesas de Astronomia','Desbloqueadas na aula de Astronomia. Só funcionam à noite: alinha a constelação rodando e ajustando o zoom do telescópio.']
 ];puzzleData.forEach((v,i)=>{const d=document.createElement('details');d.className='quest-card';const su=document.createElement('summary');su.textContent=v[0];const b=document.createElement('div');b.className='quest-body';const para=document.createElement('p');para.textContent=v[1];b.appendChild(para);b.appendChild(guideCheck('puzzle.'+i,'Já resolvi este tipo de puzzle / verifiquei as localizações'));d.appendChild(su);d.appendChild(b);pi.appendChild(d)});content.appendChild(puzzles);
+// Mini-puzzles com localizações individualizadas e checkboxes próprias (v18).
+const miniLocations=document.createElement('section');miniLocations.className='group';miniLocations.innerHTML='<h3>📍 Mini-puzzles — listas com localização individual</h3><p class="footer">Abre cada lista para ver o ponto de partida, a localização do objecto e requisitos. Cada item tem o seu próprio check.</p>';
+const miniLists=[
+{title:'🦋 15 enxames de Borboletas',source:'https://emmiejacob.com/hogwarts-legacy-butterfly-locations-map-and-list/',items:[
+'North Ford Bog — Pitt-Upon-Ford: segue a estrada para nordeste, para fora da aldeia.',
+'Vale de Hogsmeade — East Hogsmeade Valley: a partir da Chama de Flu, segue para sul até ficares a este de Hogsmeade.',
+'North Hogwarts — Jackdaw’s Tomb: a sudoeste da Chama, acompanha o rio em direcção às Ruínas de Karrow.',
+'North Hogwarts — Floresta Proibida: enxame da missão Follow the Butterflies; desbloqueia após falar com Clementine Willardsey nas Three Broomsticks, no Inverno.',
+'Floresta Proibida — Jackdaw’s Tomb: encontra a Prova de Merlin a este da Chama e segue ligeiramente para nordeste.',
+'South Hogwarts — Hogwarts North Exit: nas falésias a sudoeste do campo de Quidditch, perto de um arco natural de pedra.',
+'South Hogwarts — Aranshire: a sul da aldeia, no campo com topiária de dragão, junto à estrada.',
+'Hogwarts Valley — Central Hogwarts Valley: a este da Chama, em direcção à ponte ferroviária.',
+'Hogwarts Valley — Keenbridge: a oeste da aldeia, junto ao grupo de pedras no mapa.',
+'Hogwarts Valley — Keenbridge: a este da aldeia, junto a uma pequena ruína/castelo perto da margem do mapa.',
+'Feldcroft — North Feldcroft: a sudoeste da Chama, numa falésia com vista para a pequena ilha.',
+'Feldcroft — Feldcroft Catacombs: segue para este pela costa, junto a dois acampamentos de bandidos.',
+'Poidsear Coast — Poidsear Castle: a norte do castelo.',
+'Poidsear Coast — South Poidsear Coast: nas proximidades da Chama de Flu South Poidsear Coast.',
+'Clagmar Coast — Clagmar Castle: no extremo noroeste da massa de terra do castelo, na falésia exterior.' ]},
+{title:'🪞 20 Quadros de Traças (espelhos)',source:'https://emmiejacob.com/hl-all-20-moth-puzzles/',items:[
+'Hogwarts — Anexo da Biblioteca, Central Hall: missão inicial Like a Moth to a Frame; quadro na Central Hall. Traça: do outro lado do corredor, descendo as escadas para Poções, à esquerda da estátua.',
+'Hogwarts — Grande Escadaria, base da Torre de Ravenclaw: quadro ao pé das escadas. Traça: um piso acima, entre pinturas, em frente à porta de Aritmância.',
+'Hogwarts — Torre de Defesa Contra as Artes das Trevas: quadro abaixo da Chama de Flu. Traça: sobe e fica à esquerda da sala do Professor Fig.',
+'Hogwarts — História da Magia / North Hall: quadro um piso acima da aula de História da Magia, perto do Pátio da Transfiguração. Traça: atrás da porta Alohomora I da sala de História da Magia.',
+'Hogwarts — Biblioteca: quadro no piso superior, no extremo oposto das escadas. Traça: no púlpito acima da Chama de Flu da Biblioteca.',
+'Hogwarts — Pátio do Viaduto: quadro na parede exterior baixa do pátio. Traça: sobe as escadas junto à Chama de Flu e procura no extremo direito da área coberta.',
+'Hogwarts — Grande Salão: quadro junto ao exterior do salão. Traça: parede de trás do Grande Salão, atrás dos lugares dos professores.',
+'Hogwarts — Sala Comum de Slytherin / corredor: quadro em frente ao corredor junto à casa de banho. Traça: segue à esquerda, contorna, sobe as escadas e vira na segunda esquerda (guia assinala possível bug de spawn).',
+'Hogwarts — Pungent Passage: quadro pela porta no penúltimo piso das escadas da Torre de Defesa Contra as Artes das Trevas, caminho para Feitiços/Professor Fig. Traça: corredor à esquerda.',
+'Hogwarts — Torre de Gryffindor, Mapa de Argyllshire: usa Depulso no botão acima do mapa, junto à porta para Crossed Wands. Traça: casa de banho feminina no corredor.',
+'Hogwarts — sala de Crossed Wands: quadro dentro do armazém com Alohomora I. Traça: no pátio exterior, à direita.',
+'Hogwarts — corredor trancado abaixo de Poções: acesso pela escada de Poções ou pelo Pátio do Campanário; Alohomora I. Traça: no expositor com troll, junto ao lado do Pátio do Campanário.',
+'Hogwarts — saída norte: quadro na sala trancada à direita do pátio, junto à Chama de Flu. Traça: duas torres atrás, acima da porta de saída.',
+'Hogwarts — corredor do Director: quadro acima do nível da Sala dos Troféus, na base das escadas do Gabinete do Director. Traça: volta a descer as escadas.',
+'Hogwarts — Torre de Astronomia: quadro na base da escadaria em espiral que sobe aos telescópios exteriores. Traça: no quadro-negro exterior, no topo.',
+'Hogsmeade — Dogweed and Deathcap: quadro dentro da loja. Traça: no topo da chaminé; sai e contorna o edifício, sobe as pedras.',
+'Hogsmeade — sudeste: quadro a norte da Chama South Hogsmeade, encostado a uma casa. Traça: vira à direita, passa entre casas até à zona relvada.',
+'Hogsmeade — Hog’s Head Alley: quadro atrás dos edifícios no beco sem saída. Traça: no cais, junto à água.',
+'Hogsmeade — Moinho de Água: quadro dentro do moinho/celeiro anexo à roda. Traça: no candeeiro ao longo do caminho de regresso à vila.',
+'Hogsmeade — loja abandonada: a oeste, entre The Magic Neep e Dogweed and Deathcap. Traça: atrás da loja.' ]},
+{title:'🗝️ 16 Chaves Daedalianas',source:'https://ragequit.gg/hogwarts-legacy/the-daedalian-keys-quest-and-daedalian-key-locations/',items:[
+'Astronomy Tower — chave tutorial, no topo da torre, seguindo o marcador da missão. Cabinet: sala circular um piso abaixo, junto à Chama de Flu.',
+'Astronomy Wing — piso abaixo da aula de Defesa Contra as Artes das Trevas; sobe as escadas e vira à esquerda, junto ao esqueleto de rinoceronte.',
+'Grande Salão — atravessa as portas à direita da Chama do Grande Salão, desce as escadas à direita; chave perto de uma estátua.',
+'Grande Salão — sai pelas primeiras portas para o Entrance Hall.',
+'Grande Salão — junto à lareira à esquerda da Chama; segue a chave pelas escadas atrás da lareira.',
+'Ala do Campanário — Pátio do Campanário, primeira escadaria à esquerda, sobe até ao topo.',
+'Ala do Campanário — desce a partir do Pátio do Campanário; chave diante da grande estátua de dragão.',
+'Ala do Campanário — segue o corredor a partir da chave anterior e contorna a curva.',
+'Anexo da Biblioteca — corredor exterior à aula de Poções, descendo as escadas.',
+'Anexo da Biblioteca — Central Hall, em frente à aula de Poções; cabinet junto a uma porta de Aritmância.',
+'Anexo da Biblioteca — junto à lareira do lado esquerdo da Biblioteca.',
+'Anexo da Biblioteca — desde a Chama Central Hall, vira à esquerda e sobe; procura atrás da segunda escadaria.',
+'Grande Escadaria — perto do topo da torre da escadaria.',
+'Ala Sul — Torre da Faculdade: Chama de Flu, corredor e porta à direita; sobe as escadas e vira à esquerda para o corredor de retratos. Requer Alohomora.',
+'Ala Sul — Hospital Wing: passa a casa de banho dos prefects e continua a descer as escadas da Ala Hospitalar. Requer Alohomora.',
+'Ala Sul — Pátio da Torre do Relógio: junto à área de duelos, acesso a partir da Chama do Pátio do Relógio. Requer Alohomora.' ]},
+{title:'🔢 Portas de Aritmância',source:'https://emmiejacob.com/hl-all-12-arithmancy-doors/',items:[
+'Anexo da Biblioteca — Central Hall: porta de Aritmância perto da Chama de Flu e da escadaria.',
+'Anexo da Biblioteca — Sala de Aritmância: porta na própria sala de aula.',
+'Anexo da Biblioteca — Sala de Aritmância: segunda porta na sala.',
+'Grande Escadaria — porta de puzzle num patamar da escadaria.',
+'Grande Escadaria — porta de puzzle num patamar superior.',
+'Grande Salão — porta no corredor lateral do Grande Salão.',
+'Torre de Ravenclaw — porta de Aritmância junto à Chama de Flu.',
+'Torre de Defesa Contra as Artes das Trevas — porta de Aritmância perto da Sala de Feitiços.',
+'North Hall — porta de Aritmância no corredor do North Hall.',
+'Anexo da Biblioteca — porta de Aritmância na área da Adivinhação.',
+'Ala do Campanário — porta de Aritmância no pátio do Campanário.',
+'Grande Escadaria / zona superior — confirma no mapa interactivo as restantes portas; a fonte consultada apresenta 12 no total e esta última entrada requer confirmação visual.' ]},
+{title:'🧱 Salas de Depulso / Herodiana',source:'https://www.powerpyx.com/hogwarts-legacy-all-puzzles-explained/',items:[
+'Sala de Herodiana — Ala de Astronomia, corredor perto da Sala de Feitiços; inicia a missão secundária The Hall of Herodiana.',
+'Depulso Puzzle Room 1 — Ala do Campanário, junto à sala de Aritmância/pátio do Campanário; entrada escondida por mecanismo Depulso.',
+'Depulso Puzzle Room 2 — Ala de Astronomia, acesso por mecanismo Depulso em parede do corredor. Requer explorar e puxar/empurrar blocos para alcançar o botão/entrada.' ]}
+];
+miniLists.forEach((list,li)=>{const det=document.createElement('details');det.className='quest-card';const sum=document.createElement('summary');sum.textContent=list.title+' — '+list.items.length+' locais';det.appendChild(sum);const body=document.createElement('div');body.className='quest-body';const ul=document.createElement('div');ul.className='items';list.items.forEach((loc,idx)=>ul.appendChild(guideCheck('v18.minipuzzle.'+li+'.'+idx,loc)));body.appendChild(ul);const source=document.createElement('p');source.className='footer';source.innerHTML='<a href="'+list.source+'" target="_blank" rel="noopener">Consultar guia de origem / mapas</a>';body.appendChild(source);det.appendChild(body);miniLocations.appendChild(det)});content.appendChild(miniLocations);
 const maps=document.createElement('section');maps.className='group';maps.innerHTML='<h3>🗺️ Exploração fora do castelo — o que limpar em cada região</h3><div class="items"><p>Em cada região do mapa, abre os filtros e verifica os contadores. Conclui os elementos abaixo e consulta o mapa interactivo para a localização individual:</p><ul><li>Chamas de Flu e aldeias;</li><li>Baús de coleção, cofres do tesouro e baús com olho;</li><li>Provas de Merlin e Pontos de Magia Antiga;</li><li>Estátuas Demiguise (recolher à noite; Alohomora I/II/III);</li><li>Balões, plataformas de aterragem, mesas de astronomia e borboletas;</li><li>Acampamentos de bandidos, inimigos infames, covis de criaturas e masmorras;</li><li>Missões secundárias locais e páginas Revelio.</li></ul><div class="guide-links"><a href="https://wand.com/maps/hogwarts-legacy" target="_blank" rel="noopener">Abrir mapa e filtrar por região</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-guide-full-game-walkthrough-and-100percent-collectibles" target="_blank" rel="noopener">Guias de coleccionáveis por região</a></div></div>';content.appendChild(maps);
 // Locais com nomes concretos transcritos de guias de localização consultados.
 // IDs próprios mantêm o progresso independente das antigas listas numeradas.

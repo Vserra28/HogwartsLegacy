@@ -43,3 +43,5 @@ AUDITORIA FINAL V15
 
 VERSAO 17 - CORRECAO DE NAVEGACAO
 Menus em grelha de duas colunas, sem scroll horizontal.
+
+V18: Mini-puzzles agora incluem checklists individuais com localizacoes: Borboletas, Quadros de Tracas (espelhos), Chaves Daedalianas, portas de Aritmancia e salas Depulso/Herodiana. Cache v18.

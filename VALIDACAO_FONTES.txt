@@ -41,3 +41,10 @@ ALTERACOES FUNCIONAIS V15
 - Cada missao tem uma chave de progresso partilhada entre o Guia 100%, a secao Historia principal e as entradas duplicadas de tarefas de professores quando correspondem ao mesmo nome de missao.
 - A sincronizacao entre janelas/separadores do mesmo navegador e feita por localStorage + BroadcastChannel. Nao e sincronizacao cloud entre dispositivos.
 - Os marcadores de verificacao de desvios e coleccionaveis permanecem independentes da conclusao da missao, para nao assinalar como recolhido algo que o jogador ainda nao recolheu.
+
+ALTERACOES V18 — MINI-PUZZLES COM LOCALIZACOES
+- Acrescentadas listas individuais com checkboxes: 15 enxames de borboletas, 20 quadros de traças/espelhos, 16 chaves Daedalianas, portas de Aritmancia e salas de Depulso/Herodiana.
+- As descricoes de localizacao foram resumidas e adaptadas a PT-PT a partir dos guias referenciados dentro de cada lista.
+- Algumas entradas de Aritmancia e Depulso ficam explicitamente marcadas como necessitando confirmacao visual; nao foram apresentadas como coordenadas verificadas.
+- IDs novos v18.minipuzzle.*; progresso guardado separadamente.
+- Service worker/cache actualizado para v18.
