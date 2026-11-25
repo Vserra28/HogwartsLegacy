@@ -48,3 +48,6 @@ ALTERACOES V18 — MINI-PUZZLES COM LOCALIZACOES
 - Algumas entradas de Aritmancia e Depulso ficam explicitamente marcadas como necessitando confirmacao visual; nao foram apresentadas como coordenadas verificadas.
 - IDs novos v18.minipuzzle.*; progresso guardado separadamente.
 - Service worker/cache actualizado para v18.
+
+
+VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por categoria ao mapa interactivo filtrável e aos guias individuais de Field Guide Pages, Merlin Trials, Balloons, Demiguise, Astronomy Tables, Landing Platforms, Ancient Magic Hotspots e Butterfly Chests. As checklists não devem ser confundidas com descrições de coordenadas completas; o mapa/guia externo fornece os marcadores individuais.
