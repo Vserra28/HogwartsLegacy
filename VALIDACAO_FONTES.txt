@@ -66,3 +66,6 @@ VERSAO 22 — ALTERACOES DE INTERFACE
 - Correcao: ao marcar uma checkbox, o render preserva o estado aberto/fechado de cada elemento details, evitando recolher o capítulo ou a missão em edição.
 - Guia 100% e História Principal usam exclusivamente a estrutura cronológica por capítulos; não apresentam uma checklist geral de coleccionáveis.
 - Esta correcao de interface não acrescenta novas localizações nem altera o estado dos itens já guardados.
+
+
+Versão v23: o menu Guia 100% apresenta as áreas complementares: missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração regional. A checklist geral de todos os coleccionáveis e a duplicação dos capítulos da História Principal ficam fora do Guia 100%. A História Principal mantém o percurso cronológico por capítulos.

@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>Hogwarts Legacy — Guia passo a passo e 100% · v22</title>
+<title>Hogwarts Legacy — Guia passo a passo e 100% · v23</title>
 <style>
 :root{--bg:#100e1b;--panel:#1c1930;--panel2:#26213d;--text:#f4f0ff;--muted:#b8b1ce;--gold:#e7c46a;--green:#75d5a0;--border:#393252;--accent:#9c83f7}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#17132a,#0e1420 65%,#101b20);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
@@ -48,7 +48,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 </head>
 <body>
 <header>
-<h1>🪄 Hogwarts Legacy — Guia completo e 100%</h1>
+<h1>🪄 Hogwarts Legacy — Guia completo e 100% · v23</h1>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
 </header>
 <main>
@@ -301,7 +301,7 @@ function renderChapterJourney(){
  const p=document.createElement('p');p.className='items';p.textContent=doneMissions+' de '+totalMissions+' missões concluídas. As caixas de baús, páginas e desvios contam separadamente.';summary.appendChild(p);content.insertBefore(summary,intro.nextSibling);
 }
 
-function renderGuide(){content.innerHTML='';renderChapterJourney();return;
+function renderGuide(){content.innerHTML='';
 // v19 — localizar os coleccionáveis com mapas interactivos e guias por categoria.
 const locator=document.createElement('section');locator.className='group';locator.innerHTML='<h3>📍 Localizações exactas — mapa e guias por categoria</h3><p>As listas abaixo são checklists de progresso. Para ver o marcador exacto no mapa, abre o mapa interactivo, escolhe a categoria na camada/filtros e usa a pesquisa por região ou nome. Os guias individuais ajudam a navegar no terreno; não confundir checklist numerada com localização exacta confirmada.</p><div class="location-resource-grid"></div>';
 const resources=[
@@ -315,7 +315,7 @@ const resources=[
  ['🦋 Baús de borboletas — 15','https://ragequit.gg/hogwarts-legacy/interactive-map/','Mapa interactivo: activar Butterfly Chests','https://www.powerpyx.com/hogwarts-legacy-follow-the-butterflies-side-quest-walkthrough/','PowerPyx: missão e baús de borboletas'],
  ['🦋 Espelhos de borboleta / páginas — 20','https://ragequit.gg/hogwarts-legacy/interactive-map/','Mapa interactivo: activar Field Guide Pages','https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/','PowerPyx: páginas Revelio e espelhos']
 ];const rg=locator.querySelector('.location-resource-grid');resources.forEach(([title,map,mapLabel,guide,guideLabel])=>{const card=document.createElement('article');card.className='location-resource-card';card.innerHTML='<b>'+title+'</b><a href="'+map+'" target="_blank" rel="noopener">'+mapLabel+' ↗</a><a href="'+guide+'" target="_blank" rel="noopener">'+guideLabel+' ↗</a>';rg.appendChild(card)});content.appendChild(locator);
-const intro=document.createElement('div');intro.className='guide-intro';intro.innerHTML='<h2>🧭 Guia completo — do início aos 100%</h2><p>Segue a campanha por capítulos. Na v20, cada missão abre uma checklist própria com baús/páginas/desvios identificados quando a localização está confirmada; quando a fonte não publica uma contagem, isso fica explicitamente indicado. O check da missão continua sincronizado com a janela História principal.</p><div class="guide-links"><a href="https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/" target="_blank" rel="noopener">Lista e ordem de missões</a><a href="https://www.powerpyx.com/hogwarts-legacy-collectibles-guide-100-completion/" target="_blank" rel="noopener">Checklist 100% de coleccionáveis</a><a href="https://wand.com/maps/hogwarts-legacy" target="_blank" rel="noopener">Mapa interactivo por localização</a><a href="https://www.powerpyx.com/hogwarts-legacy-all-puzzles-explained/" target="_blank" rel="noopener">Soluções de puzzles</a></div><div class="guide-note"><b>Importante:</b> os coleccionáveis ligados à conclusão não são perdíveis. Podes voltar ao mundo depois da história. O guia assinala, ainda assim, o momento mais eficiente para os recolher. Para coordenadas exactas de cada baú/página, usa o mapa interactivo por região. No jogo base, a referência inclui 95 Provas de Merlin, 33 estátuas Demiguise, 168 baús de coleção (inclui os 12 dos Vivários), 236 páginas do Guia de Campo, 15 mesas de astronomia, 20 plataformas de aterragem, 20 pontos de Magia Antiga e 15 enxames de borboletas.</div>';
+const intro=document.createElement('div');intro.className='guide-intro';intro.innerHTML='<h2>🧭 Guia 100% — tudo o que falta para além da história</h2><p>Este menu reúne missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração das regiões. A História Principal tem o seu próprio menu cronológico. Não existe aqui uma checklist geral de todos os baús e páginas.</p><div class=\'guide-links\'><a href=\"https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/\" target=\"_blank\" rel=\"noopener\">Lista e ordem de missões</a><a href=\"https://wand.com/maps/hogwarts-legacy\" target=\"_blank\" rel=\"noopener\">Mapa interactivo por localização</a><a href=\"https://www.powerpyx.com/hogwarts-legacy-all-puzzles-explained/\" target=\"_blank\" rel=\"noopener\">Soluções de puzzles</a></div><div class=\'guide-note\'><b>Como usar:</b> assinala missões secundárias, puzzles e desafios à medida que os concluis. Os baús e as páginas que pertencem a uma missão principal continuam dentro dessa missão no separador História Principal.</div>';
 content.appendChild(intro);
 // Resumo sempre visível: os números não ficam escondidos em secções recolhidas.
 const overview=document.createElement('section');overview.className='count-overview';
@@ -882,22 +882,49 @@ valley.innerHTML='<h3>🗺️ Vale de Hogsmeade — ficha de região</h3><div cl
 const valleyLinks=document.createElement('div');valleyLinks.className='guide-links';valleyLinks.innerHTML='<a href="https://www.powerpyx.com/hogwarts-legacy-collectibles-guide-100-completion/" target="_blank" rel="noopener">PowerPyx — contagens de 100%</a><a href="https://ragequit.gg/hogwarts-legacy/" target="_blank" rel="noopener">Mapa interactivo — filtrar Vale de Hogsmeade</a>';
 valley.appendChild(valleyLinks);content.appendChild(valley);
 const total=document.createElement('p');total.className='footer';total.textContent='Missões principais/pós-história apresentadas: '+all+'. O progresso deste guia fica guardado no mesmo dispositivo que a checklist.';content.appendChild(total);
-// Navegação por categorias: evita uma única página longa em scroll.
-const nodes=Array.from(content.children);const storyStart=3,storyEnd=storyStart+storyChapters.length;let cursor=storyEnd;
-const sideNode=nodes[cursor++];const relationNodes=nodes.slice(cursor,cursor+Object.keys(relationships).length);cursor+=Object.keys(relationships).length;
-const assignmentsNode=nodes[cursor++],regionsNode=nodes[cursor++],totalsNode=nodes[cursor++],puzzlesNode=nodes[cursor++],mapsNode=nodes[cursor++],verifiedNode=nodes[cursor++],completionNode=nodes[cursor++],routeNode=nodes[cursor++],demNode=nodes[cursor++],valleyNode=nodes[cursor++],footerNode=nodes[cursor++];
+// Navegação por áreas complementares. A História Principal permanece no seu menu próprio.
+// Não são apresentados aqui a checklist geral de coleccionáveis, as contagens genéricas
+// por baú/página nem uma segunda cópia dos capítulos da história.
+const nodes=Array.from(content.children);
+const storyStart=4, storyEnd=storyStart+storyChapters.length;
+let cursor=storyEnd;
+const sideNode=nodes[cursor++];
+const relationNodes=nodes.slice(cursor,cursor+Object.keys(relationships).length); cursor+=Object.keys(relationships).length;
+const assignmentsNode=nodes[cursor++], regionsNode=nodes[cursor++], totalsNode=nodes[cursor++], puzzlesNode=nodes[cursor++], miniLocationsNode=nodes[cursor++], mapsNode=nodes[cursor++], verifiedNode=nodes[cursor++], completionNode=nodes[cursor++], routeNode=nodes[cursor++], demNode=nodes[cursor++], valleyNode=nodes[cursor++], footerNode=nodes[cursor++];
+
+// Separar apenas os desafios de exploração e os puzzles com localização própria.
+const challengePanel=document.createElement('section'); challengePanel.className='group';
+challengePanel.innerHTML='<h3>🏅 Desafios e actividades de exploração</h3><p class="footer">Provas de Merlin, plataformas, mesas de Astronomia, balões, pontos de Magia Antiga e inimigos infames. Não inclui uma checklist geral de baús ou páginas do Guia de Campo.</p>';
+const flooPanel=document.createElement('section'); flooPanel.className='group';
+flooPanel.innerHTML='<h3>🔥 Chamas de Flu — por região</h3><p class="footer">Activa as Chamas à medida que exploras cada zona.</p>';
+const keepChallenge=['🌿 Provas de Merlin','🧹 Plataformas de aterragem','🔭 Mesas de Astronomia','🎈 Conjuntos de balões','✨ Pontos de Magia Antiga','☠️ Inimigos infames'];
+Array.from(completionNode.children).forEach(child=>{
+ const label=(child.querySelector('summary')?.textContent || child.textContent || '').trim();
+ if(label.startsWith('🔥 Chamas de Flu')) flooPanel.appendChild(child);
+ else if(keepChallenge.some(prefix=>label.startsWith(prefix))) challengePanel.appendChild(child);
+});
+
 const categoryDefs=[
- {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1]]},
- {name:'História principal',icon:'📖',nodes:nodes.slice(storyStart,storyEnd)},
- {name:'Missões',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
- {name:'Coleccionáveis',icon:'🎒',nodes:[nodes[2],totalsNode]},
- {name:'Desafios e puzzles',icon:'🧩',nodes:[puzzlesNode,verifiedNode,completionNode,routeNode]},
- {name:'Exploração e regiões',icon:'🗺️',nodes:[regionsNode,mapsNode,demNode,valleyNode]},
+ {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1],nodes[2]]},
+ {name:'Missões secundárias',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
+ {name:'Mini-puzzles',icon:'🧩',nodes:[puzzlesNode,miniLocationsNode]},
+ {name:'Desafios',icon:'🏅',nodes:[challengePanel,routeNode]},
+ {name:'Exploração e regiões',icon:'🗺️',nodes:[regionsNode,mapsNode,flooPanel,demNode,valleyNode]},
  {name:'Notas',icon:'ℹ️',nodes:[footerNode]}
 ];
-const categoryNav=document.createElement('div');categoryNav.className='guide-category-nav';const categoryHost=document.createElement('div');
-categoryDefs.forEach((cat,ci)=>{const panel=document.createElement('div');panel.className='guide-panel';panel.dataset.category=cat.name;cat.nodes.filter(Boolean).forEach(n=>panel.appendChild(n));categoryHost.appendChild(panel);const btn=document.createElement('button');btn.type='button';btn.textContent=cat.icon+' '+cat.name;btn.className=(cat.name===guideCategory?'active':'');btn.onclick=()=>{guideCategory=cat.name;Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};categoryNav.appendChild(btn);});
-if(!categoryDefs.some(c=>c.name===guideCategory))guideCategory='Visão geral';Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach((b,i)=>b.classList.toggle('active',categoryDefs[i].name===guideCategory));
+const categoryNav=document.createElement('div'); categoryNav.className='guide-category-nav';
+const categoryHost=document.createElement('div');
+categoryDefs.forEach(cat=>{
+ const panel=document.createElement('div'); panel.className='guide-panel'; panel.dataset.category=cat.name;
+ cat.nodes.filter(Boolean).forEach(node=>panel.appendChild(node)); categoryHost.appendChild(panel);
+ const btn=document.createElement('button'); btn.type='button'; btn.textContent=cat.icon+' '+cat.name;
+ btn.className=cat.name===guideCategory?'active':'';
+ btn.onclick=()=>{guideCategory=cat.name;Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};
+ categoryNav.appendChild(btn);
+});
+if(!categoryDefs.some(cat=>cat.name===guideCategory)) guideCategory='Visão geral';
+Array.from(categoryHost.children).forEach(panel=>panel.classList.toggle('hide',panel.dataset.category!==guideCategory));
+Array.from(categoryNav.children).forEach((btn,i)=>btn.classList.toggle('active',categoryDefs[i].name===guideCategory));
 content.replaceChildren(categoryNav,categoryHost);
 }
 
