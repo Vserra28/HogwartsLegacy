@@ -68,10 +68,12 @@ VERSAO 22 — ALTERACOES DE INTERFACE
 - Esta correcao de interface não acrescenta novas localizações nem altera o estado dos itens já guardados.
 
 
-Versão v25: o menu Guia 100% apresenta as áreas complementares: missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração regional. A checklist geral de todos os coleccionáveis e a duplicação dos capítulos da História Principal ficam fora do Guia 100%. A História Principal mantém o percurso cronológico por capítulos.
+Versão v26: o menu Guia 100% apresenta as áreas complementares: missões secundárias, linhas de relação, tarefas dos professores, mini-puzzles, desafios e exploração regional. A checklist geral de todos os coleccionáveis e a duplicação dos capítulos da História Principal ficam fora do Guia 100%. A História Principal mantém o percurso cronológico por capítulos.
 
 
-Versão v25: nomes das 57 missões secundárias traduzidos para português de Portugal. Os identificadores de progresso foram mantidos, preservando as marcações existentes.
+Versão v26: nomes das 57 missões secundárias traduzidos para português de Portugal. Os identificadores de progresso foram mantidos, preservando as marcações existentes.
 
 
-v25: reorganizada a secção Mini-puzzles para priorizar as listas com localizações. Não se declara validação completa das 95 Provas de Merlin.
+v26: reorganizada a secção Mini-puzzles para priorizar as listas com localizações. Não se declara validação completa das 95 Provas de Merlin.
+
+Versão v26: títulos das missões de relação e tarefas de professores traduzidos para português; identificadores de progresso preservados.
