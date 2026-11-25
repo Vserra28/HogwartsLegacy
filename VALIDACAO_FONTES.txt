@@ -1,0 +1,43 @@
+AUDITORIA DE CONTEUDOS — HOGWARTS LEGACY — VERSAO FINAL V14
+
+CORRECCOES CONFIRMADAS NESTA AUDITORIA
+- Mesas de Astronomia: 15 no total (14 nas Terras Altas + 1 nos terrenos de Hogwarts). A mesa Lyra é concluída durante a missão Aula de Astronomia. A lista da APP contém 15 caixas.
+- Inimigos infames: 18 inimigos para a colecção, mais The Absconder como encontro adicional de missão. A APP apresenta 19 caixas identificadas (18 + 1 extra), com nome e indicação de localização. Alguns mapas mostram contadores de marcadores diferentes.
+- Mantidos os totais: 168 baús de coleção (incluindo 12 nos Vivários), 236 páginas do Guia de Campo (150 Revelio, 66 voadoras e 20 espelhos), 95 Provas de Merlin, 83 Chamas de Flu, 32 conjuntos de balões, 33 estátuas Demiguise, 20 plataformas de aterragem, 20 pontos de Magia Antiga e 15 enxames/baús de borboletas.
+- Mantidas as listas de 16 Chaves Daedalianas, 3 Segredos de Hogwarts, 12 portas de Aritmância e restantes categorias de exploração presentes na checklist geral.
+
+O QUE ESTÁ INDIVIDUALIZADO NA APP
+- 168 baús de coleção: 168 caixas numeradas e agrupadas por região. As primeiras 68 entradas têm descrição textual transcrita. As restantes têm número/região e ligação ao guia/vídeo para localizar o marcador. Os 12 baús dos Vivários estão incluídos no total.
+- Páginas do Guia de Campo: 150 Revelio numeradas por região, 66 páginas voadoras numeradas e 20 espelhos de borboleta agrupados por ala/região.
+- 15 mesas de Astronomia, 18 inimigos infames da colecção + The Absconder, 15 enxames de borboletas.
+- 95 Provas de Merlin, 83 Chamas de Flu, 32 conjuntos de balões, 20 plataformas de aterragem e 20 pontos de Magia Antiga.
+- 33 estátuas Demiguise numa lista própria, além das listas gerais de cofres, acampamentos, covis, criaturas e desafios.
+
+PENDENCIAS — NAO APRESENTAR COMO LOCALIZACOES TEXTUAIS COMPLETAS
+- Os 100 baús de coleção após as primeiras 68 entradas ainda não têm todos uma descrição textual própria de edifício/sala/caminho na APP. Estão numerados por região e ligados a percurso externo.
+- As 66 páginas voadoras e os 20 espelhos estão numerados/agrupados, mas não têm cada um a sua instrução de localização detalhada na APP.
+- Os 113 cofres do tesouro, 47 acampamentos de bandidos e covis estão disponíveis como checklists numeradas/contadores com ligação ao mapa interactivo; não estão todos transcritos com uma descrição textual individual.
+- As páginas Revelio estão numeradas e agrupadas por região, mas a APP não reproduz o nome/descrição completa de cada página.
+- As localizações das 33 Demiguise estão listadas, mas algumas descrições de interiores devem ser confirmadas no mapa/jogo.
+
+FONTES PRINCIPAIS
+- PowerPyx — totais e guia 100%: https://www.powerpyx.com/hogwarts-legacy-collectibles-guide-100-completion/
+- PowerPyx — inimigos infames (18): https://www.powerpyx.com/hogwarts-legacy-all-infamous-foes-locations/
+- PowerPyx — baús de coleção: https://www.powerpyx.com/hogwarts-legacy-all-collection-chest-locations/
+- PowerPyx — páginas do Guia de Campo: https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/
+- Ragequit — mesas de Astronomia (15): https://ragequit.gg/hogwarts-legacy/astronomy-table-locations/
+- Ragequit — mapa interactivo: https://ragequit.gg/hogwarts-legacy/
+- Push Square — Provas de Merlin, balões, plataformas e Magia Antiga.
+
+COMPATIBILIDADE
+- As novas caixas mantêm as chaves v12.* e v13.* para preservar o progresso anterior; as novas correcções não limpam o armazenamento local.
+- Service worker actualizado para cache hogwarts-checklist-v14.
+- Ícones mantidos na raiz da pasta HogwartsLegacy.
+
+
+ALTERACOES FUNCIONAIS V15
+- Guia 100% reorganizado em categorias com navegacao interna; deixa de apresentar todos os blocos numa unica sequencia vertical.
+- A secao Historia principal passou a listar as missoes por capitulo, em vez de quatro caixas genericas.
+- Cada missao tem uma chave de progresso partilhada entre o Guia 100%, a secao Historia principal e as entradas duplicadas de tarefas de professores quando correspondem ao mesmo nome de missao.
+- A sincronizacao entre janelas/separadores do mesmo navegador e feita por localStorage + BroadcastChannel. Nao e sincronizacao cloud entre dispositivos.
+- Os marcadores de verificacao de desvios e coleccionaveis permanecem independentes da conclusao da missao, para nao assinalar como recolhido algo que o jogador ainda nao recolheu.

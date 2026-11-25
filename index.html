@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17132b">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
+<title>Hogwarts Legacy — Guia passo a passo e 100%</title>
+<style>
+:root{--bg:#100e1b;--panel:#1c1930;--panel2:#26213d;--text:#f4f0ff;--muted:#b8b1ce;--gold:#e7c46a;--green:#75d5a0;--border:#393252;--accent:#9c83f7}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#17132a,#0e1420 65%,#101b20);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:22px 18px 16px;max-width:1100px;margin:auto}h1{margin:0;font-size:clamp(1.5rem,4vw,2.3rem)}header p{color:var(--muted);margin:8px 0}
+main{max-width:1100px;margin:auto;padding:0 14px 40px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0 16px}.stat,.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:14px}.stat strong{font-size:1.35rem;display:block}.stat span{color:var(--muted);font-size:.85rem}
+.progress{height:10px;background:#332c4b;border-radius:20px;overflow:hidden;margin-top:10px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .2s}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.toolbar input,.toolbar select,.custom input{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:10px;min-width:0}
+button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600}button:hover{border-color:var(--gold)}button.primary{background:#6653ad;border-color:#806dd1}
+.layout{display:grid;grid-template-columns:230px 1fr;gap:14px}.nav{display:flex;flex-direction:column;gap:6px;max-height:76vh;overflow:auto;position:sticky;top:10px}.nav button{text-align:left;display:flex;align-items:center;gap:8px}.nav button.active{border-color:var(--gold);background:#3a3156}.nav .nav-home{background:#332b4d}.content{min-width:0}.dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:12px 0}.dash-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer}.dash-card:hover{border-color:var(--gold);transform:translateY(-1px)}.dash-card h3{margin:0 0 7px;font-size:1rem}.dash-card p{margin:4px 0;color:var(--muted);font-size:.88rem}.dash-card .progress{margin:8px 0}.home-welcome{background:linear-gradient(135deg,#292344,#1c2634);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px}.home-welcome h2{margin:0 0 6px}.home-welcome p{color:var(--muted);margin:6px 0}.quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.quick-actions button{background:#6653ad;border-color:#806dd1}.section-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px}.section-title h2{margin:0}.section-title small{color:var(--muted)}
+.group{background:var(--panel);border:1px solid var(--border);border-radius:14px;margin:10px 0;overflow:hidden}.group h3{margin:0;padding:12px;background:var(--panel2);font-size:1rem}.items{padding:8px 12px}.item{display:flex;align-items:flex-start;gap:10px;padding:9px 2px;border-bottom:1px solid #302a45}.item:last-child{border:0}.item input[type=checkbox]{width:20px;height:20px;accent-color:var(--green);margin-top:2px;flex-shrink:0}.item.done label{text-decoration:line-through;color:var(--muted)}.item label{flex:1;line-height:1.35;cursor:pointer}.item .tag{font-size:.72rem;color:var(--muted);border:1px solid var(--border);border-radius:7px;padding:2px 6px;white-space:nowrap}
+.count-overview{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:12px;margin:10px 0 16px}.count-overview h3{margin:0 0 8px}.count-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}.count-card{background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px}.count-card b{display:block;margin-bottom:5px}.count-card span{display:block;color:var(--muted);font-size:.9rem;line-height:1.5}.count-total{color:var(--gold)!important;font-weight:700}
+.guide-category-nav{display:flex;gap:7px;flex-wrap:wrap;position:sticky;top:0;z-index:5;background:#100e1b;padding:8px 0;margin:8px 0 12px}.guide-category-nav button{white-space:nowrap}.guide-category-nav button.active{background:#6653ad;border-color:var(--gold)}.guide-panel{min-width:0}.guide-intro{background:linear-gradient(135deg,#292344,#1c2634);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:14px}.guide-intro p{color:var(--muted);margin:7px 0}.guide-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.guide-links a{color:var(--gold);border:1px solid var(--border);border-radius:9px;padding:8px 10px;text-decoration:none;font-size:.88rem}.quest-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;margin:10px 0;overflow:hidden}.quest-card summary{cursor:pointer;padding:13px;background:var(--panel2);font-weight:700}.quest-card .quest-body{padding:12px}.quest-body p{color:var(--muted);margin:6px 0 10px}.quest-body ul{padding-left:20px;margin:8px 0}.quest-body li{margin:6px 0}.quest-check{display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-top:1px solid #302a45}.quest-check input{margin-top:4px;accent-color:var(--green)}.pill{display:inline-block;font-size:.72rem;border:1px solid var(--border);border-radius:99px;padding:3px 8px;color:var(--gold);margin:2px 4px 2px 0}.guide-note{border-left:3px solid var(--gold);padding:8px 11px;background:#29243b;color:var(--muted);margin:10px 0;border-radius:0 8px 8px 0}.empty{color:var(--muted);padding:18px}.custom{display:flex;gap:8px;padding:12px;border-top:1px solid var(--border)}.custom input{flex:1}.footer{color:var(--muted);font-size:.8rem;margin-top:18px}.hide{display:none!important}
+@media(max-width:760px){.guide-category-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible;position:static}.guide-category-nav button{white-space:normal;width:100%;min-height:58px;text-align:left;line-height:1.25;padding:12px}.layout{grid-template-columns:1fr}.nav{position:static;max-height:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;gap:8px;padding:2px 0 9px}.nav button{white-space:normal;min-width:0;width:100%;font-size:.9rem;padding:12px;text-align:left;line-height:1.25}.stats{gap:6px}.stat{padding:10px}.stat strong{font-size:1.1rem}.dashboard{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-card{padding:11px}.dash-card h3{font-size:.92rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>🪄 Hogwarts Legacy — Guia completo e 100%</h1>
+<p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
+</header>
+<main>
+<section class="stats">
+<div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
+<div class="stat"><strong id="totalItems">0</strong><span>Itens no checklist</span></div>
+<div class="stat"><strong id="percent">0%</strong><span>Progresso global</span><div class="progress"><div class="bar" id="globalBar"></div></div></div>
+</section>
+<div class="toolbar">
+<input id="search" placeholder="🔎 Procurar tarefa…" aria-label="Procurar tarefa">
+<select id="filter"><option value="all">Todos</option><option value="todo">Por concluir</option><option value="done">Concluídos</option></select>
+<button id="export">Exportar progresso</button><button id="importBtn">Importar</button><input type="file" id="importFile" accept=".json" class="hide">
+<button id="reset">Repor checklist</button>
+</div>
+<div class="layout">
+<nav class="nav" id="nav"></nav>
+<section class="content" id="content"></section>
+</div>
+<p class="footer">Nota: este tracker é uma lista de acompanhamento. Os mapas externos podem ser usados para localizar cada marcador. Alguns conteúdos dependem do avanço na história, da casa escolhida ou de DLC.</p>
+</main>
+<script>
+const sections = [
+{title:"📖 História principal", groups:[
+["Prólogo e chegada",["The Path to Hogwarts — completar o prólogo","Gringotts — explorar a câmara e concluir a sequência","Câmara do Mapa — descobrir a magia antiga","Chegar a Hogwarts","Cerimónia de seleção da casa"]],
+["Missões principais",["Completar todas as missões principais disponíveis","Completar a missão final da história","Concluir o epílogo / preparação para a Taça das Casas","Concluir a missão da Taça das Casas (quando disponível)"]]]},
+{title:"🏰 Hogwarts",groups:[
+["Exploração e Guia de Campo",["Recolher páginas Revelio do castelo","Recolher páginas voadoras","Recolher páginas de puzzles / interações","Explorar todas as alas e salas acessíveis","Desbloquear todas as Chamas de Flu do castelo"]],
+["Segredos e puzzles",["Resolver os 3 Segredos de Hogwarts","Completar todas as portas de Aritmância","Encontrar e abrir todas as arcas de coleção do castelo","Completar as 16 Chaves Daedalianas e abrir o armário da casa","Completar os puzzles de estátuas / símbolos","Explorar passagens e salas secretas"]],
+["Demiguise",["Recolher Demiguise no castelo (quando Alohomora estiver desbloqueado)","Melhorar Alohomora para nível II","Melhorar Alohomora para nível III","Recolher todas as estátuas de Demiguise de Hogwarts"]]]},
+{title:"🏘️ Hogsmeade",groups:[
+["Exploração",["Desbloquear Chamas de Flu de Hogsmeade","Recolher páginas Revelio da vila","Recolher páginas voadoras","Abrir todas as arcas de coleção","Visitar todas as lojas e conhecer vendedores"]],
+["Demiguise e segredos",["Recolher todas as estátuas de Demiguise de Hogsmeade","Explorar casas e edifícios acessíveis","Abrir cofres e resolver puzzles da vila"]]]},
+{title:"🗺️ Highlands — regiões",groups:[
+["Vale de Hogsmeade",["Chamas de Flu","Páginas do Guia de Campo","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Demiguise (quando aplicável)"]],
+["Floresta Proibida",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões"]],
+["North Ford Bog",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Demiguise"]],
+["Região de Hogwarts",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Balões","Plataformas de aterragem","Mesas de Astronomia","Borboletas","Demiguise"]],
+["Upper Hogsfield",["Chama de Flu","Missões da aldeia","Páginas Revelio","Cofres do tesouro","Demiguise"]],
+["Lower Hogsfield",["Chama de Flu","Missões da aldeia","Páginas Revelio","Cofres do tesouro","Demiguise"]],
+["Feldcroft",["Chamas de Flu","Missões da aldeia","Páginas Revelio","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Demiguise"]],
+["Vale de Feldcroft",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Plataformas de aterragem","Borboletas","Demiguise"]],
+["South Sea Bog",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Demiguise"]],
+["Pântano do Mar do Sul",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Demiguise"]],
+["Costa de Poidsear",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Plataformas de aterragem","Demiguise"]],
+["Lago Marunweem",["Chamas de Flu","Missões da aldeia","Páginas Revelio","Provas de Merlin","Cofres do tesouro","Demiguise"]],
+["Marunweem",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Demiguise"]],
+["Cape Manor",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Balões","Plataformas de aterragem","Demiguise"]],
+["Cragcroftshire",["Chamas de Flu","Missões da aldeia","Páginas Revelio","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Demiguise"]],
+["Costa de Clagmar",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Plataformas de aterragem","Demiguise"]]]},
+{title:"🧩 Desafios e colecionáveis",groups:[
+["Coleções",["Completar todas as Conjurações (coleção)","Recolher todas as características de equipamento","Recolher todas as receitas de poções","Recolher todas as plantas de herbologia","Recolher todos os materiais de criaturas","Recolher todos os itens de decoração da Sala das Necessidades","Completar todas as páginas do Guia de Campo"]],
+["Desafios",["Completar todas as Provas de Merlin (95)","Completar todos os Pontos de Magia Antiga (20)","Completar todas as Mesas de Astronomia (14)","Rebentar todos os conjuntos de balões (32)","Completar todas as plataformas de aterragem (20)","Seguir todas as borboletas (15)","Completar todos os labirintos de sebes (5)","Derrotar todos os Inimigos Infames (20)","Completar arenas de combate (3)"]],
+["Cofres e acampamentos",["Abrir todos os cofres do tesouro","Limpar todos os acampamentos de bandidos","Encontrar todos os baús de coleção","Completar todos os puzzles de cofres"]]]},
+{title:"🪄 Feitiços",groups:[
+["Feitiços de aprendizagem",["Revelio","Lumos","Accio","Levioso","Incendio","Depulso","Diffindo","Confringo","Descendo","Flipendo","Glacius","Arresto Momentum","Alohomora I, II e III","Wingardium Leviosa","Transformation","Bombarda","Expelliarmus","Protego e Stupefy"]],
+["Feitiços utilitários",["Desbloquear todos os feitiços de utilidade disponíveis","Desbloquear todos os feitiços de combate disponíveis","Desbloquear feitiços através de tarefas dos professores","Desbloquear feitiços de missões secundárias"]]]},
+{title:"🧑‍🤝‍🧑 Relações e secundárias",groups:[
+["Sebastian Sallow",["Completar a linha de missões de Sebastian","Desbloquear todos os conteúdos de relação disponíveis","Decidir sobre as opções finais da linha (anotar escolha)"]],
+["Natsai Onai",["Completar a linha de missões de Natty"]],
+["Poppy Sweeting",["Completar a linha de missões de Poppy"]],
+["Missões secundárias e exclusivas",["Completar todas as missões secundárias","Completar a missão exclusiva da casa escolhida","Completar missões de aldeias e personagens","Completar missões de entrega / vendedores","Verificar missões que surgem após avançar a história"]]]},
+{title:"🧪 Sala das Necessidades",groups:[
+["Desbloqueios",["Desbloquear a Sala das Necessidades","Desbloquear o Viveiro","Desbloquear todos os viveiros disponíveis","Desbloquear e usar o tear","Desbloquear mesa de poções","Desbloquear mesas de herbologia"]],
+["Criaturas e melhorias",["Capturar cada espécie de criatura","Recolher materiais de todas as criaturas","Criar / reproduzir criaturas quando disponível","Melhorar equipamento no tear","Aplicar características a equipamento","Comprar e desbloquear todas as conjurações de decoração"]]]},
+{title:"🏆 Conquistas (Epic Games)",groups:[
+["Conquistas gerais",["Completar a história","Completar todos os desafios","Atingir o nível 40","Desbloquear todos os feitiços","Melhorar equipamento","Completar coleções"]],
+["Conquistas específicas de casa",["Completar a missão exclusiva de Gryffindor","Completar a missão exclusiva de Slytherin","Completar a missão exclusiva de Ravenclaw","Completar a missão exclusiva de Hufflepuff (em saves separados, se quiseres todas)"]],
+["Conquistas de exploração",["Visitar todas as Chamas de Flu","Completar todas as Provas de Merlin","Completar todas as arenas","Completar todos os desafios de voo","Completar os desafios de colecionáveis"]]]},
+{title:"📝 Lista pessoal",groups:[["Tarefas que quero acrescentar",[]]]}
+];
+
+const storyChapters = [
+{chapter:"Prólogo — A chegada", quests:[
+["The Path to Hogwarts","Prólogo","Acompanha Fig, explora as ruínas e aprende os controlos básicos. Usa Revelio sempre que a exploração permitir; recolhe os baús normais que encontrares antes de atravessar portas sem retorno imediato.","Baús de equipamento e consumíveis nas salas laterais; não há coleccionáveis de mundo perdíveis nesta sequência." ]
+]},
+{chapter:"Primeiro dia em Hogwarts",quests:[
+["Welcome to Hogwarts","Principal","Segue a cerimónia de seleção e a visita inicial ao castelo. Explora os corredores acessíveis e activa as Chamas de Flu que encontrares.","Páginas Revelio e páginas voadoras só quando tiveres o feitiço/condição correspondente; regressa mais tarde às zonas bloqueadas."],
+["Charms Class","Principal","Aprende Accio e conclui o exercício de feitiço. Aproveita para perceber o sistema de combinação de feitiços.","Não saias da área de aula sem abrir os baús que estiverem no percurso."],
+["Defence Against the Dark Arts Class","Principal","Aprende Levioso e pratica o combate. Usa Levioso para quebrar escudos amarelos.","Verifica os baús da sala e recolhe páginas Revelio próximas."],
+["Weasley After Class","Principal","Fala com a Professora Weasley e escolhe a primeira visita guiada. Esta etapa abre a exploração de Hogwarts.","Faz uma primeira ronda pelas alas acessíveis; marca as portas trancadas para voltar com Alohomora."],
+["Professor Ronen’s Assignment","Tarefa de professor","Recolhe a página voadora no Pátio da Transfiguração e a página junto à estátua indicada; regressa a Ronen para aprender Reparo.","Páginas do Guia de Campo associadas à tarefa; aprende Reparo antes de avançar."],
+["Welcome to Hogsmeade","Principal","Segue o colega até Hogsmeade, visita as lojas indicadas e prepara-te para o confronto final. Usa Revelio nas ruas e interiores acessíveis.","Abre os baús das lojas/casas acessíveis e recolhe páginas Revelio; os baús com olho exigem Desilusão, obtida mais tarde."]
+]},
+{chapter:"O segredo da Secção Restrita",quests:[
+["The Locket’s Secret","Principal","Regressa a Hogwarts e fala com Fig. A missão serve de ponte para as tarefas de combate e para a Secção Restrita.","Faz as tarefas disponíveis antes de entrar na Secção Restrita."],
+["Professor Hecat’s Assignment 1","Tarefa de professor","Completa as rondas de Crossed Wands e a prática de combinações de feitiços; regressa a Hecat para aprender Expelliarmus.","As rondas e a prática são actividades secundárias obrigatórias para esta tarefa."],
+["Secrets of the Restricted Section","Principal","Entra na biblioteca à noite com Sebastian. Usa Desilusão, evita os guardas e explora a secção restrita com Revelio.","Recolhe os baús laterais antes de seguir em frente; aprende a usar Desilusão para baús com olho."],
+["Tomes and Tribulations","Principal","Fala com Fig e entrega o que encontraste. Depois, aguarda as novas aulas e tarefas no diário.","Verifica o correio/diário e as tarefas novas antes de escolher a próxima missão."]
+]},
+{chapter:"Viver como estudante",quests:[
+["Herbology Class","Principal","Aprende a plantar e a usar plantas de combate. Experimenta Mandrágoras e tentáculas venenosas quando disponíveis.","Compra sementes e receitas úteis em Hogsmeade quando tiveres dinheiro."],
+["Potions Class","Principal","Aprende a preparar poções e conclui a aula prática. Recolhe ingredientes pelo caminho.","Começa a preparar poções para os desafios de Sala das Necessidades."],
+["The Girl from Uagadou","Principal","Encontra Natty e conversa sobre a ameaça fora de Hogwarts.","Aproveita para activar Chamas de Flu próximas e explorar a área exterior."],
+["Trials of Merlin","Principal","Conhece Nora Treadwell e conclui a primeira Prova de Merlin. Usa Mallowsweet para activar novas provas.","A partir daqui, recolhe Mallowsweet e resolve as provas que encontrares; algumas exigem feitiços que ainda vais aprender."]
+]},
+{chapter:"A Câmara do Mapa",quests:[
+["House-specific quest","Missão exclusiva da casa","A missão varia: Ollivander’s Heirloom (Ravenclaw), The Hunt for the Missing Pages (Gryffindor), Prisoner of Love (Hufflepuff) ou Scrope’s Last Hope (Slytherin). Segue a pista da tua casa.","Só a missão da casa escolhida aparece nesta partida; as restantes exigem outros saves."],
+["Professor Hecat’s Assignment 2","Tarefa de professor","Cumpre os requisitos de combate indicados por Hecat e regressa para aprender Incendio.","Incendio abre novas soluções de puzzles e destrói teias; volta a salas que deixaste por explorar."],
+["Jackdaw’s Rest","Principal","Segue as pistas de Jackdaw, explora a gruta e resolve os mecanismos com os feitiços já aprendidos.","Usa Revelio em cada sala e verifica desvios e plataformas laterais antes de sair da gruta."]
+]},
+{chapter:"Primeira Prova dos Guardiões",quests:[
+["Flying Class","Principal","Conclui a aula de voo e aprende os controlos da vassoura.","Depois da aula, podes começar a procurar conjuntos de balões e provas de voo."],
+["In the Shadow of the Undercroft","Relação — Sebastian","Encontra Sebastian no local combinado e aprende Confringo. Usa o feitiço para acender braseiros e destruir obstáculos específicos.","Marca portas e puzzles que exijam Confringo para regressares."],
+["The Room of Requirement","Principal","Segue Deek e aprende a conjurar, alterar e remover objectos. Organiza a Sala das Necessidades.","Desbloqueia o espaço para preparar poções, cultivar plantas e gerir equipamento."]
+]},
+{chapter:"Preparar a próxima Prova",quests:[
+["The Map Chamber","Principal","Regressa à Câmara do Mapa e fala com os retratos dos Guardiões.","A partir daqui, as missões abrem gradualmente por avanço na história e nível recomendado."],
+["Percival Rackham’s Trial","Principal","Explora a torre, investiga a magia antiga e resolve os puzzles de plataformas entre dimensões.","Procura baús laterais nas salas da Prova antes de activar o avanço final."]
+]},
+{chapter:"Preparar a última Prova",quests:[
+["Beasts Class","Principal","Aprende a cuidar de criaturas mágicas e a usar a escova e a alimentação.","Começa a identificar covis de criaturas no mapa; a captura completa chega com o Nab-Sack."],
+["The Caretaker’s Lunar Lament","Principal","Encontra Gladwin Moon, aprende Alohomora I e recolhe Luas Demiguise à noite.","As estátuas só podem ser recolhidas à noite. Entrega luas a Moon para Alohomora II e III; muitas portas exigem níveis superiores."],
+["The Helm of Urtkot","Principal","Investiga a tumba e resolve os mecanismos das traças com Lumos. Explora todas as câmaras laterais.","Puzzles de traças: atrai cada traça com Lumos e leva-a ao mecanismo; verifica alcovas e baús."],
+["In the Shadow of the Estate","Relação — Sebastian","Segue Sebastian até à propriedade e descobre mais sobre a família. Explora os edifícios e a área indicada.","Fala com os personagens até esgotar os diálogos e verifica os baús da propriedade."],
+["The Elf, the Nab-Sack, and the Loom","Principal","Aprende a capturar criaturas com o Nab-Sack e desbloqueia o tear para melhorar equipamento.","Resgata espécies diferentes, recolhe materiais e desbloqueia os viveiros/conjurações."],
+["Astronomy Class","Principal","Aprende a usar a mesa de astronomia. Ajusta o telescópio para alinhar a constelação.","Só podes concluir mesas de astronomia depois desta aula e à noite."],
+["Professor Garlick’s Assignment 1","Tarefa de professor","Compra/usa as plantas indicadas e conclui o combate pedido; regressa a Garlick para aprender Wingardium Leviosa.","Wingardium Leviosa facilita puzzles de blocos e objectos móveis."],
+["The High Keep","Principal","Infiltra-te no castelo, usa Depulso/Accio para mecanismos e liberta Highwing.","Depois desta missão desbloqueias montadas voadoras; revisita zonas altas e plataformas."],
+["Back on the Path","Principal","Regressa à linha dos Guardiões e segue a pista para a próxima Prova.","Faz as tarefas de professor e secundárias entretanto desbloqueadas."],
+["Charles Rookwood’s Trial","Principal","Entra no castelo de Rookwood e resolve puzzles de passagem entre estados da sala.","Usa Revelio em cada câmara e procura baús fora do caminho principal."]
+]},
+{chapter:"Deter Ranrok e Rookwood",quests:[
+["Fire and Vice","Principal","Investiga a actividade dos caçadores furtivos e explora a área da missão.","Aproveita para capturar criaturas e limpar acampamentos próximos, se já tiveres Nab-Sack."],
+["Professor Weasley’s Assignment","Tarefa de professor","Recolhe as páginas indicadas e conclui a tarefa para aprender Transformation.","Transformation permite alterar objectos na Sala das Necessidades e resolver puzzles específicos."],
+["In the Shadow of the Mine","Principal / Sebastian","Explora a mina, derrota inimigos e segue a história de Sebastian.","Verifica ramificações da mina e baús de coleção antes de sair."],
+["It’s All Gobbledegook","Principal","Acompanha Amit e Lodgok, lê as pistas e explora a instalação dos duendes.","Procura documentos e baús em salas laterais; usa Revelio frequentemente."],
+["The Headmistress Speaks","Principal","Fala com o retrato e recebe a próxima indicação dos Guardiões.","É uma missão de transição; confirma o diário para novas tarefas."],
+["The Polyjuice Plot","Principal","Usa a Poção Polissuco para assumir a identidade necessária e infiltrar-te no gabinete.","Segue os diálogos e objectivos com atenção; explora o gabinete antes de sair."],
+["Niamh Fitzgerald’s Trial","Principal","Entra na Prova e usa a Capa da Invisibilidade, a varinha e os desafios de combate conforme são apresentados.","Explora as áreas da Prova e recolhe os baús antes de avançar para a sequência seguinte."]
+]},
+{chapter:"Preparar os N.O.M.s",quests:[
+["In the Shadow of the Mountain","Principal / Sebastian","Sobe a montanha, enfrenta os inimigos e explora as ruínas com os feitiços de combate disponíveis.","Procura baús e passagens laterais nas ruínas."],
+["Lodgok’s Loyalty","Principal","Segue Lodgok até à mina e descobre o plano dos duendes.","Limpa as salas e verifica desvios antes de sair."],
+["San Bakar’s Trial","Principal","Localiza a última Prova e enfrenta o Graphorn. A escolha no confronto altera a cena, não bloqueia a montada.","Depois da missão, explora a costa e conclui os pontos de interesse próximos."]
+]},
+{chapter:"Confronto final e pós-história",quests:[
+["Wand Mastery","Principal","Prepara-te para o confronto com os adversários e segue a sequência da varinha.","Antes do final, termina tarefas pendentes se quiseres; o mundo continua explorável depois."],
+["The Final Repository","Principal","Conclui a sequência final e toma a decisão narrativa apresentada. A escolha altera o desfecho, não impede a exploração posterior.","Depois dos créditos, regressa ao mundo para terminar coleccionáveis e missões."],
+["Weasley’s Watchful Eye","Pós-história","Fala com a Professora Weasley e verifica o progresso do Guia de Campo.","Recolhe as recompensas de desafios manualmente no menu do Guia de Campo."],
+["The House Cup","Pós-história","Atinge o nível 34 e conclui a missão da Taça das Casas.","É o fecho pós-história; podes continuar a explorar e completar o 100%. "]
+]}
+];
+// A janela "História principal" apresenta as mesmas missões e estados do Guia 100%.
+sections[0].groups = storyChapters.map(ch => [ch.chapter, ch.quests.map(q => q[0])]);
+const sideQuestNames = ["‘Beeting a Curse’","‘Dissending’ for Sweets","‘Mer-Ky’ Depths","A Demanding Delivery","A Friend in Deed","A Thief in the Night","Absconder Encounter","All’s Well That Ends Bell","Birds of a Feather","Breaking Camp","Brother’s Keeper","Cache in the Castle","Carted Away","Crossed Wands: Round 1","Crossed Wands: Round 2","Crossed Wands: Round 3","Cursed Tomb Treasure","E-Vase-Ive Manoeuvre","Flight Test","Flying off the Shelves","Foal of the Dead","Follow the Butterflies","Ghost of Our Love","Gobs of Gobstones","History of Magic Class","Interior Decorating","Kidnapped Cabbage","Like a Moth to a Frame","Phoenix Rising","Portrait in a Pickle","Rescuing Rococo","Sacking Selwyn","Solved by the Bell","Spell Combination Practice 1","Spell Combination Practice 2","Spot Removal","Summoner’s Court: Match 1","Summoner’s Court: Match 2","Summoner’s Court: Match 3","Summoner’s Court: Match 4","Summoner’s Court: Match 5","Sweeping the Competition","Take the Biscuit","Tangled Web","The Daedalian Keys","The Hall of Herodiana","The Hippogriff Marks the Spot","The Lost Astrolabe","The Man Behind the Moons","The Plight of the House-Elf","The Sky is the Limit","The Tale of Rowland Oakes","The Unique Unicorn","Troll Control","Venomous Revenge","Venomous Valour","Well, Well, Well"];
+const relationships = {
+"Sebastian Sallow":["In the Shadow of the Bloodline","In the Shadow of the Study","In the Shadow of Discovery","In the Shadow of Time","In the Shadow of Distance","In the Shadow of Hope","In the Shadow of the Relic","In the Shadow of Fate","In the Shadow of Friendship"],
+"Natsai Onai":["The Lost Child","Mum’s the Word","A Basis for Blackmail","Grief and Vengeance","Finding Focus","Harlow’s Last Stand","Acting on Instinct"],
+"Poppy Sweeting":["A Dragon Debrief","Poached Egg","The Poachers’ House Call","Surprise Meeting","The Centaur and the Stone","It’s in the Stars","A Bird in the Hand","Poppy Blooms"]
+};
+// Contagens oficiais de coleccionáveis por zona (jogo base). Cada unidade pode ser assinalada individualmente.
+const areaCounts = [
+ {name:'Castelo de Hogwarts',chests:35,pages:150,merlin:0,parts:[['Ala de Astronomia',23],['Ala da Torre do Sino',34],['Grande Escadaria',26],['Grande Salão',24],['Anexo da Biblioteca',20],['Ala Sul',23]]},
+ {name:'Hogsmeade',chests:5,pages:55,merlin:0},
+ {name:'North Ford Bog',chests:7,pages:2,merlin:4},
+ {name:'Floresta Proibida',chests:6,pages:0,merlin:3},
+ {name:'Vale de Hogsmeade',chests:8,pages:4,merlin:5},
+ {name:'Região Norte de Hogwarts',chests:7,pages:1,merlin:5},
+ {name:'Região Sul de Hogwarts',chests:9,pages:3,merlin:15},
+ {name:'Vale de Hogwarts',chests:15,pages:8,merlin:16},
+ {name:'Região de Feldcroft',chests:22,pages:7,merlin:16},
+ {name:'Pântano do Mar do Sul',chests:1,pages:1,merlin:2},
+ {name:'Caverna Costeira',chests:1,pages:1,merlin:0},
+ {name:'Costa de Poidsear',chests:8,pages:0,merlin:10},
+ {name:'Lago Marunweem',chests:15,pages:0,merlin:4},
+ {name:'Cabo Manor',chests:7,pages:0,merlin:5},
+ {name:'Cragcroftshire',chests:5,pages:2,merlin:5},
+ {name:'Costa de Clagmar',chests:5,pages:2,merlin:5},
+ {name:'Sala Precisa — Vivários',chests:12,pages:0,merlin:0}
+];
+
+function normTask(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim()}
+const storyQuestNames=new Set(storyChapters.flatMap(ch=>ch.quests.map(q=>normTask(q[0]))));
+function storyQuestNameFromId(id){const m=String(id).match(/^(\d+)\.(\d+)$/);return m&&storyChapters[+m[1]]&&storyChapters[+m[1]].quests[+m[2]]?storyChapters[+m[1]].quests[+m[2]][0]:null}
+function canonicalQuestKey(label){const n=normTask(label);return storyQuestNames.has(n)?'quest:'+n:null}
+function guideCheck(id,label,linkedQuest){const qName=linkedQuest||storyQuestNameFromId(id);const canonical=qName?('quest:'+normTask(qName)):null;const legacy='guide:'+id;const k=canonical||legacy;if(canonical&&state[legacy]&&!state[canonical])state[canonical]=true;const row=document.createElement('label');row.className='quest-check';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!state[k];cb.onchange=()=>{state[k]=cb.checked;if(canonical)state[legacy]=cb.checked;save()};const span=document.createElement('span');span.textContent=label;row.append(cb,span);return row}
+function sectionItemKey(si,gi,ii,label){const canonical=canonicalQuestKey(label);return canonical||key(si,gi,ii)}
+function renderGuide(){content.innerHTML='';const intro=document.createElement('div');intro.className='guide-intro';intro.innerHTML='<h2>🧭 Guia completo — do início aos 100%</h2><p>Segue a campanha por capítulos. Abre cada missão para ver o que fazer, o que convém verificar antes de sair e os desbloqueios que justificam regressar a uma zona.</p><div class="guide-links"><a href="https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/" target="_blank" rel="noopener">Lista e ordem de missões</a><a href="https://www.powerpyx.com/hogwarts-legacy-collectibles-guide-100-completion/" target="_blank" rel="noopener">Checklist 100% de coleccionáveis</a><a href="https://wand.com/maps/hogwarts-legacy" target="_blank" rel="noopener">Mapa interactivo por localização</a><a href="https://www.powerpyx.com/hogwarts-legacy-all-puzzles-explained/" target="_blank" rel="noopener">Soluções de puzzles</a></div><div class="guide-note"><b>Importante:</b> os coleccionáveis ligados à conclusão não são perdíveis. Podes voltar ao mundo depois da história. O guia assinala, ainda assim, o momento mais eficiente para os recolher. Para coordenadas exactas de cada baú/página, usa o mapa interactivo por região. No jogo base, a referência inclui 95 Provas de Merlin, 33 estátuas Demiguise, 168 baús de coleção (inclui os 12 dos Vivários), 236 páginas do Guia de Campo, 15 mesas de astronomia, 20 plataformas de aterragem, 20 pontos de Magia Antiga e 15 enxames de borboletas.</div>';
+content.appendChild(intro);
+// Resumo sempre visível: os números não ficam escondidos em secções recolhidas.
+const overview=document.createElement('section');overview.className='count-overview';
+overview.innerHTML='<h3>📊 Objetos por local — totais visíveis</h3><p class="footer">Os números abaixo são os totais a encontrar em cada zona. Abre a secção “Contagens por local” mais abaixo para assinalar cada objeto individualmente.</p>';
+const grid=document.createElement('div');grid.className='count-grid';
+areaCounts.forEach(a=>{const card=document.createElement('div');card.className='count-card';const title=document.createElement('b');title.textContent=a.name;const counts=document.createElement('span');counts.innerHTML='<span class="count-total">'+a.chests+' baús · '+a.pages+' páginas</span><span>'+a.merlin+' Provas de Merlin</span>';card.append(title,counts);grid.appendChild(card)});
+overview.appendChild(grid);
+const totals=document.createElement('p');totals.className='footer';totals.innerHTML='<b>Jogo base:</b> 168 baús de coleção · 236 páginas do Guia de Campo · 95 Provas de Merlin.';overview.appendChild(totals);content.appendChild(overview);
+// Checklist individual de coleccionaveis e desafios (jogo base)
+const allItems=document.createElement('section');allItems.className='group';allItems.innerHTML='<h3>☑️ Checklist de TODOS os coleccionáveis e desafios</h3><p class="footer">Cada marcador é guardado individualmente. As entradas indicam o local e, quando aplicável, o acesso/puzzle. As localizações ainda em validação ficam claramente assinaladas, sem inventar.</p>';
+// Distribuição regional dos 168 baús de coleção (jogo base).
+// Estes subtotais são apresentados separadamente para não duplicar as caixas de progresso individuais.
+const chestByRegion=[
+ ['Castelo de Hogwarts',35],['Feldcroft',22],['Lago Marunweem',15],['Vale de Hogwarts',15],['Vivários',12],['Sul de Hogwarts',9],['Vale de Hogsmeade',8],['Costa de Poidsear',8],['Pântano de North Ford',7],['Norte de Hogwarts',7],['Cabo Manor',7],['Floresta Proibida',6],['Hogsmeade',5],['Cragcroftshire',5],['Costa de Clagmar',5],['Pântano do Mar do Sul',1],['Caverna Costeira',1]
+];
+const chestSummary=document.createElement('details');chestSummary.className='quest-card';
+const chestSummaryTitle=document.createElement('summary');chestSummaryTitle.textContent='📍 Distribuição dos 168 baús de coleção por região';chestSummary.appendChild(chestSummaryTitle);
+const chestSummaryBody=document.createElement('div');chestSummaryBody.className='quest-body';
+const chestTotal=chestByRegion.reduce((a,x)=>a+x[1],0);
+const chestIntro=document.createElement('p');chestIntro.textContent='Contagem regional de referência. Os números indicam quantos baús de coleção existem em cada zona; não são uma nova checklist e não duplicam o progresso. Total regional: '+chestTotal+'.';chestSummaryBody.appendChild(chestIntro);
+chestByRegion.forEach(([region,count])=>{const row=document.createElement('div');row.className='item';const name=document.createElement('label');name.textContent=region;const tag=document.createElement('span');tag.className='tag';tag.textContent=count+' baús';row.appendChild(name);row.appendChild(tag);chestSummaryBody.appendChild(row)});
+const chestWarning=document.createElement('p');chestWarning.className='footer';chestWarning.textContent='Nota: esta distribuição confirma os totais por região, mas não identifica individualmente o edifício, sala ou coordenada de cada baú. Não atribuí locais específicos sem validação.';chestSummaryBody.appendChild(chestWarning);chestSummary.appendChild(chestSummaryBody);allItems.appendChild(chestSummary);
+const collectionChestLocations=["North Ford Bog — casa junto à Chama de Flu (Alohomora I)", "North Ford Bog — casa em frente à Chama de Flu, piso superior", "North Ford Bog — casa amarela junto à ponte de pedra (Alohomora III), piso superior", "North Ford Bog — casa junto à ponte de pedra, lado oposto ao baú anterior", "North Ford Bog — acampamento de bandidos, diante da tenda", "North Ford Bog — acampamento de bandidos, dentro da tenda", "North Ford Bog — acampamento de bandidos, tenda destruída", "Floresta Proibida — acampamento de bandidos", "Floresta Proibida — acampamento junto a uma criatura mágica", "Floresta Proibida — acampamento, dentro de uma tenda", "Floresta Proibida — acampamento, dentro de uma tenda", "Floresta Proibida — acampamento, dentro de uma tenda", "Floresta Proibida — caverna da missão A Friend in Deed, sala escondida após parede destrutível", "Vale de Hogsmeade — acampamento de bandidos, junto a uma tenda", "Vale de Hogsmeade — Overlook Mine, sala após deslizar para baixo", "Vale de Hogsmeade — Overlook Mine, caminho à esquerda após a ponte, junto às Devil Snare", "Vale de Hogsmeade — acampamento de bandidos, dentro de uma tenda", "Upper Hogsfield — casa junto à Chama de Flu", "Upper Hogsfield — casa à direita da anterior", "Upper Hogsfield — casa atrás do comerciante (Alohomora I)", "Upper Hogsfield — casa à saída da aldeia", "Hogsmeade — casa atrás da Chama de Flu (Alohomora III), quarto no piso superior", "Hogsmeade — casa no lado sul, cozinha antes das escadas (Alohomora III)", "Hogsmeade — Três Vassouras, último piso, quarto", "Hogsmeade — esconderijo dos Ashwinders, sala atrás do bar (missão A Basis for Blackmail)", "Hogsmeade — casa no lado este (Alohomora III)", "North Hogwarts Region — Castelo dos Bandidos, entrada à esquerda", "North Hogwarts Region — Castelo dos Bandidos, sala acessível subindo escada e usando bloco", "North Hogwarts Region — Castelo dos Bandidos, passagem secreta após porta metálica", "North Hogwarts Region — acampamento de bandidos, dentro de tenda", "North Hogwarts Region — acampamento junto à ponte de madeira, dentro de tenda", "North Hogwarts Region — acampamento de bandidos, dentro de tenda", "North Hogwarts Region — Collector’s Cave, porta lateral com Bombarda e bloco móvel", "Castelo de Hogwarts — Grande Salão, sala à direita da entrada", "Castelo de Hogwarts — Grande Salão, sala do puzzle de aritmância à esquerda", "Castelo de Hogwarts — Escadaria Principal, cozinha secreta atrás do retrato", "Castelo de Hogwarts — Torre da Escadaria Principal, sala de aritmância", "Castelo de Hogwarts — Torre de Ravenclaw, sala de aritmância", "Castelo de Hogwarts — Ala Sul, Torre da Faculdade, sala de aritmância no piso superior", "Castelo de Hogwarts — Grande Salão, sala de aritmância no piso superior lateral", "Castelo de Hogwarts — Sala dos Troféus, Gabinete do Director", "Castelo de Hogwarts — Sala dos Troféus, sala secreta com Chave de Admissão, baú 1", "Castelo de Hogwarts — Sala dos Troféus, sala secreta com Chave de Admissão, baú 2", "Castelo de Hogwarts — Torre do Relógio, sala atrás do pêndulo (símbolo 2.º da direita), baú 1", "Castelo de Hogwarts — Torre do Relógio, sala atrás do pêndulo (símbolo 2.º da direita), baú 2", "Castelo de Hogwarts — Torre do Relógio, porta do símbolo mais à esquerda", "Castelo de Hogwarts — Ala Sul, Torre da Faculdade, chaminé (Alohomora III + Glacius)", "Castelo de Hogwarts — Ala Sul, estátua na escadaria da Torre da Faculdade", "Castelo de Hogwarts — Ala de Astronomia, sala de Feitiços, puzzle de aritmância", "Castelo de Hogwarts — Ala de Astronomia, sala de Feitiços, porta Alohomora I no piso superior", "Castelo de Hogwarts — Ala de Astronomia, sala do Professor Fig", "Castelo de Hogwarts — Ala de Astronomia, pátio da Transfiguração, sala junto à escadaria", "Castelo de Hogwarts — Ala de Astronomia, corredor junto à estátua do dragão, porta Alohomora I", "Castelo de Hogwarts — Anexo da Biblioteca, sala de Poções, puzzle de aritmância", "Castelo de Hogwarts — Ala de Astronomia, pátio da Transfiguração, corredor com puzzle de aritmância (Alohomora I)", "Castelo de Hogwarts — Ala de Astronomia, Torre do Sino, topo da torre", "Castelo de Hogwarts — Torre do Sino, sala teleportada pela estátua, baú 1", "Castelo de Hogwarts — Torre do Sino, sala teleportada pela estátua, baú 2", "Castelo de Hogwarts — Ala de Astronomia, Depulso Puzzle Room 2", "Castelo de Hogwarts — Ala do Campanário, saída norte, sala com Alohomora II", "Castelo de Hogwarts — Ala do Campanário, pátio do Campanário, sala de aritmância", "Castelo de Hogwarts — Anexo da Biblioteca, Secção Restrita, sala da missão Secrets of the Restricted Section", "Castelo de Hogwarts — Anexo da Biblioteca, sala de aritmância da aula de Adivinhação", "Castelo de Hogwarts — Anexo da Biblioteca, segunda sala de aritmância da Adivinhação", "Castelo de Hogwarts — Anexo da Biblioteca, terceira porta de aritmância na área da Adivinhação", "Castelo de Hogwarts — Grande Salão, ponte do Viaduto, passagem secreta com escada, baú 1", "Castelo de Hogwarts — Grande Salão, ponte do Viaduto, passagem secreta com escada, baú 2", "Castelo de Hogwarts — Ala do Campanário, Depulso Puzzle Room 1"];
+const itemCategories=[
+ ['Baús de coleção',168,'collectionchest','Inclui 12 baús dos Vivários; os restantes distribuem-se pelas regiões.'],
+ ['Páginas do Guia de Campo',236,'fieldpage','150 páginas Revelio e outras páginas obtidas por voo, interacção e puzzles.'],
+ ['Provas de Merlin',95,'merlin','Usa Mallowsweet para activar cada prova.'],
+ ['Conjuntos de balões',32,'balloon','Cada conjunto contém 5 balões; conta o conjunto como concluído.'],
+ ['Estátuas Demiguise',33,'demiguise','Recolher à noite; desbloqueia Alohomora através da missão do cuidador.'],
+ ['Mesas de astronomia',15,'astronomy','Disponíveis após a aula de Astronomia.'],
+ ['Plataformas de aterragem',20,'landing','Aterragem com a vassoura.'],
+ ['Pontos de Magia Antiga',20,'ancient','Completa os vestígios e os pontos de interacção.'],
+ ['Borboletas / baús de borboletas',15,'butterfly','Segue cada enxame até ao baú de Conjuração.'],
+ ['Inimigos infames',18,'infamous','A referência de colecção do guia; verifica também o contador do mapa, que pode apresentar 21 encontros.'],
+ ['Chamas de Flu',83,'floo','Inclui castelo, aldeias e regiões.'],
+ ['Arenas de batalha',2,'arena','Arenas do jogo base.'],
+ ['Masmorras Cairn',5,'cairn','Masmorras de exploração.'],
+ ['Segredos de Hogwarts',3,'secret','Os três segredos com soluções específicas.'],
+ ['Chaves Daedalianas',16,'daedalian','16 chaves e 16 armários; depois abre o baú da casa.'],
+ ['Cofres de tesouro',113,'vault','Número de referência do mapa Ragequit; assinala por marcador/região.'],
+ ['Acampamentos de bandidos',47,'bandit','Contagem de referência do mapa.'],
+ ['Covis de monstros',33,'monsterden','Contagem de referência do mapa.'],
+ ['Covis de criaturas',56,'beastden','Contagem de referência do mapa.'],
+ ['Labirintos de sebes',5,'hedgemaze','Completa os labirintos e recolhe o baú.'],
+ ['Aldeias / povoações',11,'hamlet','Visita e verifica as tarefas/lojas.'],
+ ['Espécies de criaturas',13,'beast','Resgata pelo menos uma de cada espécie.'],
+ ['Criaturas reproduzidas',12,'breed','Reproduz criaturas para completar o desafio.'],
+ ['Plantas cultivadas',8,'plant','Cultiva as plantas exigidas pelo desafio.'],
+ ['Poções preparadas',6,'potion','Prepara as poções exigidas pelo desafio.']
+];
+itemCategories.forEach((cat,ci)=>{const d=document.createElement('details');d.className='quest-card';const sum=document.createElement('summary');sum.textContent=cat[0]+' — '+cat[1]+' itens';d.appendChild(sum);const body=document.createElement('div');body.className='quest-body';const note=document.createElement('p');note.textContent=cat[3];body.appendChild(note);const list=document.createElement('div');list.className='items';for(let n=1;n<=cat[1];n++){let itemLabel=cat[0].replace(/s$/,'')+' #'+n; if(cat[2]==='collectionchest' && collectionChestLocations[n-1]) itemLabel='Baú de coleção — '+collectionChestLocations[n-1]; else itemLabel+=' — localização por identificar'; list.appendChild(guideCheck('allcollect.'+cat[2]+'.'+n,itemLabel));}body.appendChild(list);const l=document.createElement('div');l.className='guide-links';const a=document.createElement('a');a.href='https://ragequit.gg/hogwarts-legacy/';a.target='_blank';a.rel='noopener';a.textContent='Abrir mapa interactivo para localizar itens';l.appendChild(a);body.appendChild(l);d.appendChild(body);allItems.appendChild(d)});
+const collectionTypes=[['Ferramentas',10],['Inimigos (colecção)',69],['Aparências',89],['Páginas Revelio',150],['Criaturas',13],['Características de equipamento',75],['Punhos de varinha',42],['Conjurações',140],['Ingredientes',16],['Vassouras',13]];
+const collectionBox=document.createElement('details');collectionBox.className='quest-card';const cs=document.createElement('summary');cs.textContent='🎒 Colecções — 603 entradas (por tipo)';collectionBox.appendChild(cs);const cb=document.createElement('div');cb.className='quest-body';collectionTypes.forEach((ct,ci)=>{const label=document.createElement('p');label.innerHTML='<b>'+ct[0]+' — '+ct[1]+'</b>';cb.appendChild(label);const rows=document.createElement('div');rows.className='items';for(let n=1;n<=ct[1];n++)rows.appendChild(guideCheck('collectiontype.'+ci+'.'+n,ct[0]+' #'+n));cb.appendChild(rows)});collectionBox.appendChild(cb);allItems.appendChild(collectionBox);const allItemsFold=document.createElement("details");allItemsFold.className="quest-card";const allItemsHead=document.createElement("summary");allItemsHead.textContent="☑️ Checklist de todos os coleccionáveis e desafios — abrir";allItemsFold.appendChild(allItemsHead);allItemsFold.appendChild(allItems);content.appendChild(allItemsFold);
+let all=0,done=0;storyChapters.forEach((chapter,ci)=>{const wrap=document.createElement('section');const h=document.createElement('h3');h.textContent=chapter.chapter;wrap.appendChild(h);chapter.quests.forEach((q,qi)=>{all++;if(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi])done++;const d=document.createElement('details');d.className='quest-card';if(ci===0&&qi===0)d.open=false;const sum=document.createElement('summary');sum.textContent=(qi+1)+'. '+q[0];d.appendChild(sum);const body=document.createElement('div');body.className='quest-body';const type=document.createElement('span');type.className='pill';type.textContent=q[1];body.appendChild(type);const desc=document.createElement('p');desc.textContent=q[2];body.appendChild(desc);const note=document.createElement('div');note.className='guide-note';note.textContent='Recolha e exploração: '+q[3];body.appendChild(note);body.appendChild(guideCheck(ci+'.'+qi,'Marcar missão como concluída',q[0]));body.appendChild(guideCheck(ci+'.'+qi+'.sweep','Verifiquei os baús, páginas e desvios acessíveis nesta missão'));d.appendChild(body);wrap.appendChild(d)});content.appendChild(wrap)});
+const side=document.createElement('section');side.innerHTML='<h3>🧑‍🤝‍🧑 Missões secundárias</h3><p class="footer">A lista abaixo reúne as missões secundárias gerais. Algumas surgem apenas depois de avançar na história, de visitar uma região ou de cumprir requisitos.</p>';side.className='group';const sideItems=document.createElement('div');sideItems.className='items';sideQuestNames.forEach((n,i)=>sideItems.appendChild(guideCheck('side.'+i,n)));side.appendChild(sideItems);content.appendChild(side);
+Object.entries(relationships).forEach(([name,quests])=>{const box=document.createElement('section');box.className='group';const head=document.createElement('h3');head.textContent='💜 Relação — '+name;box.appendChild(head);const items=document.createElement('div');items.className='items';quests.forEach((n,i)=>items.appendChild(guideCheck('rel.'+name+'.'+i,n)));box.appendChild(items);content.appendChild(box)});
+const assignments=document.createElement('section');assignments.className='group';const ah=document.createElement('h3');ah.textContent='🎓 Tarefas dos professores — desbloqueiam feitiços';assignments.appendChild(ah);const ai=document.createElement('div');ai.className='items';['Madam Kogawa’s Assignment 1','Madam Kogawa’s Assignment 2','Professor Garlick’s Assignment 1','Professor Garlick’s Assignment 2','Professor Hecat’s Assignment 1','Professor Hecat’s Assignment 2','Professor Howin’s Assignment','Professor Onai’s Assignment','Professor Sharp’s Assignment 1','Professor Sharp’s Assignment 2','Professor Ronen’s Assignment','Professor Weasley’s Assignment'].forEach((n,i)=>ai.appendChild(guideCheck('assignment.'+i,n)));assignments.appendChild(ai);content.appendChild(assignments);
+const regions=document.createElement('section');regions.className='group';regions.innerHTML='<h3>📍 Regiões para explorar fora do castelo</h3><div class="items"><p>Usa esta lista para não deixar nenhuma zona por limpar. Dentro de cada região, verifica Chamas de Flu, aldeias, páginas, baús, provas, cofres, inimigos e missões.</p></div>';const ri=regions.querySelector('.items');['Hogwarts e terrenos do castelo','Hogsmeade','Vale de Hogsmeade','Floresta Proibida','North Ford Bog','North Hogwarts Region','South Hogwarts Region','Hogwarts Valley','Feldcroft Region','South Sea Bog','Coastal Cavern','Poidsear Coast','Marunweem Lake','Manor Cape','Cragcroftshire','Clagmar Coast'].forEach((n,i)=>ri.appendChild(guideCheck('region.'+i,n+' — verificar todos os marcadores e contadores do mapa')));content.appendChild(regions);
+const totalsBox=document.createElement('section');totalsBox.className='group';totalsBox.innerHTML='<h3>📊 Contagens por local — baús, páginas e desafios</h3><p class="footer">Assinala cada unidade à medida que a encontras. Os desafios de exploração apresentados aqui são as Provas de Merlin; os restantes tipos (balões, mesas de astronomia, plataformas, Magia Antiga, Demiguise e inimigos infames) ficam identificados na ficha de cada região através dos contadores do mapa.</p>';
+const grand=document.createElement('div');grand.className='guide-note';grand.innerHTML='<b>Totais do jogo base:</b> 168 baús de coleção (inclui 12 nos Vivários), 236 páginas do Guia de Campo e 95 Provas de Merlin.';totalsBox.appendChild(grand);
+areaCounts.forEach((a,ai)=>{const d=document.createElement('details');d.className='quest-card';const su=document.createElement('summary');su.textContent=a.name+' — '+a.chests+' baús · '+a.pages+' páginas · '+a.merlin+' Provas de Merlin';d.appendChild(su);const body=document.createElement('div');body.className='quest-body';const addGroup=(label,count,key)=>{if(!count)return;const sub=document.createElement('p');sub.innerHTML='<b>'+label+' ('+count+')</b>';body.appendChild(sub);const items=document.createElement('div');items.className='items';for(let i=1;i<=count;i++)items.appendChild(guideCheck('area.'+ai+'.'+key+'.'+i,label.slice(0,-1)+' '+i));body.appendChild(items)};
+ if(a.parts){a.parts.forEach((part,pi)=>{const sub=document.createElement('p');sub.innerHTML='<b>'+part[0]+' — '+part[1]+' páginas</b>';body.appendChild(sub);const items=document.createElement('div');items.className='items';for(let i=1;i<=part[1];i++)items.appendChild(guideCheck('area.'+ai+'.wing.'+pi+'.'+i,'Página '+i));body.appendChild(items)})}else addGroup('Páginas do Guia de Campo',a.pages,'page');
+ addGroup('Baús de coleção',a.chests,'chest');addGroup('Provas de Merlin',a.merlin,'merlin');
+ if(a.name==='Castelo de Hogwarts'){const extra=document.createElement('p');extra.className='footer';extra.textContent='As páginas estão divididas pelas seis alas. Os 35 baús de coleção estão distribuídos pelo castelo; consulta o contador do mapa para os separar por ala.';body.appendChild(extra)}
+ const links=document.createElement('div');links.className='guide-links';const link=document.createElement('a');link.href='https://ragequit.gg/hogwarts-legacy/';link.target='_blank';link.rel='noopener';link.textContent='Ver mapa interactivo e marcadores desta zona';links.appendChild(link);body.appendChild(links);d.appendChild(body);totalsBox.appendChild(d)});const totalsFold=document.createElement("details");totalsFold.className="quest-card";const totalsHead=document.createElement("summary");totalsHead.textContent="📊 Abrir contagens por local (baús, páginas, Merlin)";totalsFold.appendChild(totalsHead);totalsFold.appendChild(totalsBox);content.appendChild(totalsFold);
+const puzzles=document.createElement('section');puzzles.className='group';puzzles.innerHTML='<h3>🧩 Mini-puzzles — como reconhecer e resolver</h3><div class="items"></div>';const pi=puzzles.querySelector('.items');const puzzleData=[
+['Portas de Aritmância','Principalmente nas alas do castelo. Cada triângulo tem de somar o número do centro. Descobre o valor em falta e roda os dois símbolos ? e ?? para os animais correspondentes. A sequência dos símbolos representa os números de 0 a 9; Revelio ajuda a localizar os selectores.'],
+['Chaves Daedalianas','A missão começa ao falar com Nellie Oggspire em Hogwarts. Segue cada chave até ao armário correspondente e prime a tecla de interacção quando a chave passa sobre a fechadura. Reúne os 16 emblemas para abrir o baú da tua casa.'],
+['Quadros de traças','Usa Lumos junto ao quadro para revelar uma imagem. Procura a traça na zona representada, atrai-a com Lumos e regressa ao quadro. Muito comuns em Hogwarts.'],
+['Baús com olho','Aprende Desilusão na missão da Secção Restrita. Fica invisível antes de te aproximares; se o baú te detectar, afasta-te e tenta novamente.'],
+['Provas de Merlin','Depois da primeira prova com Nora Treadwell, activa cada círculo com Mallowsweet. O mecanismo varia: acender braseiros, partir esferas, colocar bolas, reparar estátuas, conduzir mariposas ou saltar plataformas. Usa Revelio para identificar objectos.'],
+['Salas de Depulso / Herodiana','Exigem Depulso e, muitas vezes, Accio. Empurra ou puxa blocos para criar escadas e plataformas. Antes de mover uma peça, observa o percurso e evita prendê-la num canto.'],
+['Cofres do tesouro','Espalhados pelas Terras Altas e cavernas. O acesso pode exigir Incendio/Confringo, Accio/Depulso, Levioso, uma plataforma, um cubo de símbolo ou uma passagem submersa. Se não conseguires abrir, marca a localização e regressa quando tiveres o feitiço.'],
+['Borboletas','Segue o enxame até ao local escondido e usa Revelio para confirmar o baú de Conjuração. Em regra, o enxame não aparece no mapa como marcador normal.'],
+['Mesas de Astronomia','Desbloqueadas na aula de Astronomia. Só funcionam à noite: alinha a constelação rodando e ajustando o zoom do telescópio.']
+];puzzleData.forEach((v,i)=>{const d=document.createElement('details');d.className='quest-card';const su=document.createElement('summary');su.textContent=v[0];const b=document.createElement('div');b.className='quest-body';const para=document.createElement('p');para.textContent=v[1];b.appendChild(para);b.appendChild(guideCheck('puzzle.'+i,'Já resolvi este tipo de puzzle / verifiquei as localizações'));d.appendChild(su);d.appendChild(b);pi.appendChild(d)});content.appendChild(puzzles);
+const maps=document.createElement('section');maps.className='group';maps.innerHTML='<h3>🗺️ Exploração fora do castelo — o que limpar em cada região</h3><div class="items"><p>Em cada região do mapa, abre os filtros e verifica os contadores. Conclui os elementos abaixo e consulta o mapa interactivo para a localização individual:</p><ul><li>Chamas de Flu e aldeias;</li><li>Baús de coleção, cofres do tesouro e baús com olho;</li><li>Provas de Merlin e Pontos de Magia Antiga;</li><li>Estátuas Demiguise (recolher à noite; Alohomora I/II/III);</li><li>Balões, plataformas de aterragem, mesas de astronomia e borboletas;</li><li>Acampamentos de bandidos, inimigos infames, covis de criaturas e masmorras;</li><li>Missões secundárias locais e páginas Revelio.</li></ul><div class="guide-links"><a href="https://wand.com/maps/hogwarts-legacy" target="_blank" rel="noopener">Abrir mapa e filtrar por região</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-guide-full-game-walkthrough-and-100percent-collectibles" target="_blank" rel="noopener">Guias de coleccionáveis por região</a></div></div>';content.appendChild(maps);
+// Locais com nomes concretos transcritos de guias de localização consultados.
+// IDs próprios mantêm o progresso independente das antigas listas numeradas.
+const verified=document.createElement('section');verified.className='group';
+verified.innerHTML='<h3>📌 Locais identificados e conferidos</h3><p class="footer">Esta secção substitui entradas genéricas por nomes reais. Só são incluídos locais explicitamente identificados nas fontes; quando uma fonte apresenta uma contagem diferente da lista de nomes, a divergência fica assinalada.</p>';
+const verifiedSets=[
+ {title:'🏘️ Hogsmeade — baús de coleção (4 locais identificados)',items:[
+  'A norte da Honeydukes — casa pequena trancada; Alohomora nível III; baú junto à cama.',
+  'Hogsmeade Sul — casa atrás do ponto de Chama de Flu; subir ao quarto; Alohomora nível III.',
+  'Spire Alley — casa pequena à direita quando o caminho curva para a esquerda; Alohomora nível III.',
+  'Três Vassouras — subir as escadas interiores até à porta trancada; baú junto à parede.'
+ ],note:'A página consultada declara 5 baús em Hogsmeade, mas só enumera 4 nomes/localizações nesta secção. O quinto fica deliberadamente por validar, em vez de ser inventado.'},
+ {title:'🌙 Hogsmeade — estátuas Demiguise (8 locais)',items:[
+  'Atrás da Honeydukes','Dervish and Banges','A leste de The Three Broomsticks','Hog’s Head','Lower High Street','Ao lado de J. Pippin’s Potions','Em frente de Brood and Peck','The Three Broomsticks','Tomes and Scrolls'
+ ],note:'A lista de nomes da fonte contém 9 locais; o total do mapa pode variar conforme a versão/contagem usada. Mantêm-se os nomes individuais para conferência.'},
+ {title:'📖 Hogsmeade — páginas do Guia de Campo (nomes dos marcadores)',items:[
+  'Brood and Peck','Caldeirões precários de Ceridwen','Sneakoscope','Dogweed and Deathcap — Accio','Dogweed and Deathcap — Lumos','Árvore de Dogweed and Deathcap','Manequim de Gladrags','Gladrags Wizardwear','Cabeça de javali montada','Beco de Hog’s Head — Accio','Correio Mágico','Hengist of Woodcroft','Exploding Bonbons','Fizzing Whizzbees','Cais de Hog’s Head','Horta comunitária de Hogsmeade','Honeydukes','J. Pippin’s Potions','Lower High Street — Accio #1','Lower High Street — Accio #2','The Magic Neep — Accio #1','The Magic Neep — Accio #2','Carrinho de The Magic Neep','North Hogsmeade — Accio #1','North Hogsmeade — Accio #2','North Hogsmeade — Accio #3','A norte de Honeydukes — Accio','The Old Fool — Accio','The Old Fool — Lumos','Ollivanders','Loja abandonada','Margem do rio — Accio #1','Margem do rio — Accio #2','Sudeste de Hogsmeade — Accio','Sudeste de Dogweed and Deathcap — Accio','Spintwitches Sporting Needs','Spire Alley — Accio','Steepley and Sons — Accio','Decoração da loja de chá','The Three Broomsticks','Sala privada de The Three Broomsticks','Escadaria encantada','Tomes and Scrolls — Accio','Upper High Street — Accio','Poço de água','Moinho de água — Lumos','Sabão de ovos de sapo','Zonko’s Joke Shop'
+ ],note:'Os nomes são os marcadores nomeados na checklist consultada. A página geral indica 55 páginas em Hogsmeade; esta lista de nomes não deve ser confundida com uma confirmação de 55 entradas distintas.'},
+ {title:'🏰 Hogwarts — baús de coleção com local identificado',items:[
+  'Aula de Alquimia — porta Alohomora nível II, corredor junto à estátua do dragão.',
+  'Aritmância #1 — entrada do Viaduto, nas vigas acima da Sala de Adivinhação.',
+  'Aritmância #2 — sala de Aritmância, porta de puzzle à esquerda.',
+  'Aritmância #3 — sala de Aritmância, porta de puzzle em frente.',
+  'Torre do Sino #1 — varanda superior da torre, depois da sala de música.',
+  'Torre do Sino #2 — atravessar a estátua de sapo para a torre oposta; à direita.',
+  'Torre do Sino #3 — atravessar a estátua de sapo para a torre oposta; à esquerda.',
+  'Salão Central — sala atrás da porta de Aritmância junto à fonte.',
+  'Sala de Feitiços — porta trancada e escada em caracol; requer Alohomora.',
+  'Torre do Relógio #1 — porta do mecanismo; parar o pêndulo com Arresto Momentum.',
+  'Torre do Relógio #2 — segunda porta do mecanismo; Arresto Momentum.',
+  'Torre de Defesa Contra as Artes das Trevas #1 — porta de Aritmância junto à Sala de Feitiços.',
+  'Torre de Defesa Contra as Artes das Trevas #2 — sala trancada entre gárgulas; Alohomora nível II.',
+  'Torre da Faculdade #1 — sala secreta acedida pela estátua de sapo e Lumos.',
+  'Torre da Faculdade #2 — porta de Aritmância na zona privada; após O Lamento Lunar do Zelador.',
+  'Torre da Faculdade #3 — lareira escondida com Glacius e sala secreta.',
+  'Grande Escadaria #1 — porta de Aritmância no patamar superior.',
+  'Grande Escadaria #2 — porta de Aritmância num patamar inferior.',
+  'Grande Escadaria #3 — sala secreta no topo da escadaria do gabinete do Director; chave de acesso.',
+  'Grande Escadaria #4 — sala secreta no topo da escadaria do gabinete do Director.',
+  'Grande Salão #1 — porta de Aritmância à esquerda da Chama de Flu.',
+  'Grande Salão #2 — sala trancada na parede oeste; Alohomora.',
+  'Gabinete do Director — junto ao telescópio, após obter a palavra-passe na missão A Trama da Poção Polissuco.',
+  'Cozinhas — interagir com o quadro da fruta junto à escadaria; baú ao fundo.',
+  'Biblioteca — Secção Restrita; durante a missão Segredos da Secção Restrita.',
+  'Galeria Longa — porta de Aritmância depois da porta de madeira da Torre do Sino.',
+  'North Hall — porta trancada e puzzle de Aritmância; baú à direita.',
+  'Sala do Professor Fig — em cima da mesa, no canto esquerdo da sala.',
+  'Torre de Ravenclaw — porta de Aritmância à direita da Chama de Flu.',
+  'Viaduto #1 — descer pela grelha dos quatro braseiros; baú à esquerda.',
+  'Viaduto #2 — descer pela grelha dos quatro braseiros; baú à direita.'
+ ],note:'A fonte consultada indica 33 baús nos terrenos de Hogwarts. A lista acima contém os nomes/localizações que foi possível confirmar no texto consultado; não preencher automaticamente os restantes sem confirmação.'}
+];
+verifiedSets.forEach((set,si)=>{const d=document.createElement('details');d.className='quest-card';const summary=document.createElement('summary');summary.textContent=set.title;d.appendChild(summary);const body=document.createElement('div');body.className='quest-body';const list=document.createElement('div');list.className='items';set.items.forEach((label,i)=>list.appendChild(guideCheck('verified.'+si+'.'+i,label)));body.appendChild(list);if(set.note){const n=document.createElement('p');n.className='footer';n.textContent='Nota de validação: '+set.note;body.appendChild(n)}d.appendChild(body);verified.appendChild(d)});
+const sourceBox=document.createElement('div');sourceBox.className='guide-links';sourceBox.innerHTML='<a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-collection-chests-locations" target="_blank" rel="noopener">Fonte: localizações dos baús de coleção</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-hogsmeade-collectibles" target="_blank" rel="noopener">Fonte: coleccionáveis de Hogsmeade</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-field-guide-pages-locations" target="_blank" rel="noopener">Fonte: páginas do Guia de Campo</a><a href="https://ragequit.gg/hogwarts-legacy/" target="_blank" rel="noopener">Mapa interactivo com filtros e marcadores</a>';
+verified.appendChild(sourceBox);content.appendChild(verified);
+
+// V12 — checklists verificadas adicionais para progressão integral.
+const completionSection=document.createElement('section');completionSection.className='group';
+completionSection.innerHTML='<h3>🧭 Guia de exploração completo — itens que faltavam</h3><p class="footer">Listas separadas por região, com progresso individual. As Chamas de Flu são activadas ao aproximar; as Provas de Merlin aparecem no mapa depois da primeira prova da história; balões contam como conjuntos de cinco. Para os marcadores que o jogo não assinala automaticamente (por exemplo, plataformas), usa as indicações abaixo. Não confundir os totais de páginas Revelio com o total de 236 páginas de todos os tipos.</p>';
+function addChecklistGroup(parent,title,id,items,note=''){
+ const d=document.createElement('details');d.className='quest-card';const s=document.createElement('summary');s.textContent=title+' ('+items.length+')';d.appendChild(s);const b=document.createElement('div');b.className='quest-body';
+ if(note){const p=document.createElement('p');p.className='footer';p.textContent=note;b.appendChild(p)}
+ const list=document.createElement('div');list.className='items';items.forEach((it,i)=>list.appendChild(guideCheck(id+'.'+i,typeof it==='string'?it:it.label)));
+ b.appendChild(list);d.appendChild(b);parent.appendChild(d);
+}
+// 83 Floo Flames, transcritas pelos nomes apresentados nos mapas/guias.
+const flooGroups=[
+['Pântano de North Ford',['North Ford Bog','Pitt-Upon-Ford','Torre de San Bakar','East North Ford Bog']],
+['Floresta Proibida',['Entrada de North Ford Bog','West Forbidden Forest','Túmulo de Jackdaw']],
+['Vale de Hogsmeade',['Upper Hogsfield','East Hogsmeade Valley','Castelo de Falbarton']],
+['Região Norte de Hogwarts',['Collector’s Cave','East North Hogwarts Region','Forbidden Forest','Korrow Ruins']],
+['Região Sul de Hogwarts',['Covil dos Mooncalves','Aranshire','Lower Hogsfield']],
+['Vale de Hogwarts',['Central Hogwarts Valley','Brocburrow','Keenbridge','The Mine’s Eye']],
+['Região de Feldcroft',['West Hogwarts Valley','North Feldcroft','Castelo de Rookwood','Feldcroft','South Feldcroft','Catacumba de Feldcroft','Irondale']],
+['Pântano do Mar do Sul',['Northern South Sea Bog']],
+['Caverna Costeira',['East South Sea Bog','North Poidsear Coast']],
+['Costa de Poidsear',['Túmulo da Traição','Castelo de Poidsear','Caverna da Montanha da Fénix','South Poidsear Coast','Ponte de Marunweem']],
+['Lago Marunweem',['Mina Costeira','Túnel da Torre','Marunweem Lake','Marunweem','Ruínas de Marunweem']],
+['Cabo Manor',['Bainburgh','West Manor Cape']],
+['Cragcroftshire',['Cragcroft Shore','Cragcroft']],
+['Costa de Clagmar',['Castelo de Clagmar','South Clagmar Coast']],
+['Castelo — Ala de Astronomia',['Torre de Astronomia','Sala de Feitiços','Torre de Defesa Contra as Artes das Trevas','Sala de Defesa Contra as Artes das Trevas','Sala do Professor Fig','Sala de Transfiguração','Pátio da Transfiguração']],
+['Castelo — Ala do Campanário',['Pátio do Campanário','Relvado da Aula de Voo','Sala de aula de Criaturas','Saída Norte de Hogwarts','Torre Oeste']],
+['Castelo — Grande Escadaria',['Grande Escadaria','Torre da Grande Escadaria','Parte inferior da Grande Escadaria','Pátio do Quadrilátero','Torre de Ravenclaw','Sala dos Troféus','Sala Comum de Slytherin']],
+['Castelo — Grande Salão',['Casa dos Barcos','Grande Salão','Pátio do Viaduto']],
+['Castelo — Anexo da Biblioteca',['Salão Central','Sala de Adivinhação','Estufas','Biblioteca','Sala de Poções']],
+['Castelo — Salas Secretas',['Câmara do Mapa','Sala das Necessidades']],
+['Castelo — Ala Sul',['Pátio da Torre do Relógio','Torre da Faculdade','Ala Hospitalar','Saída Sul de Hogwarts']],
+['Hogsmeade',['Hogsmeade Sul','Hogsmeade Oeste','Hogsmeade Norte']]
+];
+flooGroups.forEach(([r,items])=>addChecklistGroup(completionSection,'🔥 Chamas de Flu — '+r,'v12.floo.'+r,items.map((x,i)=>r+' — '+x)));
+// 95 Merlin trials, each checkbox has its own puzzle instruction. The in-game flower marker is the locator.
+const merlinGroups=[
+['Sul de Hogwarts',[
+'Prova 1 — primeira prova da missão “Provas de Merlin”; acende rapidamente os 3 braseiros com Incendio.',
+'Prova 2 — destrói as rochas circulares com Depulso.',
+'Prova 3 — acende os 3 braseiros com Confringo.',
+'Prova 4 — salta por todas as plataformas de pedra sem cair.',
+'Prova 5 — conduz 3 grupos de borboletas às pedras verdes com Lumos.',
+'Prova 6 — coloca os conjuntos de esferas nos suportes com Wingardium Leviosa.',
+'Prova 7 — leva as borboletas às pedras com Lumos.',
+'Prova 8 — empurra a pedra grande para o buraco com Depulso.',
+'Prova 9 — destrói as rochas marcadas com Confringo.',
+'Prova 10 — coloca as bolas nos encaixes com Wingardium Leviosa.',
+'Prova 11 — empurra a pedra para o buraco junto à margem com Depulso.',
+'Prova 12 — destrói as rochas marcadas com Confringo.',
+'Prova 13 — leva as borboletas às pedras verdes com Lumos.',
+'Prova 14 — empurra a pedra do alto para o buraco com Depulso.',
+'Prova 15 — segue a sequência de plataformas sem tocar no chão.' ]],
+['Pântano de North Ford',[
+'Prova 1 — sobe a escadaria rochosa até ao topo.',
+'Prova 2 — destrói as cinco rochas verdes junto ao lago com Confringo.',
+'Prova 3 — roda os três blocos com Flipendo até alinhar os símbolos.',
+'Prova 4 — queima as vinhas da abertura e empurra a pedra para o encaixe com Depulso.' ]],
+['Floresta Proibida',[
+'Prova 1 — salta pelas colunas de pedra sem cair; usa a caixa para subir à primeira.',
+'Prova 2 — conduz os três grupos de borboletas às pedras com Lumos.',
+'Prova 3 — acende os três braseiros em sequência; um fica a nordeste, outro a este e outro a sudeste do lago.' ]],
+['Vale de Hogsmeade',[
+'Prova 1 — conduz os três grupos de borboletas às pedras verdes com Lumos.',
+'Prova 2 — empurra a pedra grande encosta abaixo com Depulso.',
+'Prova 3 — destrói as rochas assinaladas com Incendio/Confringo.',
+'Prova 4 — acende os três braseiros elevados com Incendio.',
+'Prova 5 — conduz os grupos de borboletas às pedras com Lumos.' ]],
+['Norte de Hogwarts',[
+'Prova 1 — acende três braseiros: um diante da plataforma, outro na colina à direita e outro nas ruínas do castelo.',
+'Prova 2 — repara as quatro estátuas partidas com Reparo.',
+'Prova 3 — alinha os símbolos dos três pilares com Flipendo.',
+'Prova 4 — destrói os blocos/rochas circulares com Depulso.',
+'Prova 5 — conduz três grupos de borboletas às pedras verdes com Lumos.' ]],
+['Vale de Hogwarts',[
+'Prova 1 — coloca as bolas de pedra nos encaixes com Wingardium Leviosa.',
+'Prova 2 — coloca as bolas espalhadas nos encaixes das plataformas.',
+'Prova 3 — destrói as esferas de pedra com Depulso.',
+'Prova 4 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 5 — empurra a pedra encosta abaixo com Depulso.',
+'Prova 6 — completa o percurso de saltos começando no extremo oposto da plataforma.',
+'Prova 7 — destrói as rochas verdes com Confringo.',
+'Prova 8 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 9 — destrói as esferas rochosas com Depulso.',
+'Prova 10 — completa o percurso de saltos sem cair.',
+'Prova 11 — repara as três estátuas com Reparo.',
+'Prova 12 — completa o percurso de saltos.',
+'Prova 13 — empurra a pedra pela encosta até ao buraco com Depulso.',
+'Prova 14 — acende os três braseiros.',
+'Prova 15 — identifica no mapa o marcador seguinte e conclui o puzzle de ambiente; confirmar o tipo no local antes de marcar.',
+'Prova 16 — identifica no mapa o marcador seguinte e conclui o puzzle de ambiente; confirmar o tipo no local antes de marcar.' ]],
+['Região de Feldcroft',[
+'Prova 1 — destrói as rochas verdes com Confringo.',
+'Prova 2 — alinha os símbolos dos blocos com Flipendo.',
+'Prova 3 — percorre as plataformas de cima para baixo sem cair.',
+'Prova 4 — destrói os três grupos de rochas com Confringo.',
+'Prova 5 — acende os três braseiros.',
+'Prova 6 — completa o percurso de saltos.',
+'Prova 7 — destrói as esferas rochosas junto à plataforma e às ruínas com Confringo.',
+'Prova 8 — destrói as rochas verdes próximas com Confringo.',
+'Prova 9 — conduz os três grupos de borboletas às pedras verdes com Lumos.',
+'Prova 10 — destrói as estátuas verdes no acampamento com Confringo.',
+'Prova 11 — acende os três braseiros próximos.',
+'Prova 12 — destrói as esferas rochosas espalhadas por Irondale com Confringo.',
+'Prova 13 — empurra a pedra pela falésia até ao buraco com Depulso.',
+'Prova 14 — destrói as rochas verdes ao longo da costa com Confringo.',
+'Prova 15 — repara as três estátuas com Reparo.',
+'Prova 16 — destrói as rochas verdes com Confringo.' ]],
+['Pântano do Mar do Sul',[
+'Prova 1 — conduz os três grupos de borboletas às pedras verdes com Lumos.',
+'Prova 2 — destrói as rochas circulares espalhadas pelo acampamento com Confringo.' ]],
+['Costa de Poidsear',[
+'Prova 1 — completa o percurso de saltos.',
+'Prova 2 — acende os três braseiros.',
+'Prova 3 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 4 — destrói as rochas verdes com Confringo.',
+'Prova 5 — alinha os símbolos dos pilares com Flipendo.',
+'Prova 6 — coloca as bolas de pedra nos encaixes com Wingardium Leviosa.',
+'Prova 7 — empurra a pedra para o buraco a sul com Depulso.',
+'Prova 8 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 9 — repara as três estátuas com Reparo.',
+'Prova 10 — empurra a pedra para o buraco a este; parte as tábuas que escondem o encaixe.' ]],
+['Lago Marunweem',[
+'Prova 1 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 2 — completa o percurso de saltos; destrói o barril da plataforma sobre a água.',
+'Prova 3 — activa o mecanismo das ruínas com Depulso e empurra a pedra para o buraco.',
+'Prova 4 — alinha os símbolos dos pilares com Flipendo.' ]],
+['Cabo Manor',[
+'Prova 1 — acende os três braseiros.',
+'Prova 2 — alinha os símbolos dos pilares com Flipendo.',
+'Prova 3 — coloca a pedra no encaixe da colina.',
+'Prova 4 — conduz as borboletas às três pedras verdes com Lumos.',
+'Prova 5 — destrói as rochas verdes que aparecem com Confringo.' ]],
+['Cragcroftshire',[
+'Prova 1 — destrói as rochas verdes com Confringo.',
+'Prova 2 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 3 — acende os três braseiros.',
+'Prova 4 — destrói as esferas rochosas com Confringo.',
+'Prova 5 — completa o percurso de plataformas.' ]],
+['Costa de Clagmar',[
+'Prova 1 — conduz as borboletas às pedras verdes com Lumos.',
+'Prova 2 — repara as estátuas partidas junto ao mar com Reparo.',
+'Prova 3 — destrói as rochas verdes com Confringo.',
+'Prova 4 — destrói as esferas circulares com Confringo.',
+'Prova 5 — alinha os símbolos dos pilares com Flipendo.' ]]
+];
+merlinGroups.forEach(([r,items])=>addChecklistGroup(completionSection,'🌿 Provas de Merlin — '+r,'v12.merlin.'+r,items.map((x,i)=>r+' — '+x),'Localização: abre o mapa do jogo, selecciona o ícone de flor nesta região e segue o marcador. Cada linha corresponde a um puzzle numerado da lista regional; leva Mallowsweet.'));
+// 20 Landing Platforms: precise landmark hints.
+const platforms=[
+'North Ford Bog — a sudoeste das ruínas do castelo, do outro lado do rio.',
+'Vale de Hogsmeade — extremo norte da região, floresta junto à falésia e à fronteira de North Ford Bog.',
+'Vale de Hogsmeade — falésias a este de Hogsmeade, imediatamente à esquerda de uma Prova de Merlin.',
+'Norte de Hogwarts — colina a sul do pequeno acampamento de bandidos, junto ao rio e a oeste da Chama East North Hogwarts Region.',
+'Norte de Hogwarts — lado ocidental; segue o rio desde a nascente; fica em frente ao conjunto de balões.',
+'Sul de Hogwarts — sudeste da região, abaixo de Aranshire e junto a um Cofre do Tesouro.',
+'Vale de Hogwarts — canto noroeste, colina a norte da Chama West Hogwarts Valley.',
+'Vale de Hogwarts — telhado da casa em ruínas a noroeste de Keenbridge.',
+'Vale de Hogwarts — colina a norte da Chama East South Sea Bog, acima do fim da linha férrea.',
+'Feldcroft — norte da região, a este da Chama North Feldcroft.',
+'Feldcroft — topo das ruínas a este da Chama Feldcroft.',
+'Feldcroft — falésia imediatamente fora da Chama South Feldcroft.',
+'Feldcroft — extremidade da falésia na margem oposta do rio de Irondale.',
+'Costa de Poidsear — topo do rochedo no extremo sul da região.',
+'Lago Marunweem — colina a sul da Chama Coastal Mine, abaixo de um conjunto de balões.',
+'Lago Marunweem — topo da estrutura da direita na ponte junto à Chama Marunweem Bridge.',
+'Cabo Manor — base da falésia atrás da mansão em ruínas a sudoeste de Bainburgh, junto a Cofre do Tesouro.',
+'Cabo Manor — grande rocha que se projecta do continente, aproximadamente a meio da costa ocidental; balões nas proximidades.',
+'Cragcroftshire — topo da grande rocha ao largo da ponta sudeste da costa.',
+'Costa de Clagmar — ponta sudeste da região, junto ao oceano.'
+];
+addChecklistGroup(completionSection,'🧹 Plataformas de aterragem — 20 localizações','v12.platforms',platforms,'Não aparecem como marcadores normais no mapa. Aterragem com a vassoura para registar.');
+// 14 Astronomy Tables: correct total, interact at night.
+const astronomy=[
+'North Ford Bog — base do castelo em ruínas, virada para este.',
+'Floresta Proibida — a este da Chama West Forbidden Forest e a sul do Covil dos Hipogrifos.',
+'Vale de Hogsmeade — junto à beira da falésia com vista para a Floresta Proibida, a oeste de Upper Hogsfield.',
+'Sul de Hogwarts — no topo da colina à esquerda ao chegar à Chama Forbidden Forest, perto da fronteira norte.',
+'Hogwarts — muro exterior junto à estufa, na parede saliente do castelo; procurar com Revelio.',
+'Vale de Hogwarts — topo da colina a sudoeste de Brocburrow.',
+'Vale de Hogwarts — topo das ruínas do castelo a sudeste de Keenbridge.',
+'Feldcroft — perto dos dois pequenos acampamentos de bandidos no norte, junto a balões.',
+'Feldcroft — imediatamente a norte da Chama South Feldcroft.',
+'Costa de Poidsear — do outro lado da ponte, junto à Chama South Poidsear Coast.',
+'Lago Marunweem — nordeste da região, imediatamente à direita de um Cofre do Tesouro.',
+'Cabo Manor — extremo sul da região, dentro das ruínas do castelo.',
+'Cragcroftshire — topo da colina a sul de Cragcroft.',
+'Costa de Clagmar — colina a nordeste da Chama South Clagmar Coast.',
+'Sul de Hogwarts — mesa de Lyra, concluída durante a missão principal Aula de Astronomia com Amit Thakkar.'
+];
+addChecklistGroup(completionSection,'🔭 Mesas de Astronomia — 15 localizações','v12.astronomy',astronomy,'Total corrigido para 15: 14 nas Terras Altas e 1 nos terrenos do castelo; inclui a mesa da missão Aula de Astronomia. Só podem ser activadas à noite; alinha o telescópio com a constelação.');
+// 32 balloon clusters with named landmarks.
+const balloons=[
+'Vale de Hogsmeade — Upper Hogsfield: a partir da Chama, olha para cima; segue a linha de balões para sudoeste.',
+'North Ford Bog — East North Ford Bog: da Chama, olha para cima e para a esquerda; a linha contorna a falésia para noroeste.',
+'North Ford Bog — entre a Chama North Ford Bog e Pitt-Upon-Ford, voando em direcção à grande torre.',
+'Norte de Hogwarts — da Chama East North Hogwarts Region, voa para oeste sobre a encosta.',
+'Sul de Hogwarts — ponte ferroviária a norte de Aranshire, lado este da ponte.',
+'Sul de Hogwarts — estação de Hogsmeade, sobre e em redor da estação (também indicada na tarefa de Kogawa).',
+'Sul de Hogwarts — campo de Quidditch a oeste do castelo.',
+'Sul de Hogwarts — a sul de Aranshire, segue a linha férrea até à ponte; balões no lado oeste.',
+'Sul de Hogwarts — a sul da Chama Hogwarts South Exit, sobre a colina.',
+'Vale de Hogwarts — junto à aldeia de Brocburrow.',
+'Vale de Hogwarts — a este de Keenbridge, perto da encosta.',
+'Vale de Hogwarts — imediatamente a sul de Keenbridge.',
+'Vale de Hogwarts — noroeste: voa para sudoeste a partir de Lower Hogsfield, para as montanhas ocidentais.',
+'Vale de Hogwarts — directamente a sul de Lower Hogsfield.',
+'Vale de Hogwarts — a sul da Chama The Mine’s Eye.',
+'Vale de Hogwarts — sudoeste de Brocburrow; segue a linha férrea para sul.',
+'Feldcroft — perto de Irondale, segue o rio para sul.',
+'Feldcroft — a sudoeste da Chama North Feldcroft.',
+'Feldcroft — norte do Castelo de Rookwood, sobre a grande massa de água.',
+'Feldcroft — a noroeste da Chama South Feldcroft, junto à costa.',
+'Feldcroft — a sul da aldeia de Feldcroft.',
+'Feldcroft — a sudoeste da Chama Feldcroft Catacomb, junto às falésias.',
+'Caverna Costeira — depois do túnel perto da Chama East South Sea Bog; aparece em frente à Chama North Poidsear Coast.',
+'Costa de Poidsear — a sul do Castelo de Poidsear, segue o rio até ao mar.',
+'Costa de Poidsear — a sudoeste da Chama South Poidsear Coast.',
+'Costa de Poidsear — a sudoeste da Caverna da Montanha da Fénix, segue o rio estreito.',
+'Lago Marunweem — a sul da Chama Coastal Mine.',
+'Cabo Manor — a sul da Chama West Manor Cape, sobre a água e as rochas.',
+'Cabo Manor — imediatamente a oeste da Chama West Manor Cape.',
+'Cragcroftshire — a sul da Chama Cragcroft Shore; segue o rio para este.',
+'Cragcroftshire — por cima da aldeia de Cragcroft.',
+'Costa de Clagmar — a oeste da Chama South Clagmar Coast, junto às falésias.'
+];
+addChecklistGroup(completionSection,'🎈 Conjuntos de balões — 32 rotas','v12.balloons',balloons,'Cada conjunto tem 5 balões. Rebenta os cinco durante um único percurso de vassoura para o conjunto ficar concluído.');
+const ancient=[
+'Floresta Proibida — ruínas de um castelo infestadas de aranhas.',
+'Floresta Proibida — ruínas a sul da Chama West Forbidden Forest.',
+'Vale de Hogsmeade — entrada das ruínas do castelo a este de Hogsmeade, ligeiramente a sudoeste da Chama East Hogsmeade Valley.',
+'Norte de Hogwarts — ruínas no vale a oeste da Collector’s Cave e a sul da Chama East North Hogwarts Region.',
+'Vale de Hogwarts — ruínas de castelo junto à fronteira com South Hogwarts, no lado ocidental.',
+'Vale de Hogwarts — ruínas a sudoeste de Brocburrow, a este do rio central.',
+'Vale de Hogwarts — junto ao Covil das Aranhas a sul de Brocburrow.',
+'Vale de Hogwarts — ruínas no alto da colina a noroeste de Keenbridge.',
+'Vale de Hogwarts — ruínas imediatamente a oeste de Keenbridge.',
+'Vale de Hogwarts — base do castelo a sudeste de Keenbridge, onde os rios se encontram.',
+'Feldcroft — torre do castelo à esquerda do pequeno acampamento de bandidos.',
+'Feldcroft — zona a norte da aldeia de Feldcroft.',
+'Feldcroft — ruínas do castelo a este de Holdcroft.',
+'Feldcroft — entrada das ruínas do castelo a sul de Irondale.',
+'Costa de Poidsear — exterior da casa em ruínas a sul da Chama Phoenix Mountain Cave.',
+'Costa de Poidsear — junto à ponte exterior perto da Chama South Poidsear Coast.',
+'Lago Marunweem — do outro lado da ponte onde está a Chama Marunweem Bridge.',
+'Lago Marunweem — margem oposta do lago em relação à Chama Coastal Mine.',
+'Cabo Manor — interior da mansão em ruínas no topo da falésia a sudoeste da Chama Bainburgh.',
+'Cragcroftshire — margem do lago no lado ocidental da região, abaixo de dois Cofres do Tesouro.'
+];
+addChecklistGroup(completionSection,'✨ Pontos de Magia Antiga — 20 localizações','v12.ancient',ancient,'Disponíveis depois da missão Prova de Percival Rackham. Activa o vestígio e recolhe as três essências próximas; usa Revelio e a vassoura para encontrar plataformas e passagens.');
+
+// V13 — expansão das listas que ainda apareciam como itens genéricos.
+// Os 168 baús passam a estar individualizados por região; os primeiros 68 mantêm as descrições detalhadas já verificadas.
+const chestRegions = [
+ [1,7,'Pântano de North Ford'],[8,13,'Floresta Proibida'],[14,21,'Vale de Hogsmeade'],[22,26,'Hogsmeade'],[27,33,'Região Norte de Hogwarts'],[34,68,'Castelo de Hogwarts'],[69,77,'Região Sul de Hogwarts'],[78,92,'Vale de Hogwarts'],[93,114,'Região de Feldcroft'],[115,115,'Pântano do Mar do Sul'],[116,116,'Caverna Costeira'],[117,124,'Costa de Poidsear'],[125,139,'Lago Marunweem'],[140,146,'Cabo Manor'],[147,151,'Cragcroftshire'],[152,156,'Costa de Clagmar'],[157,168,'Vivários — Sala Precisa']
+];
+const chestItemsV13=[];
+for(let n=1;n<=168;n++){
+ const rg=chestRegions.find(x=>n>=x[0]&&n<=x[1])[2];
+ const detail=collectionChestLocations[n-1];
+ chestItemsV13.push(detail ? `Baú #${n} — ${detail}` : `Baú #${n} — ${rg}. Segue a numeração do guia PowerPyx/vídeo de percurso e confirma o contador da região no mapa.`);
+}
+addChecklistGroup(completionSection,'📦 Baús de coleção — checklist numerada (168)', 'v13.chests',chestItemsV13,'Os 168 estão agora numerados individualmente e agrupados por região. As descrições textuais detalhadas estão disponíveis nas primeiras entradas transcritas; nas restantes, usa a numeração do vídeo/guia ligado abaixo para seguir a localização sem inventar uma morada. Os 12 baús dos Vivários contam para o total.');
+
+// 236 páginas: divisão exacta publicada pela PowerPyx. A numeração Revelio acompanha a ordem do guia.
+const revelioRegions=[
+ [1,30,'Hogsmeade'],[31,32,'Pântano de North Ford'],[33,36,'Vale de Hogsmeade'],[37,37,'Região Norte de Hogwarts'],[38,40,'Região Sul de Hogwarts'],[41,47,'Vale de Hogwarts'],[48,55,'Região de Feldcroft'],[56,56,'Pântano do Mar do Sul'],[57,57,'Caverna Costeira'],[58,59,'Costa de Clagmar'],[60,61,'Cragcroftshire'],[62,73,'Ala de Astronomia'],[74,95,'Ala do Campanário'],[96,113,'Grande Escadaria'],[114,127,'Grande Salão'],[128,138,'Anexo da Biblioteca'],[139,150,'Ala Sul']
+];
+const revelioItems=[];
+for(let n=1;n<=150;n++){const rg=revelioRegions.find(x=>n>=x[0]&&n<=x[1])[2];revelioItems.push(`Página Revelio #${n} — ${rg}. Usa Revelio e compara com o nome da página no Guia de Campo.`)}
+addChecklistGroup(completionSection,'📜 Páginas Revelio — 150 por número e região','v13.revelio',revelioItems,'São as 150 páginas Revelio necessárias para a colecção/feito de páginas. A ordem e as regiões seguem a lista PowerPyx. Para as indicações de cada objecto, abre o guia completo ligado no fim desta secção.');
+const flyingItems=Array.from({length:66},(_,i)=>`Página voadora #${i+1} — usa Accio; confirma a zona e o trajecto no guia de páginas do Guia de Campo.`);
+addChecklistGroup(completionSection,'🪽 Páginas voadoras — 66','v13.flyingpages',flyingItems,'A fonte de referência contabiliza 66 páginas voadoras. Podem ser recolhidas com Accio; algumas circulam em altura e exigem vassoura/posição elevada.');
+const mirrorRegions=[['Hogsmeade',5],['Ala de Astronomia',3],['Ala do Campanário',2],['Grande Escadaria',3],['Grande Salão',2],['Anexo da Biblioteca',3],['Ala Sul',2]];
+const mirrorItems=[];let mirrorN=0;for(const [rg,c] of mirrorRegions){for(let j=1;j<=c;j++){mirrorN++;mirrorItems.push(`Espelho de borboleta #${mirrorN} — ${rg} (${j}/${c}); activa o espelho com Lumos e segue a borboleta.`)}}
+addChecklistGroup(completionSection,'🦋 Espelhos de borboleta — 20','v13.mirrors',mirrorItems,'Cada espelho revela uma borboleta que deve ser conduzida de volta ao espelho com Lumos. Os totais por ala seguem a distribuição publicada.');
+const butterflyItems=Array.from({length:15},(_,i)=>`Enxame de borboletas #${i+1} — segue o grupo de borboletas até ao baú de Conjuração; confirma o marcador no mapa interactivo.`);
+addChecklistGroup(completionSection,'🦋 Enxames de borboletas — 15 baús de Conjuração','v13.butterflies',butterflyItems,'Estes 15 baús de borboletas são distintos dos 20 espelhos de páginas Revelio. Completa também a missão secundária “Segue as Borboletas” antes de recolher os restantes para evitar o erro de recompensa reportado por alguns guias.');
+const foeItems=[
+'Rampant Dugbog — extremo norte do Vale de Hogsmeade.',
+'Tempest Thorne — castelo a este do Vale de Hogsmeade; entra de vassoura pelo portão.',
+'Bardolph Beaumont’s Corpse — missão Brother’s Keeper, Upper Hogsfield.',
+'The Absconder — missão Absconder Encounter, Floresta Proibida (inimigo extra de missão).',
+'Pergit — ruínas de Korrow, missão The Tale of Rowland Oakes (Norte de Hogwarts).',
+'The Insatiable Spider — missão Tangled Web, Aranshire (Sul de Hogwarts).',
+'The White Wolf — caverna junto ao rio no Vale de Hogwarts.',
+'The Grim — mesma caverna que The White Wolf, Vale de Hogwarts.',
+'Quagmire Troll — mundo aberto, Vale de Hogwarts.',
+'Alexandra’s Troll — missão Troll Control, Brocburrow.',
+'Belgruff the Bludgeoner — acampamento de bandidos na região de Feldcroft.',
+'Catrin Haggarty — missão The Lost Child, acampamento a norte de Lower Hogsfield.',
+'Ogbert the Odd — caminho principal da Caverna Costeira, entre South Sea Bog e Poidsear Coast.',
+'Iona Morgan — ruínas na Costa de Poidsear, junto a outros inimigos.',
+'Grodbik — interior da Coastal Mine, missão Lodgok’s Loyalty; activa a plataforma pelo forno.',
+'Dunstan Trinity — mundo aberto, Cabo Manor.',
+'Ailsa Travers — cave da mansão antiga, Cabo Manor; missão Cursed Tomb Treasure.',
+'Lord of the Manor — mesma cave da mansão antiga que Ailsa Travers, Cabo Manor.',
+'Silvanus Selwyn — mundo aberto / missão Sacking Selwyn, Costa de Clagmar.'
+];
+addChecklistGroup(completionSection,'☠️ Inimigos infames — 18 da colecção + 1 extra de missão','v13.infamous21',foeItems,'A referência confirma 18 inimigos para a colecção; The Absconder é um encontro adicional de missão, pelo que esta lista tem 19 caixas (18 + 1 extra). Completa as missões associadas para não deixar inimigos de masmorra por derrotar.');
+const extraLinks=document.createElement('div');extraLinks.className='guide-links';extraLinks.innerHTML='<a href="https://www.powerpyx.com/hogwarts-legacy-all-collection-chest-locations/" target="_blank" rel="noopener">PowerPyx — 168 baús com instruções individuais</a><a href="https://www.youtube.com/watch?v=z3el_d7BvPo" target="_blank" rel="noopener">Vídeo — percurso dos 168 baús com capítulos por número</a><a href="https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/" target="_blank" rel="noopener">PowerPyx — 236 páginas do Guia de Campo</a><a href="https://www.powerpyx.com/hogwarts-legacy-all-demiguise-statue-locations/" target="_blank" rel="noopener">PowerPyx — 33 estátuas Demiguise</a>';
+completionSection.appendChild(extraLinks);
+
+// Link sources for the user to open the exact map/checklist if an item needs visual confirmation.
+const refs=document.createElement('div');refs.className='guide-links';refs.innerHTML='<a href="https://www.pandallax.com/guides/hogwarts-legacy-all-floo-flame-locations-floo-around-the-world-achievement-guide" target="_blank" rel="noopener">Fonte: lista das 83 Chamas de Flu</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-merlin-trials-locations-and-how-to-solve-them" target="_blank" rel="noopener">Fonte: 95 Provas de Merlin e soluções</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-balloons-locations" target="_blank" rel="noopener">Fonte: 32 conjuntos de balões</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-landing-platforms-locations" target="_blank" rel="noopener">Fonte: 20 plataformas de aterragem</a><a href="https://ragequit.gg/hogwarts-legacy/astronomy-table-locations/" target="_blank" rel="noopener">Fonte: 15 mesas de Astronomia e localizações</a><a href="https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/" target="_blank" rel="noopener">Fonte: páginas do Guia de Campo</a>';
+completionSection.appendChild(refs);
+content.appendChild(completionSection);
+
+// Roteiro de progresso sem perder conteúdos: instruções e listas com contagem por local.
+const route=document.createElement('section');route.className='group';
+route.innerHTML='<h3>🧭 Roteiro para progredir sem deixar conteúdos para trás</h3><div class="items"><p><b>Regra geral:</b> os coleccionáveis e as missões secundárias do jogo base podem ser concluídos depois da história em exploração livre. Não abandones uma missão de história a meio sem recolher os itens que ela exige; páginas e baús de missão podem ser revisitados quando a zona voltar a estar acessível.</p><ol><li>Segue as missões principais até desbloqueares Alohomora e as ferramentas de exploração.</li><li>Faz as tarefas dos professores assim que aparecem: desbloqueiam feitiços úteis para puzzles e baús.</li><li>Quando chegares a uma aldeia, ativa primeiro a Chama de Flu; depois limpa páginas, Demiguise, baús e missão local.</li><li>Regressa às zonas com Alohomora II/III, Bombarda, Glacius, Depulso e outros feitiços quando os desbloqueares.</li><li>À noite, recolhe Demiguise. Usa o mapa para mudar o período do dia.</li><li>Antes de terminar uma região, compara cada contador do mapa com a checklist desta APP.</li></ol><p><b>Não perdíveis:</b> as 33 estátuas Demiguise, páginas, baús de coleção, Provas de Merlin e restantes coleccionáveis podem ser limpos depois da história. As estátuas Demiguise só ficam disponíveis depois da missão “O Lamento Lunar do Zelador” e só podem ser recolhidas à noite.</p><p><b>Atenção a dependências:</b> algumas portas exigem Alohomora I/II/III; alguns baús só ficam acessíveis com feitiços ou durante/depois de missões específicas. A checklist assinala esses requisitos.</p></div>';
+content.appendChild(route);
+const dem=document.createElement('section');dem.className='group';
+dem.innerHTML='<h3>🌙 Missão dos Semivisos — todas as 33 estátuas, por ordem de acesso</h3><div class="items"><p><b>Progressão de Alohomora:</b> recolhe as 3 primeiras durante “O Lamento Lunar do Zelador”; entrega 9 luas a Gladwin Moon para Alohomora II; entrega mais 13 (22 no total) para Alohomora III. As estátuas só podem ser apanhadas à noite. As 33 não são perdíveis.</p><p><b>Vale de Hogsmeade:</b> 1 estátua, em Upper Hogsfield. A partir da Chama de Flu, segue pela rua principal até à pequena praça com abóboras. Procura a casa com uma grande roda de madeira junto à porta; abre a fechadura de nível I. A estátua está num banco/banqueta no interior.</p></div>';
+const demItems=[
+['Missão — estátua 1/3','Recolhida automaticamente durante “O Lamento Lunar do Zelador”, no percurso inicial com Gladwin Moon.'],
+['Missão — estátua 2/3','Recolhida automaticamente durante “O Lamento Lunar do Zelador”, na zona indicada por Moon.'],
+['Missão — estátua 3/3','Recolhida automaticamente durante “O Lamento Lunar do Zelador”, antes de regressares a Gladwin Moon.'],
+['North Ford Bog — Pitt-Upon-Ford (1/1)','Entra na casa grande junto à carruagem, a sudoeste da Chama de Flu; sobe até ao último piso.'],
+['Vale de Hogsmeade — Upper Hogsfield (1/1)','Casa com roda grande de madeira à entrada, perto da praça com abóboras; fechadura nível I; estátua num banco.'],
+['South Hogwarts — Aranshire (1/2)','Casa de Mary Portman, no lado noroeste da praça; abre a fechadura nível I e sobe ao piso superior.'],
+['South Hogwarts — Lower Hogsfield (2/2)','Casa de Johanna Bickle, perto da entrada da aldeia, com pequeno recinto para animais; estátua logo dentro.'],
+['Hogwarts Valley — Brocburrow (1/2)','Casa junto ao centro da aldeia, próxima do local da Prova de Merlin; procura a prateleira verde no interior.'],
+['Hogwarts Valley — Keenbridge (2/2)','Casa na extremidade oeste da aldeia, na colina junto à loja de poções; fechadura nível I.'],
+['Feldcroft — Irondale (1/2)','Casa de Althea Twiddle, perto da Chama de Flu e do moinho; estátua atrás do balcão.'],
+['Marunweem Lake — Marunweem (1/1)','Casa a nordeste da Chama de Flu, com caldeirões empilhados junto à porta; estátua atrás do balcão.'],
+['Hogsmeade — Tomes and Scrolls (1/9)','Entra na loja e passa por trás do balcão até à divisão das traseiras.'],
+['Hogsmeade — casa a noroeste de Tomes and Scrolls (2/9)','Segue pela rua a norte da loja; segunda casa à esquerda, no piso superior; fechadura nível II.'],
+['Hogsmeade — Hog’s Head (3/9)','Na divisão das traseiras da estalagem, atrás do balcão.'],
+['Hogsmeade — casa a norte de J. Pippin’s Potions (4/9)','Casa na extremidade oeste da vila; sobe ao piso superior; fechadura nível II.'],
+['Hogsmeade — The Three Broomsticks (5/9)','Sobe até ao último piso da estalagem; porta com fechadura nível I.'],
+['Hogsmeade — casa a este de The Three Broomsticks (6/9)','Entra na casa imediatamente a este da estalagem e sobe; fechadura nível I.'],
+['Hogsmeade — Dervish and Banges (7/9)','Dentro da loja, em cima do balcão, junto a Gladrags Wizardwear.'],
+['Hogsmeade — casa na colina nordeste (8/9)','Casa no alto da zona nordeste da vila; estátua no rés-do-chão, logo à entrada; fechadura nível I.'],
+['Hogsmeade — casa noroeste junto à ponte (9/9)','Casa antes da ponte/rio, no noroeste; estátua numa prateleira no rés-do-chão; fechadura nível I.'],
+['Feldcroft — aldeia de Feldcroft (2/2)','Casa no lado este da aldeia, com fechadura nível II; estátua no rés-do-chão, à esquerda ao entrar.'],
+['Manor Cape — Bainburgh (1/1)','Casa na zona norte da aldeia, fechadura nível I; estátua numa cadeira à esquerda ao entrar.'],
+['Cragcroftshire — Cragcroft (1/1)','Casa na extremidade oeste da aldeia, junto ao comerciante Bella Navarro; sobe ao piso superior.'],
+['Hogwarts — Ala Sul, Clock Tower Courtyard (1/10)','Casa de banho trancada; abre Alohomora I e procura na cabine central.'],
+['Hogwarts — Grande Salão (2/10)','Na área do Grande Salão; segue a indicação do marcador para a divisão lateral e recolhe a estátua no interior.'],
+['Hogwarts — Anexo da Biblioteca, Divination Classroom (1/3)','Sobe a escada em espiral até à sala de Adivinhação; estátua junto à secretária/professora.'],
+['Hogwarts — Anexo da Biblioteca, Potions Classroom (2/3)','Desce pela escadaria junto à sala de Poções e abre a porta trancada; estátua na divisão interior.'],
+['Hogwarts — Anexo da Biblioteca, Library (3/3)','Na zona da Biblioteca, numa sala/recanto acessível por porta trancada; verifica o marcador no piso da biblioteca.'],
+['Hogwarts — Torre do Campanário, Beasts Classroom (1/2)','Na sala de aula das Criaturas, entra na casa junto à sala; abre a porta de nível I.'],
+['Hogwarts — Torre do Campanário, Hogwarts North Exit (2/2)','A partir da Chama de Flu, vira-te e segue a parede até à porta por baixo das escadas; fechadura nível I.'],
+['Hogwarts — Ala de Astronomia, Transfiguration Courtyard (1/3)','A partir do pátio, entra pela porta junto à Chama de Flu e abre a porta de nível II à direita.'],
+['Hogwarts — Ala de Astronomia, Transfiguration Courtyard (2/3)','Do pátio, segue para a estátua do dragão, atravessa as portas e desce à cave; abre a porta de nível I à esquerda.'],
+['Hogwarts — Ala de Astronomia, Professor Fig’s Classroom (3/3)','Entra na sala de aula do Professor Fig e passa para o gabinete dele; estátua no gabinete.']
+];
+demItems.forEach((x,i)=>dem.appendChild(guideCheck('demiguise33.'+i,x[0]+' — '+x[1])));
+const demNote=document.createElement('p');demNote.className='footer';demNote.textContent='Confirma os nomes das salas no mapa do jogo: algumas versões/guias usam traduções diferentes. Para as estátuas de Hogwarts que dependem de fechaduras, regressa depois de melhorar Alohomora. Fontes: PowerPyx e Push Square; ver ligações abaixo.';dem.appendChild(demNote);
+const demLinks=document.createElement('div');demLinks.className='guide-links';demLinks.innerHTML='<a href="https://www.powerpyx.com/hogwarts-legacy-all-demiguise-statue-locations/" target="_blank" rel="noopener">PowerPyx — 33 estátuas Demiguise</a><a href="https://www.pushsquare.com/guides/hogwarts-legacy-all-demiguise-statues-locations" target="_blank" rel="noopener">Push Square — locais por região</a><a href="https://ragequit.gg/hogwarts-legacy/demiguise-statues-locations/" target="_blank" rel="noopener">Ragequit — guia Demiguise</a>';
+dem.appendChild(demLinks);content.appendChild(dem);
+const valley=document.createElement('section');valley.className='group';
+valley.innerHTML='<h3>🗺️ Vale de Hogsmeade — ficha de região</h3><div class="items"><p><b>Baús de coleção: 8</b> · <b>Provas de Merlin: 5</b> · <b>Páginas do Guia de Campo: 4</b> · <b>Demiguise: 1</b> (Upper Hogsfield).</p><p><b>Baús identificados:</b> 4 em Upper Hogsfield e 4 fora da aldeia, distribuídos por acampamentos de bandidos e Overlook Mine. Os locais já nomeados na checklist de baús devem ser confirmados um a um com o contador do mapa; não assumir que baús normais e baús de coleção são a mesma categoria.</p><p><b>Chamas de Flu:</b> ativa todas as Chamas que aparecem no mapa ao explorar a região. A contagem apresentada por mapas de terceiros pode divergir conforme a forma como agrupam as zonas limítrofes; por isso, a APP não fixa um total não confirmado. Marca cada ponto pelo nome mostrado no teu mapa de jogo.</p><p><b>Ordem recomendada:</b> Upper Hogsfield (Chama de Flu, missão da aldeia, Demiguise, casas/baús) → Overlook Mine (explora todos os corredores e salas laterais) → acampamentos de bandidos → completar as 5 Provas de Merlin → verificar balões, plataformas, pontos de Magia Antiga e inimigos infames no mapa.</p></div>';
+['Ativei todas as Chamas de Flu visíveis no Vale de Hogsmeade','Concluí os 8 baús de coleção da região','Concluí as 5 Provas de Merlin','Recolhi as 4 páginas do Guia de Campo atribuídas à região','Recolhi a estátua Demiguise de Upper Hogsfield','Verifiquei todos os cofres do tesouro e acampamentos no mapa','Concluí as missões secundárias da região','Voltei a verificar os marcadores depois de desbloquear novos feitiços'].forEach((x,i)=>valley.appendChild(guideCheck('hogvalley.route.'+i,x)));
+const valleyLinks=document.createElement('div');valleyLinks.className='guide-links';valleyLinks.innerHTML='<a href="https://www.powerpyx.com/hogwarts-legacy-collectibles-guide-100-completion/" target="_blank" rel="noopener">PowerPyx — contagens de 100%</a><a href="https://ragequit.gg/hogwarts-legacy/" target="_blank" rel="noopener">Mapa interactivo — filtrar Vale de Hogsmeade</a>';
+valley.appendChild(valleyLinks);content.appendChild(valley);
+const total=document.createElement('p');total.className='footer';total.textContent='Missões principais/pós-história apresentadas: '+all+'. O progresso deste guia fica guardado no mesmo dispositivo que a checklist.';content.appendChild(total);
+// Navegação por categorias: evita uma única página longa em scroll.
+const nodes=Array.from(content.children);const storyStart=3,storyEnd=storyStart+storyChapters.length;let cursor=storyEnd;
+const sideNode=nodes[cursor++];const relationNodes=nodes.slice(cursor,cursor+Object.keys(relationships).length);cursor+=Object.keys(relationships).length;
+const assignmentsNode=nodes[cursor++],regionsNode=nodes[cursor++],totalsNode=nodes[cursor++],puzzlesNode=nodes[cursor++],mapsNode=nodes[cursor++],verifiedNode=nodes[cursor++],completionNode=nodes[cursor++],routeNode=nodes[cursor++],demNode=nodes[cursor++],valleyNode=nodes[cursor++],footerNode=nodes[cursor++];
+const categoryDefs=[
+ {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1]]},
+ {name:'História principal',icon:'📖',nodes:nodes.slice(storyStart,storyEnd)},
+ {name:'Missões',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
+ {name:'Coleccionáveis',icon:'🎒',nodes:[nodes[2],totalsNode]},
+ {name:'Desafios e puzzles',icon:'🧩',nodes:[puzzlesNode,verifiedNode,completionNode,routeNode]},
+ {name:'Exploração e regiões',icon:'🗺️',nodes:[regionsNode,mapsNode,demNode,valleyNode]},
+ {name:'Notas',icon:'ℹ️',nodes:[footerNode]}
+];
+const categoryNav=document.createElement('div');categoryNav.className='guide-category-nav';const categoryHost=document.createElement('div');
+categoryDefs.forEach((cat,ci)=>{const panel=document.createElement('div');panel.className='guide-panel';panel.dataset.category=cat.name;cat.nodes.filter(Boolean).forEach(n=>panel.appendChild(n));categoryHost.appendChild(panel);const btn=document.createElement('button');btn.type='button';btn.textContent=cat.icon+' '+cat.name;btn.className=(cat.name===guideCategory?'active':'');btn.onclick=()=>{guideCategory=cat.name;Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};categoryNav.appendChild(btn);});
+if(!categoryDefs.some(c=>c.name===guideCategory))guideCategory='Visão geral';Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach((b,i)=>b.classList.toggle('active',categoryDefs[i].name===guideCategory));
+content.replaceChildren(categoryNav,categoryHost);
+}
+
+let state={};
+try { state=JSON.parse(localStorage.getItem("hlTracker")||"{}") || {}; } catch(e) { state={}; }
+storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{if(state['guide:'+ci+'.'+qi])state['quest:'+normTask(q[0])]=true;}));
+let current=-1;let guideCategory='Visão geral';
+const nav=document.getElementById("nav"),content=document.getElementById("content");
+function key(si,gi,ii){return `${si}.${gi}.${ii}`}
+let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress');syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
+window.addEventListener('storage',e=>{if(e.key==='hlTracker'&&e.newValue){try{state=JSON.parse(e.newValue)||{};render()}catch(_){}}});
+function save(){try { localStorage.setItem("hlTracker",JSON.stringify(state));if(syncChannel)syncChannel.postMessage({state}); } catch(e) { alert("Não foi possível guardar neste navegador. Usa Exportar progresso para criar uma cópia de segurança."); } render()}
+function countAll(){let total=0,done=0;sections.forEach((s,si)=>s.groups.forEach((g,gi)=>g[1].forEach((it,ii)=>{total++;if(state[sectionItemKey(si,gi,ii,it)])done++})));Object.keys(state).filter(k=>k.startsWith("guide:")&&!/^guide:\d+\.\d+$/.test(k)).forEach(k=>{total++;if(state[k])done++});return {total,done}}
+function renderNav(){nav.innerHTML="";const home=document.createElement("button");home.textContent="🏠 Início";home.className="nav-home "+(current===-1?"active":"");home.onclick=()=>{current=-1;render()};nav.appendChild(home);const guide=document.createElement("button");guide.textContent="🧭 Guia 100%";guide.className=current===-2?"active":"";guide.onclick=()=>{current=-2;render()};nav.appendChild(guide);sections.forEach((s,i)=>{let b=document.createElement("button");b.textContent=s.title;b.className=i===current?"active":"";b.onclick=()=>{current=i;render()};nav.appendChild(b)})}
+function renderDashboard(){content.innerHTML="";const welcome=document.createElement("div");welcome.className="home-welcome";welcome.innerHTML='<h2>🏰 O teu percurso até aos 100%</h2><p>Escolhe uma área para continuar. O progresso é guardado automaticamente neste dispositivo.</p><div class="quick-actions"></div>';const actions=welcome.querySelector('.quick-actions');[['📖 Continuar história',0],['🧭 Abrir guia completo',-2],['🏰 Explorar Hogwarts',1],['🗺️ Explorar regiões',3]].forEach(([label,target])=>{const b=document.createElement('button');b.textContent=label;b.onclick=()=>{current=target;render()};actions.appendChild(b)});content.appendChild(welcome);const grid=document.createElement('div');grid.className='dashboard';sections.forEach((sec,i)=>{let total=0,done=0;sec.groups.forEach((g,gi)=>g[1].forEach((x,ii)=>{total++;if(state[sectionItemKey(i,gi,ii,x)])done++}));const card=document.createElement('div');card.className='dash-card';card.onclick=()=>{current=i;render()};const h=document.createElement('h3');h.textContent=sec.title;const p=document.createElement('p');p.textContent=done+' de '+total+' tarefas concluídas';const bar=document.createElement('div');bar.className='progress';const fill=document.createElement('div');fill.className='bar';fill.style.width=(total?Math.round(done/total*100):0)+'%';bar.appendChild(fill);const foot=document.createElement('p');foot.textContent='Tocar para abrir →';card.append(h,p,bar,foot);grid.appendChild(card)});content.appendChild(grid);const tip=document.createElement('section');tip.className='group';tip.innerHTML='<h3>✨ Sugestão para jogar sem te perderes</h3><div class="items"><p>Avança na história e nas tarefas dos professores para desbloquear feitiços. Quando uma nova zona fica acessível, limpa-a por etapas: Chamas de Flu → missões → coleccionáveis → puzzles → baús e desafios.</p><p>Usa a pesquisa acima para encontrar rapidamente uma missão ou coleccionável e o filtro para mostrar apenas o que falta.</p></div>';content.appendChild(tip)}
+function render(){
+ renderNav();content.innerHTML="";
+ if(current===-1){renderDashboard();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
+ if(current===-2){renderGuide();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
+ let s=sections[current],title=document.createElement("div");title.className="section-title";
+ let h=document.createElement("h2");h.textContent=s.title;title.appendChild(h);
+ let sm=document.createElement("small");let sectionTotal=0,sectionDone=0;s.groups.forEach((g,gi)=>g[1].forEach((x,ii)=>{sectionTotal++;if(state[sectionItemKey(current,gi,ii,x)])sectionDone++}));sm.textContent=`${sectionDone}/${sectionTotal} concluídos`;title.appendChild(sm);content.appendChild(title);
+ let q=document.getElementById("search").value.toLowerCase(),filter=document.getElementById("filter").value;
+ s.groups.forEach((g,gi)=>{let group=document.createElement("div");group.className="group";let gh=document.createElement("h3");gh.textContent=g[0];group.appendChild(gh);let items=document.createElement("div");items.className="items";
+ g[1].forEach((it,ii)=>{let k=sectionItemKey(current,gi,ii,it),isDone=!!state[k];if(q&&!it.toLowerCase().includes(q))return;if(filter==="todo"&&isDone||filter==="done"&&!isDone)return;
+ let row=document.createElement("div");row.className="item"+(isDone?" done":"");let cb=document.createElement("input");cb.type="checkbox";cb.checked=isDone;cb.onchange=()=>{state[k]=cb.checked;save()};let label=document.createElement("label");label.textContent=it;label.onclick=()=>cb.click();row.append(cb,label);items.appendChild(row)});
+ if(items.children.length===0&&filter!=="all"||items.children.length===0&&q){group.classList.add("hide")}else group.appendChild(items);
+ if(current===sections.length-1&&gi===0){let add=document.createElement("div");add.className="custom";let inp=document.createElement("input");inp.placeholder="Adicionar tarefa personalizada…";let btn=document.createElement("button");btn.textContent="Adicionar";btn.onclick=()=>{let val=inp.value.trim();if(!val)return;g[1].push(val);inp.value="";save()};add.append(inp,btn);group.appendChild(add)}
+ content.appendChild(group)});
+ let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%"
+}
+document.getElementById("search").oninput=render;document.getElementById("filter").onchange=render;
+document.getElementById("export").onclick=()=>{let blob=new Blob([JSON.stringify({state,sections:sections.map(s=>s.title),exported:new Date().toISOString()},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hogwarts-legacy-progresso.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
+document.getElementById("importFile").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let obj=JSON.parse(r.result);state=obj.state||obj;save();alert("Progresso importado!")}catch{alert("Ficheiro inválido.")}};r.readAsText(f)};
+document.getElementById("reset").onclick=()=>{if(confirm("Tens a certeza que queres apagar todo o progresso?")){state={};save()}};
+render();
+</script>
+<script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));</script>
+</body></html>

@@ -1,0 +1,41 @@
+HOGWARTS LEGACY — GUIA E CHECKLIST DE PROGRESSO (V15)
+
+1. Publicacao no GitHub Pages
+- Extrai o ZIP.
+- Abre a pasta HogwartsLegacy.
+- Copia o conteudo dessa pasta para a raiz do repositorio GitHub (index.html, manifest.webmanifest, service-worker.js, icon-192.png, icon-512.png e restantes ficheiros).
+- Nao coloques a pasta HogwartsLegacy dentro de outra pasta HogwartsLegacy.
+- Aguarda a actualizacao do GitHub Pages e abre o endereco da APP.
+
+2. Actualizacao no telemovel
+- Antes de substituir os ficheiros, usa Exportar progresso na APP antiga para guardar uma copia JSON.
+- Actualiza os ficheiros no GitHub.
+- Fecha a APP, abre-a novamente com internet e aguarda a cache v15.
+- Se continuar a mostrar a versao antiga, fecha a APP instalada e abre o site no Chrome; depois limpa os dados/cache do site ou remove e volta a adicionar o atalho.
+- Importa o JSON de progresso se necessario.
+
+3. O que foi acrescentado
+- Checklists individuais de 168 baus, 236 paginas do Guia de Campo, 15 enxames de borboletas e 18 inimigos infames da colecção + 1 extra de missão.
+- Mantem as listas de 95 Provas de Merlin, 83 Chamas de Flu, 32 conjuntos de baloes, 20 plataformas, 15 mesas de Astronomia e 20 pontos de Magia Antiga.
+- As 33 estatuas Demiguise estao listadas numa secao propria.
+
+4. Nota de rigor
+A APP distingue localizacoes transcritas de listas numeradas que remetem para guias externos. Para nao inventar localizacoes, algumas entradas dos baus e das paginas voadoras/espelhos devem ser abertas nos guias ligados dentro da APP. Ver VALIDACAO_FONTES.txt.
+
+5. Correcções da auditoria v14
+- Mesas de Astronomia: corrigido para 15 (14 nas Terras Altas + 1 nos terrenos do castelo; inclui a mesa da missão Aula de Astronomia).
+- Inimigos infames: substituída a lista de 21 rótulos genéricos por 18 encontros com nomes e indicações de localização; The Absconder está identificado como encontro adicional de missão.
+- As listas de baús e páginas continuam a distinguir itens numerados de instruções de localização já transcritas.
+
+AUDITORIA FINAL V15
+- Corrigido o total das mesas de Astronomia para 15.
+- Corrigida a lista de inimigos infames para 18 da colecção + The Absconder como extra de missão.
+- Consulta VALIDACAO_FONTES.txt para ver claramente o que está transcrito e o que continua a depender de mapas/guias externos.
+
+
+6. Navegacao por categorias e sincronizacao (V15)
+- O Guia 100% foi dividido em separadores: Visao geral, Historia principal, Missoes, Coleccionaveis, Desafios e puzzles, Exploracao e regioes e Notas.
+- A janela Historia principal apresenta as mesmas missoes e capitulos do Guia 100%.
+- Ao marcar uma missao no Guia 100%, o estado dessa mesma missao e actualizado automaticamente na janela Historia principal; o inverso tambem funciona. As tarefas dos professores que correspondem a missoes da campanha partilham o mesmo estado.
+- O progresso sincroniza automaticamente entre separadores/janelas do mesmo site e navegador, no mesmo dispositivo, usando armazenamento local e BroadcastChannel. Nao e sincronizacao na nuvem entre dispositivos diferentes. Para mudar de dispositivo, usa Exportar/Importar progresso.
+- As caixas de verificacao de tarefas diferentes (por exemplo, verificar desvios/coleccionaveis numa missao) continuam separadas: concluir uma missao nao assinala automaticamente coleccionaveis que ainda nao recolheste.
