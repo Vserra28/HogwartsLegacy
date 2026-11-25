@@ -56,3 +56,7 @@ VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por ca
 VERSAO 20 — HISTORIA PRINCIPAL
 Fontes principais: PowerPyx, lista completa de missões e walkthroughs individuais (https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/); The Path to Hogwarts (https://www.powerpyx.com/hogwarts-legacy-the-path-to-hogwarts-walkthrough/); Welcome to Hogwarts; Charms Class; Defence Against the Dark Arts; Professor Ronen Assignment; Welcome to Hogsmeade; Secrets of the Restricted Section; Jackdaw’s Rest; Percival Rackham’s Trial; Helm of Urtkot; High Keep; Charles Rookwood’s Trial; In the Shadow of the Mine; It’s All Gobbledegook; In the Shadow of the Mountain; Lodgok’s Loyalty.
 Critério: números só são apresentados quando confirmados pela fonte; restantes missões mostram “contagem não confirmada” e checklist de verificação, para não inventar quantidades. As recolhas têm checks independentes do check de missão.
+
+
+VERSAO 21 — ALTERACAO DE ESTRUTURA
+A navegação Guia 100% / História Principal foi reorganizada para mostrar apenas o percurso cronológico por capítulos e missões. As listas gerais de coleccionáveis, contagens regionais e checklists agregadas deixam de ser apresentadas nessa área. As listas de localização por missão continuam sujeitas à validação individual indicada nas notas v20; esta versão não declara concluída a auditoria de todas as missões secundárias nem de todos os baús/páginas.

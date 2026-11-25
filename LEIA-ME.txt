@@ -1,4 +1,4 @@
-HOGWARTS LEGACY — GUIA E CHECKLIST DE PROGRESSO (V15)
+HOGWARTS LEGACY — GUIA DE PROGRESSO (V21)
 
 1. Publicacao no GitHub Pages
 - Extrai o ZIP.
@@ -52,3 +52,11 @@ VERSÃO 19: foi adicionada uma área de Localizações exactas com acesso por ca
 
 VERSAO 20 — HISTORIA PRINCIPAL POR MISSAO
 Cada missão tem agora uma checklist de recolhas/desvios própria. O Prólogo inclui os 9 baús com localização individual. Outras missões incluem localizações de baús e puzzles quando descritos por guias de walkthrough; nos casos sem contagem publicada, a aplicação identifica a limitação em vez de inventar totais. Os checks de recolha são independentes do check de missão, e o estado da missão permanece sincronizado com o Guia 100%.
+
+
+VERSAO 21 — ESTRUTURA CRONOLOGICA POR CAPITULOS
+- A área Guia 100% e a área História Principal apresentam agora o mesmo percurso cronológico por capítulos.
+- Cada capítulo contém as suas missões; cada missão abre a respetiva orientação e a checklist própria de recolhas/desvios quando existem localizações identificadas.
+- Foi retirada da navegação do Guia 100% a checklist geral de todos os coleccionáveis. Não são apresentados baús/páginas como uma lista global separada da história.
+- A conclusão da missão continua independente da conclusão de cada baú, página ou desvio. O progresso anterior é preservado.
+- Nota: esta versão altera a organização e a navegação; não significa que todas as localizações individuais das 47 missões estejam já validadas. Os casos sem localização confirmada continuam assinalados como tal.
