@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-<p>🦡 Edição Hufflepuff · v48</p></header>
+<p>🦡 Edição Hufflepuff · v49</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -235,6 +235,9 @@ function missionChecklistFor(q,ci,qi,body){
 
  const stepBox=document.createElement("section");stepBox.className="mission-collection-panel";const stepTitle=document.createElement("h4");stepTitle.textContent="📖 Objetivos passo a passo";stepBox.appendChild(stepTitle);(steps44[q[0]]||[]).forEach((label,i)=>{if(!(skipSteps47[q[0]]||[]).includes(i))stepBox.appendChild(guideCheck("v44.steps."+ci+"."+qi+"."+i,label))});body.appendChild(stepBox);
  const pages=storyPagePlan[q[0]]||{};
+ if(q[0]==='Welcome to Hogsmeade'){
+ const panel=document.createElement('section');panel.className='mission-collection-panel';const h=document.createElement('h4');h.textContent='🦋 Espelhos de mariposas — 5 páginas opcionais';panel.appendChild(h);const p=document.createElement('p');p.textContent='Durante a exploração livre, usa Lumos diante do espelho, encontra a mariposa, aproxima-te com Lumos ativo, regressa ao espelho e desativa o feitiço. Recolhe a página.';panel.appendChild(p);miniLists[1].items.slice(15,20).forEach((label,i)=>panel.appendChild(guideCheck('v18.minipuzzle.1.'+(15+i),label)));body.appendChild(panel);
+ }
  const pagePanel=document.createElement('section');pagePanel.className='mission-collection-panel';
  const ph=document.createElement('h4');ph.textContent='📜 Páginas do Guia de Campo — percurso Hufflepuff';pagePanel.appendChild(ph);
  for(const [kind,title] of [['required','Obrigatórias'],['optional','Opcionais — desvio sugerido']]){
@@ -295,7 +298,7 @@ function normTask(v){return String(v||'').normalize('NFD').replace(/[\u0300-\u03
 const storyQuestNames=new Set(storyChapters.flatMap(ch=>ch.quests.map(q=>normTask(q[0]))));
 function storyQuestNameFromId(id){const m=String(id).match(/^(\d+)\.(\d+)$/);return m&&storyChapters[+m[1]]&&storyChapters[+m[1]].quests[+m[2]]?storyChapters[+m[1]].quests[+m[2]][0]:null}
 function canonicalQuestKey(label){const n=normTask(label);return storyQuestNames.has(n)?'quest:'+n:null}
-function guideCheck(id,label,linkedQuest){const qName=linkedQuest||storyQuestNameFromId(id);const canonical=qName?('quest:'+normTask(qName)):null;const legacy='guide:'+id;const k=canonical||legacy;if(canonical&&state[legacy]&&!state[canonical])state[canonical]=true;const row=document.createElement('label');row.className='quest-check';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!state[k];cb.onchange=()=>{state[k]=cb.checked;if(canonical)state[legacy]=cb.checked;save()};const span=document.createElement('span');span.textContent=label;row.append(cb,span);return row}
+function guideCheck(id,label,linkedQuest){const mirrorMatch=/^v13\.mirrors\.([0-4])$/.exec(id);if(mirrorMatch)id='v18.minipuzzle.1.'+(15+Number(mirrorMatch[1]));const qName=linkedQuest||storyQuestNameFromId(id);const canonical=qName?('quest:'+normTask(qName)):null;const legacy='guide:'+id;const k=canonical||legacy;if(canonical&&state[legacy]&&!state[canonical])state[canonical]=true;const row=document.createElement('label');row.className='quest-check';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!!state[k];cb.onchange=()=>{state[k]=cb.checked;if(canonical)state[legacy]=cb.checked;save()};const span=document.createElement('span');span.textContent=label;row.append(cb,span);return row}
 function sectionItemKey(si,gi,ii,label){const canonical=canonicalQuestKey(label);return canonical||key(si,gi,ii)}
 function renderChapterJourney(){
  content.innerHTML='';
@@ -494,11 +497,11 @@ const miniLists=[
 'Hogwarts — saída norte: quadro na sala trancada à direita do pátio, junto à Chama de Flu. Traça: duas torres atrás, acima da porta de saída.',
 'Hogwarts — corredor do Director: quadro acima do nível da Sala dos Troféus, na base das escadas do Gabinete do Director. Traça: volta a descer as escadas.',
 'Hogwarts — Torre de Astronomia: quadro na base da escadaria em espiral que sobe aos telescópios exteriores. Traça: no quadro-negro exterior, no topo.',
-'Hogsmeade — Dogweed and Deathcap: quadro dentro da loja. Traça: no topo da chaminé; sai e contorna o edifício, sobe as pedras.',
-'Hogsmeade — sudeste: quadro a norte da Chama South Hogsmeade, encostado a uma casa. Traça: vira à direita, passa entre casas até à zona relvada.',
-'Hogsmeade — Hog’s Head Alley: quadro atrás dos edifícios no beco sem saída. Traça: no cais, junto à água.',
-'Hogsmeade — Moinho de Água: quadro dentro do moinho/celeiro anexo à roda. Traça: no candeeiro ao longo do caminho de regresso à vila.',
-'Hogsmeade — loja abandonada: a oeste, entre The Magic Neep e Dogweed and Deathcap. Traça: atrás da loja.' ]},
+"Hogsmeade — Dogweed and Deathcap: espelho dentro da loja. Mariposa no topo da chaminé; sai e contorna o edifício, sobe pelas rochas.",
+"Hogsmeade — sudeste: espelho a norte da Chama de Flu Sul, encostado a uma casa. Mariposa: vira à direita e passa entre as casas até à zona relvada.",
+"Hogsmeade — Cabeça de Javali: espelho no beco sem saída atrás dos edifícios. Mariposa no cais da estalagem, junto à água.",
+"Hogsmeade — Moinho de Água: espelho dentro do moinho, junto à roda. Mariposa no candeeiro ao longo do caminho de regresso à vila.",
+"Hogsmeade — The Old Fool: espelho dentro da loja abandonada, entre Magic Neep e Dogweed and Deathcap. Mariposa nas traseiras da loja." ]},
 {title:'🗝️ 16 Chaves Daedalianas',source:'https://ragequit.gg/hogwarts-legacy/the-daedalian-keys-quest-and-daedalian-key-locations/',items:[
 'Astronomy Tower — chave tutorial, no topo da torre, seguindo o marcador da missão. Cabinet: sala circular um piso abaixo, junto à Chama de Flu.',
 'Astronomy Wing — piso abaixo da aula de Defesa Contra as Artes das Trevas; sobe as escadas e vira à esquerda, junto ao esqueleto de rinoceronte.',
@@ -868,7 +871,8 @@ addChecklistGroup(completionSection,'🪽 Páginas voadoras e de interação —
 addChecklistGroup(completionSection, "👁 Baús de olho — Hogsmeade", "v30.eye.hogsmeade", eyeHogsmeade.map((x,i)=>`Baú ${i+1} — ${x}. Afasta-te do campo de visão, lança Desilusão e aproxima-te para abrir.`), "15 localizações de referência. Os nomes de lojas permitem reconhecer os locais no mapa; alguns baús exigem acesso a interiores.");
 const mirrorRegions=[['Hogsmeade',5],['Ala de Astronomia',3],['Ala do Campanário',2],['Grande Escadaria',3],['Grande Salão',2],['Anexo da Biblioteca',3],['Ala Sul',2]];
 const mirrorDetails={6:"Torre de Astronomia: espelho junto à lareira; mariposa acima do quadro na sala do telescópio.",7:"Torre de Defesa Contra as Artes das Trevas: espelho na parede junto à Chama; mariposa num pilar do piso superior, após o corredor.",8:"Torre Oeste: espelho no fim do corredor com vapor verde; mariposa no quadro do centauro no patamar superior.",9:"Saída norte de Hogwarts: espelho na divisão trancada junto à carruagem; mariposa atrás da muralha a este.",10:"Campanário: espelho acima da escada junto à sala de História da Magia; mariposa no vaso junto à esfinge."};const mirrorItems=[];let mirrorN=0;for(const [rg,c] of mirrorRegions){for(let j=1;j<=c;j++){mirrorN++;mirrorItems.push(`Espelho de borboleta #${mirrorN} — ${rg} (${j}/${c}); ${mirrorDetails[mirrorN] || "Localização individual por confirmar."} Activa o espelho com Lumos e regressa com a mariposa.`)}}
-addChecklistGroup(completionSection,'🦋 Espelhos de borboleta — 20','v13.mirrors',mirrorItems,'Cada espelho revela uma borboleta que deve ser conduzida de volta ao espelho com Lumos. Os totais por ala seguem a distribuição publicada.');
+for(let i=0;i<5;i++)mirrorItems[i]=miniLists[1].items[15+i];
+addChecklistGroup(completionSection,'🦋 Espelhos de mariposas — 20','v13.mirrors',mirrorItems,'Cada espelho revela uma borboleta que deve ser conduzida de volta ao espelho com Lumos. Os totais por ala seguem a distribuição publicada.');
 const butterflyItems=Array.from({length:15},(_,i)=>`Enxame de borboletas #${i+1} — segue o grupo de borboletas até ao baú de Conjuração; confirma o marcador no mapa interactivo.`);
 addChecklistGroup(completionSection,'🦋 Enxames de borboletas — 15 baús de Conjuração','v13.butterflies',butterflyItems,'Estes 15 baús de borboletas são distintos dos 20 espelhos de páginas Revelio. Completa também a missão secundária “Segue as Borboletas” antes de recolher os restantes para evitar o erro de recompensa reportado por alguns guias.');
 const foeItems=[
@@ -1100,6 +1104,7 @@ const pairs={
 };for(const [a,b] of pairs[q[0]]||[])if(state[a])state[b]=true;
 }));state['migration:v47.dedup']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}
 }
+if(!state['migration:v49.mirrors']){for(let i=0;i<5;i++)if(state['guide:v13.mirrors.'+i])state['guide:v18.minipuzzle.1.'+(15+i)]=true;state['migration:v49.mirrors']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
 let storySelectedChapter=null;let storySelectedMission=null;let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
 const nav=document.getElementById("nav"),content=document.getElementById("content");
 function key(si,gi,ii){return `${si}.${gi}.${ii}`}
