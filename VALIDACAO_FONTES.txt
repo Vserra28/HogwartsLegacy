@@ -77,3 +77,6 @@ Versão v26: nomes das 57 missões secundárias traduzidos para português de Po
 v26: reorganizada a secção Mini-puzzles para priorizar as listas com localizações. Não se declara validação completa das 95 Provas de Merlin.
 
 Versão v26: títulos das missões de relação e tarefas de professores traduzidos para português; identificadores de progresso preservados.
+
+
+Versão v27: as 12 tarefas dos professores passam a abrir individualmente com instruções e recompensas em português de Portugal. As caixas de progresso mantêm os IDs anteriores. Cache v27.
