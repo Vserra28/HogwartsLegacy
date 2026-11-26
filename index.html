@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-</header>
+<p>🦡 Edição Hufflepuff · v41</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -947,7 +947,7 @@ Array.from(completionNode.children).forEach(child=>{
 // Navegação de desafios por tipo e, quando aplicável, por região.
 const challengeGroups=new Map(keepChallenge.map(x=>[x,[]]));
 Array.from(challengePanel.children).forEach(node=>{
- const label=node.querySelector('summary')?.textContent?.trim()||'';
+ const label=(node.querySelector('summary')?.textContent || node.textContent || '').trim();
  const type=keepChallenge.find(x=>label.startsWith(x));
  if(type){challengeGroups.get(type).push({node,label});node.remove();}
 });
@@ -1000,13 +1000,39 @@ if(current===3 || (current===-2 && guideCategory==='Exploração e regiões')){
  content.replaceChildren(host);return;
 }
 
+// v41: navegação de baús e páginas, sem alterar IDs.
+const lootPanel=document.createElement('section');lootPanel.className='group';
+lootPanel.innerHTML='<h3>📦 Baús e páginas</h3>';
+const lootGrid=document.createElement('div');lootGrid.className='region-grid';lootPanel.appendChild(lootGrid);
+const lootTypes=[
+ ['📦 Baús de coleção','v13.chests',chestItemsV13,chestRegions],
+ ['📜 Páginas Revelio','v13.revelio',revelioItems,revelioRegions],
+ ['🪽 Páginas voadoras e de interação','v13.flyingpages',flyingItems,[[1,20,'Hogsmeade'],[21,28,'Ala de Astronomia'],[29,33,'Localização por confirmar'],[34,40,'Ala do Campanário'],[41,66,'Localização por confirmar']]],
+ ['👁 Baús de olho','v30.eye.hogsmeade',eyeHogsmeade.map((x,i)=>`Baú ${i+1} — ${x}. Afasta-te do campo de visão, lança Desilusão e aproxima-te para abrir.`),[[1,15,'Hogsmeade']]]
+];
+function lootCount(id,items,indices){return indices.filter(i=>state['guide:'+id+'.'+i]).length+'/'+indices.length;}
+function showLoot(){
+ if(selectedLoot===null){lootTypes.forEach(([name,id,items],i)=>challengeButton(lootGrid,name+' · '+lootCount(id,items,items.map((_,j)=>j)),()=>{selectedLoot=i;selectedLootRegion=null;render()}));challengeButton(lootGrid,'ℹ️ Fontes e notas',()=>{selectedLoot=-1;render()});return;}
+ challengeButton(lootGrid,'← Todos os baús e páginas',()=>{selectedLoot=null;selectedLootRegion=null;render()});
+ if(selectedLoot===-1){Array.from(completionNode.children).filter(n=>n.tagName!=='DETAILS'&&n.tagName!=='H3').forEach(n=>lootPanel.appendChild(n));return;}
+ const [name,id,items,ranges]=lootTypes[selectedLoot];const groups=new Map();
+ ranges.forEach(([a,b,r])=>{if(!groups.has(r))groups.set(r,[]);for(let n=a;n<=b;n++)groups.get(r).push(n-1)});
+ const heading=document.createElement('h3');heading.textContent=name;lootPanel.appendChild(heading);
+ if(selectedLootRegion===null){for(const [r,indices] of groups)challengeButton(lootGrid,r+' · '+lootCount(id,items,indices),()=>{selectedLootRegion=r;render()});return;}
+ challengeButton(lootGrid,'← Escolher localização',()=>{selectedLootRegion=null;render()});
+ const title=document.createElement('h3');title.textContent=selectedLootRegion;lootPanel.appendChild(title);
+ const list=document.createElement('div');list.className='items';const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;
+ for(const i of groups.get(selectedLootRegion)||[]){const checked=!!state['guide:'+id+'.'+i];if(q&&!items[i].toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;list.appendChild(guideCheck(id+'.'+i,items[i]));}lootPanel.appendChild(list);
+}
+showLoot();
+
 const categoryDefs=[
  {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1],nodes[2]]},
  {name:'Missões secundárias',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
  {name:'Mini-puzzles e localizações',icon:'🧩',nodes:[miniLocationsNode,puzzlesNode]},
  {name:'Desafios',icon:'🏅',nodes:[challengePanel]},
  {name:'Exploração e regiões',icon:'🗺️',nodes:[]},
- {name:'Baús e páginas',icon:'📦',nodes:[completionNode]},
+ {name:'Baús e páginas',icon:'📦',nodes:[lootPanel]},
  {name:'Notas',icon:'ℹ️',nodes:[footerNode]}
 ];
 const categoryNav=document.createElement('div'); categoryNav.className='guide-category-nav';
@@ -1016,7 +1042,7 @@ categoryDefs.forEach(cat=>{
  cat.nodes.filter(Boolean).forEach(node=>panel.appendChild(node)); categoryHost.appendChild(panel);
  const btn=document.createElement('button'); btn.type='button'; btn.textContent=cat.icon+' '+cat.name;
  btn.className=cat.name===guideCategory?'active':'';
- btn.onclick=()=>{guideCategory=cat.name;if(cat.name==='Desafios'){selectedChallenge=null;selectedChallengeGroup=null;render();return;}if(cat.name==='Exploração e regiões'){selectedRegion=null;render();return;}Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};
+ btn.onclick=()=>{guideCategory=cat.name;if(cat.name==='Baús e páginas'){selectedLoot=null;selectedLootRegion=null;render();return;}if(cat.name==='Desafios'){selectedChallenge=null;selectedChallengeGroup=null;render();return;}if(cat.name==='Exploração e regiões'){selectedRegion=null;render();return;}Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};
  categoryNav.appendChild(btn);
 });
 if(!categoryDefs.some(cat=>cat.name===guideCategory)) guideCategory='Visão geral';
@@ -1029,7 +1055,7 @@ let state={};
 try { state=JSON.parse(localStorage.getItem("hlTracker")||"{}") || {}; } catch(e) { state={}; }
 storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{if(state['guide:'+ci+'.'+qi])state['quest:'+normTask(q[0])]=true;}));
 if(!state['migration:v34.pages']){storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{const prefix='guide:v20.mission.'+ci+'.'+qi+'.item.';if(q[0]==='Welcome to Hogwarts'&&state[prefix+0])state['guide:v13.revelio.96']=true;if(q[0]==='Professor Ronen’s Assignment')for(let i=0;i<2;i++)if(state[prefix+i])state['guide:v13.flyingpages.'+(20+i)]=true;}));state['migration:v34.pages']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
-let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
+let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
 const nav=document.getElementById("nav"),content=document.getElementById("content");
 function key(si,gi,ii){return `${si}.${gi}.${ii}`}
 let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress');syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
@@ -1073,5 +1099,5 @@ const originalRender=render;render=function(){originalRender();translateVisible(
 
 render();
 </script>
-<script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));</script>
+<script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js", {updateViaCache:"none"}).then(r=>r.update()).catch(() => {}));</script>
 </body></html>

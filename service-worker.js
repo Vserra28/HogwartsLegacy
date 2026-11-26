@@ -1,5 +1,5 @@
-const CACHE_NAME = "hogwarts-checklist-v39";
+const CACHE_NAME = "hogwarts-checklist-v41";
 const APP_SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
-self.addEventListener("install", event => { event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))); self.skipWaiting(); });
-self.addEventListener("activate", event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key)))).then(() => self.clients.claim())); });
-self.addEventListener("fetch", event => { if (event.request.method !== "GET") return; event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => { const copy = response.clone(); if (new URL(event.request.url).origin === self.location.origin) caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)); return response; }).catch(() => caches.match("./index.html")))); });
+self.addEventListener("install", e => {e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(APP_SHELL.map(u=>new Request(u,{cache:"reload"})))).then(()=>self.skipWaiting()));});
+self.addEventListener("activate", e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith("hogwarts-checklist-")&&k!==CACHE_NAME).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener("fetch", e=>{if(e.request.method!=="GET"||new URL(e.request.url).origin!==self.location.origin)return; if(e.request.mode==="navigate"){e.respondWith(fetch(e.request,{cache:"no-store"}).then(async r=>{if(r.ok){const c=await caches.open(CACHE_NAME);await c.put("./index.html",r.clone());}return r;}).catch(()=>caches.match("./index.html")));return;}e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});
