@@ -90,3 +90,7 @@ V30 — atualização parcial. 20 páginas voadoras de Hogsmeade (IDs posicionai
 V31: secção Baús e páginas disponibilizada na navegação; lista geral redundante ocultada; 29 entradas Revelio e 8 entradas de Astronomia detalhadas. Fonte: https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . Restantes locais, moedas e tradução integral pendentes. IDs anteriores mantidos; correspondência de páginas antigas não verificada.
 
 V32 — atualização parcial: 24 novas páginas Revelio detalhadas (#64–87), 7 páginas de interação/voo do Campanário (#34–40 na lista combinada), 5 espelhos (#6–10) e correção da tarefa de Ronen. Fonte: https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . IDs anteriores mantidos; correspondência de progresso e navegador não testados. Restam localizações, tradução e baús/sacos não documentados.
+
+V33: percurso Hufflepuff; fontes: https://hogwarts-legacy.fandom.com/wiki/Welcome_to_Hogwarts ; https://hogwarts-legacy.fandom.com/wiki/Prisoner_of_Love ; https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ .
+
+V34: reutiliza localizações do catálogo v33; não houve nova verificação externa. Páginas por missão em sete etapas, restantes sem localização atribuída. Quadro da pera tem ID novo. Marcações agrupadas antigas não são convertidas automaticamente. Teste de navegador pendente.
