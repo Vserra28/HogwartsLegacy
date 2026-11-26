@@ -1059,6 +1059,24 @@ function showLoot(){
 }
 showLoot();
 
+// v54: menus regionais, preservando os índices originais.
+function regionalPanel54(title,groups,selected,choose,note){
+ const panel=document.createElement('section');panel.className='group';
+ const heading=document.createElement('h3');heading.textContent=title;panel.appendChild(heading);
+ const p=document.createElement('p');p.className='footer';p.textContent=note;panel.appendChild(p);
+ const grid=document.createElement('div');grid.className='guide-category-nav';panel.appendChild(grid);
+ if(selected===null){for(const [region,entries] of groups){const done=entries.filter(x=>state['guide:'+x.id]).length;challengeButton(grid,region+' · '+done+'/'+entries.length,()=>choose(region));}return panel;}
+ challengeButton(grid,'← Todas as regiões',()=>choose(null));
+ const sub=document.createElement('h3');sub.textContent=selected;panel.appendChild(sub);
+ const list=document.createElement('div');list.className='items';
+ const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;
+ for(const x of groups.get(selected)||[]){const checked=!!state['guide:'+x.id];if(q&&!x.label.toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;list.appendChild(guideCheck(x.id,x.label));}panel.appendChild(list);return panel;
+}
+const demGroups54=new Map();
+demItems.forEach((x,i)=>{const id='demiguise33.'+i;if(inStory51(id))return;let region=x[0].split(' — ')[0];if(region==='Missão')region='Missão de Gladwin Moon';if(region==='Hogwarts')region='Hogwarts — '+x[0].split(' — ')[1].split(',')[0].replace(/ \(.*\)$/,'');if(!demGroups54.has(region))demGroups54.set(region,[]);demGroups54.get(region).push({id,label:x[0]+' — '+x[1]});});
+const flooGroups54=new Map(flooGroups.map(([r,a])=>[r,a.map((x,i)=>({id:'v12.floo.'+r+'.'+i,label:r+' — '+x})).filter(x=>!inStory51(x.id))]).filter(([r,a])=>a.length));
+const demPanel54=regionalPanel54('🌙 Semivisos',demGroups54,selectedDem54,r=>{selectedDem54=r;render();},'Recolhe à noite. Entrega 9 luas a Gladwin Moon para Alohomora II e mais 13 para Alohomora III.');
+const fluPanel54=regionalPanel54('🔥 Chamas de Flu',flooGroups54,selectedFlu54,r=>{selectedFlu54=r;render();},'Escolhe uma região ou ala do castelo. Activa as Chamas ao aproximares-te.');
 const categoryDefs=[
  {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1],nodes[2]]},
  {name:'Missões secundárias',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
@@ -1066,8 +1084,8 @@ const categoryDefs=[
  {name:'Desafios',icon:'🏅',nodes:[challengePanel]},
  {name:'Exploração e regiões',icon:'🗺️',nodes:[]},
  {name:'Baús e páginas',icon:'📦',nodes:[lootPanel]},
- {name:'Semivisos',icon:'🌙',nodes:[demNode]},
- {name:'Chamas de Flu',icon:'🔥',nodes:[flooPanel]},
+ {name:'Semivisos',icon:'🌙',nodes:[demPanel54]},
+ {name:'Chamas de Flu',icon:'🔥',nodes:[fluPanel54]},
  {name:'Notas',icon:'ℹ️',nodes:[footerNode]}
 ];
 const categoryNav=document.createElement('div'); categoryNav.className='guide-category-nav';
@@ -1077,7 +1095,7 @@ categoryDefs.forEach(cat=>{
  cat.nodes.filter(Boolean).forEach(node=>panel.appendChild(node)); categoryHost.appendChild(panel);
  const btn=document.createElement('button'); btn.type='button'; btn.textContent=cat.icon+' '+cat.name;
  btn.className=cat.name===guideCategory?'active':'';
- btn.onclick=()=>{guideCategory=cat.name;if(cat.name==='Baús e páginas'){selectedLoot=null;selectedLootRegion=null;render();return;}if(cat.name==='Desafios'){selectedChallenge=null;selectedChallengeGroup=null;render();return;}if(cat.name==='Exploração e regiões'){selectedRegion=null;render();return;}Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};
+ btn.onclick=()=>{guideCategory=cat.name;if(cat.name==='Semivisos'){selectedDem54=null;render();return;}if(cat.name==='Chamas de Flu'){selectedFlu54=null;render();return;}if(cat.name==='Baús e páginas'){selectedLoot=null;selectedLootRegion=null;render();return;}if(cat.name==='Desafios'){selectedChallenge=null;selectedChallengeGroup=null;render();return;}if(cat.name==='Exploração e regiões'){selectedRegion=null;render();return;}Array.from(categoryHost.children).forEach(p=>p.classList.toggle('hide',p.dataset.category!==guideCategory));Array.from(categoryNav.children).forEach(b=>b.classList.toggle('active',b===btn));};
  categoryNav.appendChild(btn);
 });
 if(!categoryDefs.some(cat=>cat.name===guideCategory)) guideCategory='Visão geral';
@@ -1104,7 +1122,7 @@ const pairs={
 }));state['migration:v47.dedup']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}
 }
 if(!state['migration:v49.mirrors']){for(let i=0;i<5;i++)if(state['guide:v13.mirrors.'+i])state['guide:v18.minipuzzle.1.'+(15+i)]=true;state['migration:v49.mirrors']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
-let storySelectedChapter=null;let storySelectedMission=null;let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
+let selectedDem54=null;let selectedFlu54=null;let storySelectedChapter=null;let storySelectedMission=null;let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
 const nav=document.getElementById("nav"),content=document.getElementById("content");
 function key(si,gi,ii){return `${si}.${gi}.${ii}`}
 let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress');syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
