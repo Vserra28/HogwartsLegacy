@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-<p>🦡 Edição Hufflepuff · v51</p></header>
+<p>🦡 Edição Hufflepuff · v52</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -987,6 +987,20 @@ Array.from(completionNode.children).forEach(child=>{
 });
 
 
+// v52: submenus regionais, preservando os índices originais de progresso.
+const foeRegions52=['Vale de Hogsmeade','Vale de Hogsmeade','Vale de Hogsmeade','Floresta Proibida','Norte de Hogwarts','Sul de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Feldcroft','Sul de Hogwarts','Caverna Costeira','Costa de Poidsear','Lago Marunweem','Cabo Manor','Cabo Manor','Cabo Manor','Costa de Clagmar'];
+const challengeData52=[
+ [keepChallenge[1],'v12.platforms',platforms,'Aterra com a vassoura.'],
+ [keepChallenge[2],'v12.astronomy',astronomy,'Interage à noite, após a Aula de Astronomia.'],
+ [keepChallenge[3],'v12.balloons',balloons,'Rebenta os cinco balões de cada conjunto.'],
+ [keepChallenge[4],'v12.ancient',ancient,'Activa o vestígio e recolhe as três essências.'],
+ [keepChallenge[5],'v13.infamous21',foeItems,'Inclui o encontro extra The Absconder. Alguns inimigos exigem missões.',foeRegions52]
+];
+for(const [type,id,items,note,regions] of challengeData52){
+ for(const child of Array.from(challengePanel.children)){if(child.querySelector('summary')?.textContent.startsWith(type))child.remove();}
+ const groups=new Map();items.forEach((label,i)=>{if(inStory51(id+'.'+i))return;const region=regions?regions[i]:label.split(' — ')[0];if(!groups.has(region))groups.set(region,[]);groups.get(region).push({label,i});});
+ for(const [region,entries] of groups){const d=document.createElement('details');d.className='quest-card';const summary=document.createElement('summary');summary.textContent=type+' — '+region;d.appendChild(summary);const body=document.createElement('div');body.className='quest-body';const p=document.createElement('p');p.className='footer';p.textContent=note;body.appendChild(p);const list=document.createElement('div');list.className='items';const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;for(const {label,i} of entries){const checked=!!state['guide:'+id+'.'+i];if(q&&!label.toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;list.appendChild(guideCheck(id+'.'+i,label));}body.appendChild(list);d.appendChild(body);challengePanel.appendChild(d);}
+}
 // Navegação de desafios por tipo e, quando aplicável, por região.
 const challengeGroups=new Map(keepChallenge.map(x=>[x,[]]));
 Array.from(challengePanel.children).forEach(node=>{
@@ -1007,7 +1021,7 @@ function showChallenge(){
  challengeButton(challengeGrid,'← Todos os desafios',()=>{selectedChallenge=null;selectedChallengeGroup=null;render();});
  if(selectedChallenge==='route'){if(routeNode)challengePanel.appendChild(routeNode);return;}
  const groups=challengeGroups.get(selectedChallenge)||[];
- if(groups.length===1){groups[0].node.open=true;challengePanel.appendChild(groups[0].node);return;}
+ 
  if(selectedChallengeGroup!==null){
   challengeButton(challengeGrid,'← Escolher região',()=>{selectedChallengeGroup=null;render();});
   const entry=groups.find(g=>g.label===selectedChallengeGroup);
