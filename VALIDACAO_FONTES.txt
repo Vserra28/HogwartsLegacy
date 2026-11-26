@@ -104,3 +104,5 @@ V44: objetivos de percurso adicionados a todas as entradas da historia; redacao 
 V45: catálogos de baús de olho movidos para âmbito partilhado; teste de renderização JavaScript com DOM simulado: 11 capítulos, 47 entradas. Teste visual Chromium bloqueado pelo ambiente. IDs v44 mantidos.
 
 V47: revisão de 47 entradas de história; supressão de duplicações explícitas; tradução de títulos visíveis; migração de equivalências individuais. Sem teste visual ou verificação externa integral. Marcações agregadas não inferem recolhas individuais.
+
+V48 parcial: páginas adicionais e revisão Hogsmeade. Fonte https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . Inventário de baús e cobertura cronológica ainda incompletos. Sem teste no navegador.
