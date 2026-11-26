@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-<p>🦡 Edição Hufflepuff · v52</p></header>
+<p>🦡 Edição Hufflepuff · v53</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -987,7 +987,6 @@ Array.from(completionNode.children).forEach(child=>{
 });
 
 
-// v52: submenus regionais, preservando os índices originais de progresso.
 const foeRegions52=['Vale de Hogsmeade','Vale de Hogsmeade','Vale de Hogsmeade','Floresta Proibida','Norte de Hogwarts','Sul de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Vale de Hogwarts','Feldcroft','Sul de Hogwarts','Caverna Costeira','Costa de Poidsear','Lago Marunweem','Cabo Manor','Cabo Manor','Cabo Manor','Costa de Clagmar'];
 const challengeData52=[
  [keepChallenge[1],'v12.platforms',platforms,'Aterra com a vassoura.'],
@@ -996,40 +995,17 @@ const challengeData52=[
  [keepChallenge[4],'v12.ancient',ancient,'Activa o vestígio e recolhe as três essências.'],
  [keepChallenge[5],'v13.infamous21',foeItems,'Inclui o encontro extra The Absconder. Alguns inimigos exigem missões.',foeRegions52]
 ];
-for(const [type,id,items,note,regions] of challengeData52){
- for(const child of Array.from(challengePanel.children)){if(child.querySelector('summary')?.textContent.startsWith(type))child.remove();}
- const groups=new Map();items.forEach((label,i)=>{if(inStory51(id+'.'+i))return;const region=regions?regions[i]:label.split(' — ')[0];if(!groups.has(region))groups.set(region,[]);groups.get(region).push({label,i});});
- for(const [region,entries] of groups){const d=document.createElement('details');d.className='quest-card';const summary=document.createElement('summary');summary.textContent=type+' — '+region;d.appendChild(summary);const body=document.createElement('div');body.className='quest-body';const p=document.createElement('p');p.className='footer';p.textContent=note;body.appendChild(p);const list=document.createElement('div');list.className='items';const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;for(const {label,i} of entries){const checked=!!state['guide:'+id+'.'+i];if(q&&!label.toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;list.appendChild(guideCheck(id+'.'+i,label));}body.appendChild(list);d.appendChild(body);challengePanel.appendChild(d);}
-}
-// Navegação de desafios por tipo e, quando aplicável, por região.
 const challengeGroups=new Map(keepChallenge.map(x=>[x,[]]));
-Array.from(challengePanel.children).forEach(node=>{
- const label=(node.querySelector('summary')?.textContent || node.textContent || '').trim();
- const type=keepChallenge.find(x=>label.startsWith(x));
- if(type){challengeGroups.get(type).push({node,label});node.remove();}
-});
-const challengeGrid=document.createElement('div');challengeGrid.className='region-grid';
-challengePanel.appendChild(challengeGrid);
+const aliases53={'North Ford Bog':'Pântano de North Ford','Região Norte de Hogwarts':'Norte de Hogwarts','Região Sul de Hogwarts':'Sul de Hogwarts','Região de Feldcroft':'Feldcroft'};
+function addRegion53(type,region,id,items,note){const entries=items.filter(x=>!inStory51(x.id));if(entries.length)challengeGroups.get(type).push({region,entries,note});}
+merlinGroups.forEach(([r,items])=>addRegion53(keepChallenge[0],r,'',items.map((x,i)=>({id:'v12.merlin.'+r+'.'+i,label:r+' — '+x})), 'Leva Mallowsweet. Localização exata ainda por confirmar.'));
+for(const [type,id,items,note,regions] of challengeData52){const groups=new Map();items.forEach((label,i)=>{let r=regions?regions[i]:label.split(' — ')[0];r=aliases53[r]||r;if(!groups.has(r))groups.set(r,[]);groups.get(r).push({id:id+'.'+i,label});});for(const [r,entries] of groups)addRegion53(type,r,id,entries,note);}
+challengePanel.replaceChildren();
+const heading53=document.createElement('h3');heading53.textContent='🏅 Desafios e actividades de exploração';challengePanel.appendChild(heading53);
+const challengeGrid=document.createElement('div');challengeGrid.className='region-grid';challengePanel.appendChild(challengeGrid);
 function challengeButton(host,label,action){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=action;host.appendChild(b);return b;}
-function showChallenge(){
- challengeGrid.replaceChildren();
- if(!selectedChallenge){
-  for(const [type,groups] of challengeGroups){if(groups.length)challengeButton(challengeGrid,type,()=>{selectedChallenge=type;selectedChallengeGroup=null;render();});}
-  if(routeNode)challengeButton(challengeGrid,'🧭 Percurso de exploração',()=>{selectedChallenge='route';render();});
-  return;
- }
- challengeButton(challengeGrid,'← Todos os desafios',()=>{selectedChallenge=null;selectedChallengeGroup=null;render();});
- if(selectedChallenge==='route'){if(routeNode)challengePanel.appendChild(routeNode);return;}
- const groups=challengeGroups.get(selectedChallenge)||[];
- 
- if(selectedChallengeGroup!==null){
-  challengeButton(challengeGrid,'← Escolher região',()=>{selectedChallengeGroup=null;render();});
-  const entry=groups.find(g=>g.label===selectedChallengeGroup);
-  if(entry){entry.node.open=true;challengePanel.appendChild(entry.node);return;}
- }
- for(const g of groups)challengeButton(challengeGrid,g.label.replace(selectedChallenge+' — ',''),()=>{selectedChallengeGroup=g.label;render();});
-}
-showChallenge();
+if(!selectedChallenge){for(const [type,groups] of challengeGroups)challengeButton(challengeGrid,type,()=>{selectedChallenge=type;selectedChallengeGroup=null;render();});if(routeNode)challengeButton(challengeGrid,'🧭 Percurso de exploração',()=>{selectedChallenge='route';render();});}
+else{challengeButton(challengeGrid,'← Todos os desafios',()=>{selectedChallenge=null;selectedChallengeGroup=null;render();});if(selectedChallenge==='route'){if(routeNode)challengePanel.appendChild(routeNode);}else{const groups=challengeGroups.get(selectedChallenge)||[];const entry=groups.find(g=>g.region===selectedChallengeGroup);if(entry){challengeButton(challengeGrid,'← Escolher região',()=>{selectedChallengeGroup=null;render();});const h=document.createElement('h3');h.textContent=selectedChallenge+' — '+entry.region;challengePanel.appendChild(h);const p=document.createElement('p');p.className='footer';p.textContent=entry.note;challengePanel.appendChild(p);const list=document.createElement('div');list.className='items';const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;for(const x of entry.entries){const checked=!!state['guide:'+x.id];if(q&&!x.label.toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;list.appendChild(guideCheck(x.id,x.label));}challengePanel.appendChild(list);}else{for(const g of groups)challengeButton(challengeGrid,g.region+' ('+g.entries.length+')',()=>{selectedChallengeGroup=g.region;render();});}}}
 
 if(current===3 || (current===-2 && guideCategory==='Exploração e regiões')){
  const names=['Pântano de North Ford','Floresta Proibida','Vale de Hogsmeade','Norte de Hogwarts','Sul de Hogwarts','Vale de Hogwarts','Feldcroft','Pântano do Mar do Sul','Caverna Costeira','Costa de Poidsear','Lago Marunweem','Cabo Manor','Cragcroftshire','Costa de Clagmar'];
