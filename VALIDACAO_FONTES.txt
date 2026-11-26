@@ -94,3 +94,5 @@ V32 — atualização parcial: 24 novas páginas Revelio detalhadas (#64–87), 
 V33: percurso Hufflepuff; fontes: https://hogwarts-legacy.fandom.com/wiki/Welcome_to_Hogwarts ; https://hogwarts-legacy.fandom.com/wiki/Prisoner_of_Love ; https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ .
 
 V34: reutiliza localizações do catálogo v33; não houve nova verificação externa. Páginas por missão em sete etapas, restantes sem localização atribuída. Quadro da pera tem ID novo. Marcações agrupadas antigas não são convertidas automaticamente. Teste de navegador pendente.
+
+V39: navegacao dos desafios por tipo e regiao; IDs e dados anteriores mantidos. Validacao de sintaxe e ZIP; navegador nao testado.

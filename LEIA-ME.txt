@@ -90,3 +90,5 @@ V30 — atualização parcial. 20 páginas voadoras de Hogsmeade (IDs posicionai
 V31 — atualização parcial. Nova categoria Baús e páginas. Há localizações ainda por confirmar.
 
 V32 — atualização parcial: 24 novas páginas Revelio detalhadas (#64–87), 7 páginas de interação/voo do Campanário (#34–40 na lista combinada), 5 espelhos (#6–10) e correção da tarefa de Ronen. Fonte: https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . IDs anteriores mantidos; correspondência de progresso e navegador não testados. Restam localizações, tradução e baús/sacos não documentados.
+
+V39: navegacao dos desafios por tipo e regiao; IDs e dados anteriores mantidos. Validacao de sintaxe e ZIP; navegador nao testado.
