@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-<p>🦡 Edição Hufflepuff · v45</p></header>
+<p>🦡 Edição Hufflepuff · v46</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -294,20 +294,29 @@ function sectionItemKey(si,gi,ii,label){const canonical=canonicalQuestKey(label)
 function renderChapterJourney(){
  content.innerHTML='';
  const intro=document.createElement('section');intro.className='guide-intro';
- intro.innerHTML='<h2>📖 Percurso cronológico — capítulo a capítulo</h2><p>Avança pela história por ordem. Abre cada capítulo e, dentro dele, cada missão para veres as tarefas associadas e os baús, páginas e desvios que já têm localização identificada. Não existe aqui uma checklist geral de coleccionáveis: todos os baús, páginas e desvios são apresentados apenas dentro da missão e do capítulo onde podem ser encontrados.</p><div class="guide-note"><b>Como acompanhar:</b> assinala cada recolha individualmente. A conclusão da missão é independente dos baús, páginas e desvios. O progresso é guardado automaticamente e a conclusão das missões mantém-se sincronizada entre História Principal e Guia 100%.</div>';
+ intro.innerHTML='<h2>📖 Percurso cronológico — capítulo a capítulo</h2><p>Avança pela história por ordem. Seleciona um capítulo e, dentro dele, uma missão para veres as tarefas associadas e os baús, páginas e desvios que já têm localização identificada. Não existe aqui uma checklist geral de coleccionáveis: todos os baús, páginas e desvios são apresentados apenas dentro da missão e do capítulo onde podem ser encontrados.</p><div class="guide-note"><b>Como acompanhar:</b> assinala cada recolha individualmente. A conclusão da missão é independente dos baús, páginas e desvios. O progresso é guardado automaticamente e a conclusão das missões mantém-se sincronizada entre História Principal e Guia 100%.</div>';
  content.appendChild(intro);
  const legend=document.createElement('p');legend.className='footer';legend.textContent='Nota de rigor: quando uma localização ou contagem ainda não está confirmada, a aplicação assinala essa limitação em vez de inventar um número ou uma localização.';content.appendChild(legend);
  let totalMissions=0,doneMissions=0;
+ const grid=document.createElement('div');grid.className='region-grid';
+ const button=(label,action)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>{action();render();content.scrollIntoView({block:'start'});};return b;};
+ if(storySelectedChapter!==null)content.appendChild(button('← Todos os capítulos',()=>{storySelectedChapter=null;storySelectedMission=null;}));
+ if(storySelectedMission!==null)content.appendChild(button('← Missões do capítulo',()=>{storySelectedMission=null;}));
+ content.appendChild(grid);
  storyChapters.forEach((chapter,ci)=>{
-  const chapterBox=document.createElement('details');chapterBox.className='quest-card chapter-card';
-  const chapterSummary=document.createElement('summary');
+  const chapterBox=document.createElement('section');chapterBox.className='group chapter-card';
+  const chapterSummary=document.createElement('h3');
   let cDone=0;chapter.quests.forEach(q=>{if(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+chapter.quests.indexOf(q)])cDone++});
   chapterSummary.textContent=chapter.chapter+' — '+cDone+'/'+chapter.quests.length+' missões concluídas';chapterBox.appendChild(chapterSummary);
-  const chapterBody=document.createElement('div');chapterBody.className='quest-body';
+  totalMissions+=chapter.quests.length;doneMissions+=cDone;
+  if(storySelectedChapter===null){grid.appendChild(button(chapterSummary.textContent,()=>{storySelectedChapter=ci;storySelectedMission=null;}));return;}
+  if(storySelectedChapter!==ci)return;
+  const chapterBody=document.createElement('div');chapterBody.className=storySelectedMission===null?'region-grid':'quest-body';
   chapter.quests.forEach((q,qi)=>{
-   totalMissions++;if(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi])doneMissions++;
-   const mission=document.createElement('details');mission.className='quest-card';
-   const summary=document.createElement('summary');summary.textContent=(qi+1)+'. '+q[0]+' · '+q[1];mission.appendChild(summary);
+   if(storySelectedMission===null){const done=state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi];chapterBody.appendChild(button((done?'✓ ':'')+(qi+1)+'. '+q[0],()=>{storySelectedMission=qi;}));return;}
+   if(storySelectedMission!==qi)return;
+   const mission=document.createElement('section');mission.className='quest-card';
+   const summary=document.createElement('h3');summary.textContent=(qi+1)+'. '+q[0]+' · '+q[1];mission.appendChild(summary);
    const body=document.createElement('div');body.className='quest-body';
    const desc=document.createElement('p');desc.textContent=q[2];body.appendChild(desc);
    const note=document.createElement('div');note.className='guide-note';note.textContent='Orientação da missão: '+q[3];body.appendChild(note);
@@ -1072,7 +1081,7 @@ let state={};
 try { state=JSON.parse(localStorage.getItem("hlTracker")||"{}") || {}; } catch(e) { state={}; }
 storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{if(state['guide:'+ci+'.'+qi])state['quest:'+normTask(q[0])]=true;}));
 if(!state['migration:v34.pages']){storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{const prefix='guide:v20.mission.'+ci+'.'+qi+'.item.';if(q[0]==='Welcome to Hogwarts'&&state[prefix+0])state['guide:v13.revelio.96']=true;if(q[0]==='Professor Ronen’s Assignment')for(let i=0;i<2;i++)if(state[prefix+i])state['guide:v13.flyingpages.'+(20+i)]=true;}));state['migration:v34.pages']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
-let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
+let storySelectedChapter=null;let storySelectedMission=null;let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
 const nav=document.getElementById("nav"),content=document.getElementById("content");
 function key(si,gi,ii){return `${si}.${gi}.${ii}`}
 let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress');syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
