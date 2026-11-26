@@ -96,3 +96,5 @@ V33: percurso Hufflepuff; fontes: https://hogwarts-legacy.fandom.com/wiki/Welcom
 V34: reutiliza localizações do catálogo v33; não houve nova verificação externa. Páginas por missão em sete etapas, restantes sem localização atribuída. Quadro da pera tem ID novo. Marcações agrupadas antigas não são convertidas automaticamente. Teste de navegador pendente.
 
 V39: navegacao dos desafios por tipo e regiao; IDs e dados anteriores mantidos. Validacao de sintaxe e ZIP; navegador nao testado.
+
+V43: progressao parcial de feiticos e 30 baus de olho com IDs existentes. Acesso sugerido, nao verificado no jogo. Teste de sintaxe Node.

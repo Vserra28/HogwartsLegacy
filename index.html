@@ -53,7 +53,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
-<p>🦡 Edição Hufflepuff · v42</p></header>
+<p>🦡 Edição Hufflepuff · v43</p></header>
 <main>
 <section class="stats">
 <div class="stat"><strong id="totalDone">0</strong><span>Itens concluídos</span></div>
@@ -137,7 +137,7 @@ const storyChapters = [
 ]},
 {chapter:"O segredo da Secção Restrita",quests:[
 ["The Locket’s Secret","Principal","Regressa a Hogwarts e fala com Fig. A missão serve de ponte para as tarefas de combate e para a Secção Restrita.","Faz as tarefas disponíveis antes de entrar na Secção Restrita."],
-["Professor Hecat’s Assignment 1","Tarefa de professor","Completa as rondas de Crossed Wands e a prática de combinações de feitiços; regressa a Hecat para aprender Expelliarmus.","As rondas e a prática são actividades secundárias obrigatórias para esta tarefa."],
+["Professor Hecat’s Assignment 1","Tarefa de professor","Completa as rondas de Crossed Wands e a prática de combinações de feitiços; regressa a Hecat para aprender Incendio.","As rondas e a prática são actividades secundárias obrigatórias para esta tarefa."],
 ["Secrets of the Restricted Section","Principal","Entra na biblioteca à noite com Sebastian. Usa Desilusão, evita os guardas e explora a secção restrita com Revelio.","Recolhe os baús laterais antes de seguir em frente; aprende a usar Desilusão para baús com olho."],
 ["Tomes and Tribulations","Principal","Fala com Fig e entrega o que encontraste. Depois, aguarda as novas aulas e tarefas no diário.","Verifica o correio/diário e as tarefas novas antes de escolher a próxima missão."]
 ]},
@@ -149,7 +149,7 @@ const storyChapters = [
 ]},
 {chapter:"A Câmara do Mapa",quests:[
 ["House-specific quest","Missão exclusiva da casa","Prisioneira do amor: depois das Provas de Merlin e ao atingir o nível 5, lê a carta de Lenora Everleigh e fala com o retrato de Eldritch Diggory na sala comum de Hufflepuff.","Visita Azkaban com Helen Thistlewood e resolve o puzzle de Accio na gruta a norte de Upper Hogsfield."],
-["Professor Hecat’s Assignment 2","Tarefa de professor","Cumpre os requisitos de combate indicados por Hecat e regressa para aprender Incendio.","Incendio abre novas soluções de puzzles e destrói teias; volta a salas que deixaste por explorar."],
+["Professor Hecat’s Assignment 2","Tarefa de professor","Cumpre os requisitos de combate indicados por Hecat e regressa para aprender Expelliarmus.","Expelliarmus permite desarmar inimigos; Incendio abre novas soluções de puzzles e destrói teias; volta a salas que deixaste por explorar."],
 ["Jackdaw’s Rest","Principal","Segue as pistas de Jackdaw, explora a gruta e resolve os mecanismos com os feitiços já aprendidos.","Usa Revelio em cada sala e verifica desvios e plataformas laterais antes de sair da gruta."]
 ]},
 {chapter:"Primeira Prova dos Guardiões",quests:[
@@ -311,6 +311,7 @@ function renderChapterJourney(){
    const note=document.createElement('div');note.className='guide-note';note.textContent='Orientação da missão: '+q[3];body.appendChild(note);
    body.appendChild(guideCheck(ci+'.'+qi,'Marcar missão como concluída',q[0]));
    missionChecklistFor(q,ci,qi,body);
+   progression43(q,body);
    mission.appendChild(body);chapterBody.appendChild(mission);
   });
   chapterBox.appendChild(chapterBody);content.appendChild(chapterBox);
@@ -318,6 +319,18 @@ function renderChapterJourney(){
  const summary=document.createElement('section');summary.className='group';
  const h=document.createElement('h3');h.textContent='📈 Progresso da história';summary.appendChild(h);
  const p=document.createElement('p');p.className='items';p.textContent=doneMissions+' de '+totalMissions+' missões concluídas. As caixas de baús, páginas e desvios contam separadamente.';summary.appendChild(p);content.insertBefore(summary,intro.nextSibling);
+}
+
+function progression43(q,body){
+ const spells={"The Path to Hogwarts":"Revelio, Lumos, Protego, Estupefacção e ataque básico","Charms Class":"Accio","Defence Against the Dark Arts Class":"Levioso","Professor Ronen’s Assignment":"Reparo","Professor Hecat’s Assignment 1":"Incendio","Professor Hecat’s Assignment 2":"Expelliarmus","Secrets of the Restricted Section":"Desilusão","In the Shadow of the Undercroft":"Confringo","The Room of Requirement":"Feitiços de conjuração, alteração e Evanesco","The Caretaker’s Lunar Lament":"Alohomora I","Professor Garlick’s Assignment 1":"Wingardium Leviosa","Professor Weasley’s Assignment":"Transformação"};
+ const notes={"Flying Class":"Compra uma vassoura em Hogsmeade para explorar balões e plataformas.","Trials of Merlin":"Desbloqueia as Provas de Merlin; leva malva-doce e verifica os feitiços exigidos.","Astronomy Class":"Desbloqueia as mesas de astronomia; usa-as à noite.","The Caretaker’s Lunar Lament":"Entrega 9 luas adicionais a Moon para Alohomora II e mais 13 para III. Recolhe as estátuas à noite.","Welcome to Hogsmeade":"Deixa os baús de olho para depois de aprender Desilusão.","Weasley After Class":"Tarefa do Professor Ronen: aprende Reparo antes de visitar Hogsmeade.","The Locket’s Secret":"Conclui a primeira tarefa de Hecat para aprender Incendio antes da Secção Restrita."};
+ const name=q[0]; const add=(t)=>{const p=document.createElement('p');p.className='guide-note';p.textContent=t;body.appendChild(p)};
+ if(spells[name])add('🪄 Feitiços aprendidos: '+spells[name]);if(notes[name])add('🔓 Progressão: '+notes[name]);
+ const groups={"Secrets of the Restricted Section":[...Array.from({length:15},(_,i)=>i),15,16,17,19,20,21,22,23,24,25,28],"The Map Chamber":[18],"The Caretaker’s Lunar Lament":[26,29],"Professor Weasley’s Assignment":[27]};
+ if(!groups[name])return;
+ const d=document.createElement('details');d.className='quest-card';const h=document.createElement('summary');h.textContent='👁 Baús de olho — '+groups[name].length+' locais a visitar';d.appendChild(h);
+ const b=document.createElement('div');b.className='quest-body';const p=document.createElement('p');p.textContent='Percurso sugerido após esta etapa, não obrigatório. Confirma o acesso; usa Desilusão fora do campo de visão. As marcações são partilhadas com Baús e páginas.';b.appendChild(p);
+ const all=[...eyeHogsmeade,...eyeHogwarts];for(const i of groups[name]){let extra=i===26?' — só depois de Alohomora III':i===29?' — só depois de Alohomora II':i===27?' — requer Glacius ou Arresto Momentum; pode ser visitado antes se já aprendeste o feitiço':'';b.appendChild(guideCheck('v30.eye.hogsmeade.'+i,(i<15?'Hogsmeade':'Hogwarts')+' — '+all[i]+extra));}d.appendChild(b);body.appendChild(d);
 }
 
 function renderGuide(){content.innerHTML='';
@@ -1001,7 +1014,7 @@ if(current===3 || (current===-2 && guideCategory==='Exploração e regiões')){
  content.replaceChildren(host);return;
 }
 
-// v42: navegação de baús e páginas, sem alterar IDs.
+// v43: navegação de baús e páginas, sem alterar IDs.
 const lootPanel=document.createElement('section');lootPanel.className='group';
 lootPanel.innerHTML='<h3>📦 Baús e páginas</h3>';
 const lootGrid=document.createElement('div');lootGrid.className='region-grid';lootPanel.appendChild(lootGrid);
