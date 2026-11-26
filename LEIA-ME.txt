@@ -84,3 +84,9 @@ Versão v26: títulos das missões de relação e tarefas de professores traduzi
 Versão v28: as 12 tarefas dos professores passam a abrir individualmente com instruções e recompensas em português de Portugal. As caixas de progresso mantêm os IDs anteriores. Cache v28.
 
 Versão v28: revisão do português dentro das tarefas dos professores; substituição de termos ingleses por instruções e nomes em português, mantendo os nomes de feitiços quando são nomes próprios do jogo.
+
+V30 — atualização parcial. 20 páginas voadoras de Hogsmeade (IDs posicionais mantidos; as marcações anteriores podem não corresponder à nova ordem) e 15 baús de olho com novos IDs. Fontes: https://www.reddit.com/r/HogwartsLegacyGaming/comments/1pvulrv/last_page_in_hogsmeade/ ; https://video-game-guide-walkthrough.supersoluce.com/solution/hogwarts-legacy-guide-walkthrough/eye-chests/eye-chests-hogsmeade/ ; https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . Restantes páginas, baús normais, sacos de moedas e traduções por completar. Não testado no navegador.
+
+V31 — atualização parcial. Nova categoria Baús e páginas. Há localizações ainda por confirmar.
+
+V32 — atualização parcial: 24 novas páginas Revelio detalhadas (#64–87), 7 páginas de interação/voo do Campanário (#34–40 na lista combinada), 5 espelhos (#6–10) e correção da tarefa de Ronen. Fonte: https://www.powerpyx.com/hogwarts-legacy-all-field-guide-pages-locations/ . IDs anteriores mantidos; correspondência de progresso e navegador não testados. Restam localizações, tradução e baús/sacos não documentados.
