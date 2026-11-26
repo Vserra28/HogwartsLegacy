@@ -82,7 +82,7 @@ const sections = [
 {title:"🏘️ Hogsmeade",groups:[
 ["Exploração",["Desbloquear Chamas de Flu de Hogsmeade","Recolher páginas Revelio da vila","Recolher páginas voadoras","Abrir todas as arcas de coleção","Visitar todas as lojas e conhecer vendedores"]],
 ["Demiguise e segredos",["Recolher todas as estátuas de Demiguise de Hogsmeade","Explorar casas e edifícios acessíveis","Abrir cofres e resolver puzzles da vila"]]]},
-{title:"🗺️ Highlands — regiões",groups:[
+{title:"🗺️ Terras Altas — regiões",groups:[
 ["Vale de Hogsmeade",["Chamas de Flu","Páginas do Guia de Campo","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Pontos de Magia Antiga","Demiguise (quando aplicável)"]],
 ["Floresta Proibida",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões"]],
 ["North Ford Bog",["Chamas de Flu","Provas de Merlin","Cofres do tesouro","Acampamentos de bandidos","Inimigos infames","Covis de criaturas","Pontos de Magia Antiga","Balões","Demiguise"]],
@@ -941,6 +941,29 @@ Array.from(completionNode.children).forEach(child=>{
  else if(label.startsWith('🦋')) child.hidden=true;
 });
 
+
+if(current===3){
+ const names=['Pântano de North Ford','Floresta Proibida','Vale de Hogsmeade','Norte de Hogwarts','Sul de Hogwarts','Vale de Hogwarts','Feldcroft','Pântano do Mar do Sul','Caverna Costeira','Costa de Poidsear','Lago Marunweem','Cabo Manor','Cragcroftshire','Costa de Clagmar'];
+ const aliases={'North Ford Bog':names[0],'Região Norte de Hogwarts':names[3],'North Hogwarts':names[3],'Região Sul de Hogwarts':names[4],'South Hogwarts':names[4],'Hogwarts Valley':names[5],'Região de Feldcroft':names[6],'South Sea Bog':names[7],'Poidsear Coast':names[9],'Marunweem Lake':names[10],'Manor Cape':names[11],'Clagmar Coast':names[13]};
+ const region=x=>aliases[x]||x;
+ const catalog=new Map(names.map(n=>[n,new Map()]));
+ function add(r,c,id,label){r=region(r);if(!catalog.has(r))return;const m=catalog.get(r);if(!m.has(c))m.set(c,[]);m.get(c).push({id,label});}
+ const prefix=x=>x.split(' — ')[0];
+ flooGroups.forEach(([r,a])=>a.forEach((x,i)=>add(r,'Chamas de Flu','v12.floo.'+r+'.'+i,x+' — activa ao aproximares-te do marcador de viagem rápida.')));
+ merlinGroups.forEach(([r,a])=>a.forEach((x,i)=>add(r,'Provas de Merlin','v12.merlin.'+r+'.'+i,x+' Localização exata ainda por confirmar.')));
+ [[platforms,'Plataformas de aterragem','v12.platforms'],[astronomy,'Mesas de Astronomia','v12.astronomy'],[balloons,'Conjuntos de balões','v12.balloons'],[ancient,'Pontos de Magia Antiga','v12.ancient']].forEach(([a,c,id])=>a.forEach((x,i)=>add(prefix(x),c,id+'.'+i,x)));
+ chestRegions.forEach(([a,b,r])=>{for(let n=a;n<=b;n++)add(r,'Baús de coleção','v13.chests.'+(n-1),chestItemsV13[n-1])});
+ revelioRegions.forEach(([a,b,r])=>{for(let n=a;n<=b;n++)add(r,'Páginas do Guia de Campo','v13.revelio.'+(n-1),revelioItems[n-1])});
+ demItems.forEach((x,i)=>add(prefix(x[0]),'Estátuas Demiguise','demiguise33.'+i,x.join(' — ')+' Recolhe à noite.'));
+ miniLists[0].items.forEach((x,i)=>add(prefix(x),'Percursos de borboletas','v18.minipuzzle.0.'+i,x));
+ const host=document.createElement('div');const h=document.createElement('h2');h.textContent='🗺️ Terras Altas — regiões';host.appendChild(h);
+ const all=[...catalog.values()].flatMap(m=>[...m.values()].flat());const done=all.filter(x=>state['guide:'+x.id]).length;
+ const note=document.createElement('p');note.className='footer';note.textContent=done+'/'+all.length+' entradas individuais concluídas. Contagens do catálogo atual, não certificadas como totais do jogo. Localizações em falta estão assinaladas.';host.appendChild(note);
+ const q=document.getElementById('search').value.toLowerCase(),f=document.getElementById('filter').value;
+ for(const [r,m] of catalog){const g=document.createElement('section');g.className='group';const t=document.createElement('h3');t.textContent=r;g.appendChild(t);for(const [c,a] of m){const d=document.createElement('details');d.className='quest-card';const su=document.createElement('summary');su.textContent=c+' — '+a.filter(x=>state['guide:'+x.id]).length+'/'+a.length;d.appendChild(su);const b=document.createElement('div');b.className='quest-body';for(const x of a){const checked=!!state['guide:'+x.id];if(q&&!(r+' '+c+' '+x.label).toLowerCase().includes(q)||f==='todo'&&checked||f==='done'&&!checked)continue;b.appendChild(guideCheck(x.id,x.label));}if(b.children.length){d.appendChild(b);g.appendChild(d);if(q)d.open=true;}}const p=document.createElement('p');p.className='footer';p.textContent='Cofres do tesouro, acampamentos, covis, inimigos infames, baús normais e sacos de moedas: inventário regional ainda por confirmar.';g.appendChild(p);host.appendChild(g);}
+ content.replaceChildren(host);return;
+}
+
 const categoryDefs=[
  {name:'Visão geral',icon:'🏰',nodes:[nodes[0],nodes[1],nodes[2]]},
  {name:'Missões secundárias',icon:'🧑‍🤝‍🧑',nodes:[sideNode,...relationNodes,assignmentsNode]},
@@ -989,7 +1012,7 @@ function renderDashboard(){content.innerHTML="";const welcome=document.createEle
 function render(){
  renderNav();content.innerHTML="";
  if(current===-1){renderDashboard();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
- if(current===-2){renderGuide();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
+ if(current===-2||current===3){renderGuide();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
  if(current===0){renderChapterJourney();let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%";return;}
  let s=sections[current],title=document.createElement("div");title.className="section-title";
  let h=document.createElement("h2");h.textContent=s.title;title.appendChild(h);
