@@ -98,3 +98,5 @@ V34: reutiliza localizações do catálogo v33; não houve nova verificação ex
 V39: navegacao dos desafios por tipo e regiao; IDs e dados anteriores mantidos. Validacao de sintaxe e ZIP; navegador nao testado.
 
 V43: progressao parcial de feiticos e 30 baus de olho com IDs existentes. Acesso sugerido, nao verificado no jogo. Teste de sintaxe Node.
+
+V44: objetivos de percurso adicionados a todas as entradas da historia; redacao baseada em conhecimento do jogo, sem verificacao externa integral. Localizacoes de colecionaveis continuam incompletas.
