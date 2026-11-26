@@ -102,3 +102,5 @@ V43: progressao parcial de feiticos e 30 baus de olho com IDs existentes. Acesso
 V44: objetivos de percurso adicionados a todas as entradas da historia; redacao baseada em conhecimento do jogo, sem verificacao externa integral. Localizacoes de colecionaveis continuam incompletas.
 
 V45: catálogos de baús de olho movidos para âmbito partilhado; teste de renderização JavaScript com DOM simulado: 11 capítulos, 47 entradas. Teste visual Chromium bloqueado pelo ambiente. IDs v44 mantidos.
+
+V47: revisão de 47 entradas de história; supressão de duplicações explícitas; tradução de títulos visíveis; migração de equivalências individuais. Sem teste visual ou verificação externa integral. Marcações agregadas não inferem recolhas individuais.
