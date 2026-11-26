@@ -82,3 +82,5 @@ Versão v26: títulos das missões de relação e tarefas de professores traduzi
 Versão v28: as 12 tarefas dos professores passam a abrir individualmente com instruções e recompensas em português de Portugal. As caixas de progresso mantêm os IDs anteriores. Cache v28.
 
 Versão v28: revisão do português dentro das tarefas dos professores; substituição de termos ingleses por instruções e nomes em português, mantendo os nomes de feitiços quando são nomes próprios do jogo.
+
+V29: traducao de apresentacao das missoes, titulo e cache. Localizacoes novas ainda pendentes.

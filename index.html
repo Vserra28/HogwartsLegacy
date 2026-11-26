@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
-<title>Hogwarts Legacy — Guia passo a passo e 100% · v25</title>
+<title>🪄 Hogwarts Legacy — Guia Completo</title>
 <style>
 :root{--bg:#100e1b;--panel:#1c1930;--panel2:#26213d;--text:#f4f0ff;--muted:#b8b1ce;--gold:#e7c46a;--green:#75d5a0;--border:#393252;--accent:#9c83f7}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#17132a,#0e1420 65%,#101b20);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif}
@@ -48,7 +48,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 </head>
 <body>
 <header>
-<h1>🪄 Hogwarts Legacy — Guia completo e 100% · v25</h1>
+<h1>🪄 Hogwarts Legacy — Guia Completo</h1>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
 </header>
 <main>
@@ -990,6 +990,10 @@ document.getElementById("export").onclick=()=>{let blob=new Blob([JSON.stringify
 document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
 document.getElementById("importFile").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let obj=JSON.parse(r.result);state=obj.state||obj;save();alert("Progresso importado!")}catch{alert("Ficheiro inválido.")}};r.readAsText(f)};
 document.getElementById("reset").onclick=()=>{if(confirm("Tens a certeza que queres apagar todo o progresso?")){state={};save()}};
+const displayTranslations = Object.assign({}, relationshipTranslations, {"The Path to Hogwarts": "O caminho para Hogwarts", "Welcome to Hogwarts": "Bem-vindo a Hogwarts", "Charms Class": "Aula de Encantamentos", "Defence Against the Dark Arts Class": "Aula de Defesa Contra as Artes das Trevas", "Weasley After Class": "Weasley depois da aula", "Professor Ronen’s Assignment": "Tarefa do Professor Ronen", "Welcome to Hogsmeade": "Bem-vindo a Hogsmeade", "The Locket’s Secret": "O segredo do medalhão", "Professor Hecat’s Assignment 1": "Tarefa da Professora Hecat 1", "Secrets of the Restricted Section": "Segredos da Secção Restrita", "Tomes and Tribulations": "Tomos e tribulações", "Herbology Class": "Aula de Herbologia", "Potions Class": "Aula de Poções", "The Girl from Uagadou": "A rapariga de Uagadou", "Trials of Merlin": "Provas de Merlin", "House-specific quest": "Missão exclusiva da casa", "Professor Hecat’s Assignment 2": "Tarefa da Professora Hecat 2", "Jackdaw’s Rest": "O descanso de Jackdaw", "Flying Class": "Aula de voo", "In the Shadow of the Undercroft": "À sombra da cripta", "The Room of Requirement": "A Sala das Necessidades", "The Map Chamber": "A Câmara do Mapa", "Percival Rackham’s Trial": "Prova de Percival Rackham", "Beasts Class": "Aula de Criaturas Mágicas", "The Caretaker’s Lunar Lament": "O lamento lunar do zelador", "The Helm of Urtkot": "O elmo de Urtkot", "In the Shadow of the Estate": "À sombra da propriedade", "The Elf, the Nab-Sack, and the Loom": "O elfo, o saco de captura e o tear", "Astronomy Class": "Aula de Astronomia", "Professor Garlick’s Assignment 1": "Tarefa da Professora Garlick 1", "The High Keep": "A fortaleza elevada", "Back on the Path": "De volta ao caminho", "Charles Rookwood’s Trial": "Prova de Charles Rookwood", "Fire and Vice": "Fogo e vício", "Professor Weasley’s Assignment": "Tarefa da Professora Weasley", "In the Shadow of the Mine": "À sombra da mina", "It’s All Gobbledegook": "Tudo em língua de duendes", "The Headmistress Speaks": "A diretora fala", "The Polyjuice Plot": "O plano da Poção Polissuco", "Niamh Fitzgerald’s Trial": "Prova de Niamh Fitzgerald", "In the Shadow of the Mountain": "À sombra da montanha", "Lodgok’s Loyalty": "A lealdade de Lodgok", "San Bakar’s Trial": "Prova de San Bakar", "Wand Mastery": "O domínio da varinha", "The Final Repository": "O repositório final", "Weasley’s Watchful Eye": "O olhar atento de Weasley", "The House Cup": "A Taça das Casas"});
+function translateVisible(){const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT);let node;const pairs=Object.entries(displayTranslations).sort((a,b)=>b[0].length-a[0].length);while(node=walker.nextNode()){let t=node.nodeValue;for(const [en,pt] of pairs)t=t.split(en).join(pt);if(t!==node.nodeValue)node.nodeValue=t;}}
+const originalRender=render;render=function(){originalRender();translateVisible();};
+
 render();
 </script>
 <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));</script>
