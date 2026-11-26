@@ -81,4 +81,6 @@ Versão v26: mini-puzzles e listas de localizações aparecem primeiro no menu M
 Versão v26: títulos das missões de relação e tarefas de professores traduzidos para português; identificadores de progresso preservados.
 
 
-Versão v27: as 12 tarefas dos professores passam a abrir individualmente com instruções e recompensas em português de Portugal. As caixas de progresso mantêm os IDs anteriores. Cache v27.
+Versão v28: as 12 tarefas dos professores passam a abrir individualmente com instruções e recompensas em português de Portugal. As caixas de progresso mantêm os IDs anteriores. Cache v28.
+
+Versão v28: revisão do português dentro das tarefas dos professores; substituição de termos ingleses por instruções e nomes em português, mantendo os nomes de feitiços quando são nomes próprios do jogo.
