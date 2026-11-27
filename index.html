@@ -1228,7 +1228,7 @@ const hd59=houseData59[house59]||{};
 function choose60(h){
  if(house59==='Prologo'){
   const target=h==='Hufflepuff'?'hlTracker':'hlTracker:'+h;
-  const dest=read60(target);for(const k of Object.keys(state))if(state[k])dest[k]=true;
+  const dest=read60(target);for(const k of Object.keys(state))if(isPrologue60(k)&&state[k])dest[k]=true;
   localStorage.setItem(target,JSON.stringify(dest));localStorage.setItem('hlHouse60Confirmed','1');
  }else if(h===house59)return;else if(!confirm('Mudar para '+h+'? O progresso atual fica guardado separadamente.'))return;
  localStorage.setItem('hlHouse59',h);sessionStorage.setItem('hlResume63','1');location.reload();
@@ -1246,8 +1246,29 @@ if(house59!=='Hufflepuff'&&house59!=='Prologo'){
  const w=storyChapters.flatMap(c=>c.quests).find(q=>q[0]==='Welcome to Hogwarts');w[2]='Conhece os colegas na sala comum. '+hd59.room+'. Encontra a Professora Weasley à saída.';w[3]='Segue Weasley, recolhe a página indicada no tutorial e ativa a Chama de Flu.';
  steps44[w[0]]=['Fala com os três colegas na sala comum','Encontra a Professora Weasley à saída','Recolhe a página indicada por Weasley com Revelio','Ativa a Chama de Flu indicada','Segue até ao encontro com o Professor Fig'];skipSteps47[w[0]]=[];
  delete storyPagePlan[w[0]];delete missionDetails[w[0]];
- storyCollectibles51.clear();for(const p of Object.values(storyPagePlan))for(const x of [...(p.required||[]),...(p.optional||[])])storyCollectibles51.add(x[0]);
+
 }
+
+
+const houseVerified64={
+ Gryffindor:{peers:['Cressida Blume','Garreth Weasley','Nellie Oggspire'],page:'Retrato de Baruffio — segue Weasley desde a saída da sala comum até ao retrato; usa Revelio.',map:'Cemitério de Hogsmeade — procura o mapa sobre a lápide junto ao túmulo do aldeão, perto de Sir Patrick.'},
+ Hufflepuff:{peers:['Adelaide Oakes','Arthur Plummly','Lenora Everleigh'],page:'Livro de receitas dos elfos domésticos — segue Weasley até ao expositor na escadaria junto às cozinhas; usa Revelio.',map:'Upper Hogsfield — abre o baú atrás da banca de Claire Beaumont.'},
+ Ravenclaw:{peers:['Amit Thakkar','Everett Clopton','Samantha Dale'],page:'Busto de Ravenclaw — segue Weasley até ao busto na torre; usa Revelio.',map:'Corujal — sobe ao último piso pela escada de mão; procura o mapa no chão junto ao topo.'},
+ Slytherin:{peers:['Imelda Reyes','Ominis Gaunt','Sebastian Sallow'],page:'Estátua de Kelpie — segue Weasley desde a sala comum até à estátua nas masmorras; usa Revelio.',map:'Gruta de Apollonia Black — coloca a torrada no pedestal e abre o baú na divisão secreta.'}
+};
+if(houseVerified64[house59]){
+ const d=houseVerified64[house59], w='Welcome to Hogwarts', q='House-specific quest';
+ const prior=storyPagePlan[w]||{};
+ storyPagePlan[w]={required:[[house59==='Hufflepuff'?'v13.revelio.96':'v64.house.page.'+house59,d.page]],optional:house59==='Hufflepuff'?(prior.optional||[]):[['v13.revelio.127','Fonte do Salão Central — atrás da fonte; Revelio.']]};
+ steps44[w]=['Conhece os colegas na sala comum','Encontra Weasley à saída','Recolhe a página indicada no painel de páginas','Ativa a Chama de Flu indicada','Fala com o Professor Fig'];
+ skipSteps47[w]=[0,2];
+ const oldMission64=missionChecklistFor;
+ missionChecklistFor=function(quest,ci,qi,body){oldMission64(quest,ci,qi,body);if(quest[0]!==w&&quest[0]!==q)return;const panel=document.createElement('section');panel.className='mission-collection-panel';const h=document.createElement('h4');h.textContent=quest[0]===w?'Colegas da casa':'Mapa das velas flutuantes';panel.append(h);if(quest[0]===w)d.peers.forEach((name,i)=>panel.append(guideCheck('v64.house.peer.'+house59+'.'+i,'Fala com '+name)));else{panel.append(guideCheck('v64.house.map',d.map));panel.append(guideCheck('v64.house.candlechest','À noite, usa Lumos na ponte de pedra junto à Chama de Flu da Floresta Proibida; segue as velas até à mesa e abre o baú.'));}body.append(panel);};
+}
+// Reconstituir exclusões sem perder olhos e espelhos.
+storyCollectibles51.clear();for(const p of Object.values(storyPagePlan))for(const x of [...(p.required||[]),...(p.optional||[])])storyCollectibles51.add(x[0]);
+for(let i=0;i<30;i++)storyCollectibles51.add('v30.eye.hogsmeade.'+i);
+for(let i=15;i<20;i++)storyCollectibles51.add('v18.minipuzzle.1.'+i);
 
 build57();
 const renderBefore60=render;
