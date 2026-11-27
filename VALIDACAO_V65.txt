@@ -1,0 +1,1 @@
+Ícones adicionados aos seis botões de ferramentas. Cache v65. Sintaxe JavaScript verificada. Sem teste visual no navegador.
