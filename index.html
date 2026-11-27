@@ -51,7 +51,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 <body>
 <header>
 <h1>🪄 Hogwarts Legacy — Guia Completo</h1>
-<p style="color:var(--gold);font-weight:bold">🦡 Casa: Hufflepuff</p>
+<p id="houseLabel59" style="color:var(--gold);font-weight:bold"></p><div id="houseButtons59" class="region-grid"></div>
 <p>Guia em Português de Portugal: história, missões, puzzles, coleccionáveis e exploração. Marca o que já concluíste; o progresso fica guardado neste dispositivo.</p>
 </header>
 <main>
@@ -239,7 +239,7 @@ function missionChecklistFor(q,ci,qi,body){
  const panel=document.createElement('section');panel.className='mission-collection-panel';const h=document.createElement('h4');h.textContent='🦋 Espelhos de mariposas — 5 páginas opcionais';panel.appendChild(h);const p=document.createElement('p');p.textContent='Durante a exploração livre, usa Lumos diante do espelho, encontra a mariposa, aproxima-te com Lumos ativo, regressa ao espelho e desativa o feitiço. Recolhe a página.';panel.appendChild(p);miniLists[1].items.slice(15,20).forEach((label,i)=>panel.appendChild(guideCheck('v18.minipuzzle.1.'+(15+i),label)));body.appendChild(panel);
  }
  const pagePanel=document.createElement('section');pagePanel.className='mission-collection-panel';
- const ph=document.createElement('h4');ph.textContent='📜 Páginas do Guia de Campo — percurso Hufflepuff';pagePanel.appendChild(ph);
+ const ph=document.createElement('h4');ph.textContent='📜 Páginas do Guia de Campo';pagePanel.appendChild(ph);
  for(const [kind,title] of [['required','Obrigatórias'],['optional','Opcionais — desvio sugerido']]){
  const entries=pages[kind]||[];const h=document.createElement('p');h.className='mission-count';h.textContent=title+': '+(entries.length?entries.length:'nenhuma identificada nesta versão');pagePanel.appendChild(h);
  entries.forEach(([id,label])=>pagePanel.appendChild(guideCheck(id,label)));
@@ -1118,10 +1118,14 @@ Array.from(categoryNav.children).forEach((btn,i)=>btn.classList.toggle('active',
 content.replaceChildren(categoryNav,categoryHost);
 }
 
+let house59=localStorage.getItem('hlHouse59')||'Hufflepuff';
+const houses59=['Gryffindor','Hufflepuff','Ravenclaw','Slytherin'];
+if(!houses59.includes(house59))house59='Hufflepuff';
+function storage59(){return house59==='Hufflepuff'?'hlTracker':'hlTracker:'+house59;}
 let state={};
-try { state=JSON.parse(localStorage.getItem("hlTracker")||"{}") || {}; } catch(e) { state={}; }
+try { state=JSON.parse(localStorage.getItem(storage59())||"{}") || {}; } catch(e) { state={}; }
 storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{if(state['guide:'+ci+'.'+qi])state['quest:'+normTask(q[0])]=true;}));
-if(!state['migration:v34.pages']){storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{const prefix='guide:v20.mission.'+ci+'.'+qi+'.item.';if(q[0]==='Welcome to Hogwarts'&&state[prefix+0])state['guide:v13.revelio.96']=true;if(q[0]==='Professor Ronen’s Assignment')for(let i=0;i<2;i++)if(state[prefix+i])state['guide:v13.flyingpages.'+(20+i)]=true;}));state['migration:v34.pages']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
+if(!state['migration:v34.pages']){storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{const prefix='guide:v20.mission.'+ci+'.'+qi+'.item.';if(q[0]==='Welcome to Hogwarts'&&state[prefix+0])state['guide:v13.revelio.96']=true;if(q[0]==='Professor Ronen’s Assignment')for(let i=0;i<2;i++)if(state[prefix+i])state['guide:v13.flyingpages.'+(20+i)]=true;}));state['migration:v34.pages']=true;try{localStorage.setItem(storage59(),JSON.stringify(state))}catch(_){}}
 if(!state['migration:v47.dedup']){
 storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{
 const base='guide:v20.mission.'+ci+'.'+qi+'.', step='guide:v44.steps.'+ci+'.'+qi+'.';
@@ -1133,18 +1137,18 @@ const pairs={
 'Secrets of the Restricted Section':[[base+'item.2','guide:v30.eye.hogsmeade.16']],
 'Jackdaw’s Rest':[[base+'extra.1',step+'5']]
 };for(const [a,b] of pairs[q[0]]||[])if(state[a])state[b]=true;
-}));state['migration:v47.dedup']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}
+}));state['migration:v47.dedup']=true;try{localStorage.setItem(storage59(),JSON.stringify(state))}catch(_){}
 }
-if(!state['migration:v49.mirrors']){for(let i=0;i<5;i++)if(state['guide:v13.mirrors.'+i])state['guide:v18.minipuzzle.1.'+(15+i)]=true;state['migration:v49.mirrors']=true;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}}
+if(!state['migration:v49.mirrors']){for(let i=0;i<5;i++)if(state['guide:v13.mirrors.'+i])state['guide:v18.minipuzzle.1.'+(15+i)]=true;state['migration:v49.mirrors']=true;try{localStorage.setItem(storage59(),JSON.stringify(state))}catch(_){}}
 let selectedMini55=null;let selectedDem54=null;let selectedFlu54=null;let storySelectedChapter=null;let storySelectedMission=null;let selectedLoot=null;let selectedLootRegion=null;let selectedChallenge=null;let selectedChallengeGroup=null;let selectedRegion=null;let current=-1;let guideCategory='Visão geral';
 const nav=document.getElementById("nav"),content=document.getElementById("content");
 function key(si,gi,ii){return `${si}.${gi}.${ii}`}
-let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress');syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem('hlTracker',JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
-window.addEventListener('storage',e=>{if(e.key==='hlTracker'&&e.newValue){try{state=JSON.parse(e.newValue)||{};render()}catch(_){}}});
+let syncChannel=null;try{if('BroadcastChannel' in window){syncChannel=new BroadcastChannel('hogwarts-legacy-progress:'+house59);syncChannel.onmessage=e=>{if(e.data&&e.data.state){state=e.data.state;try{localStorage.setItem(storage59(),JSON.stringify(state))}catch(_){}render()}}}}catch(_){}
+window.addEventListener('storage',e=>{if(e.key===storage59()&&e.newValue){try{state=JSON.parse(e.newValue)||{};render()}catch(_){}}});
 function save(){
  // Preserva os capítulos e missões que estavam abertos antes de actualizar o progresso.
  const openDetails=Array.from(content.querySelectorAll('details')).map(d=>d.open);
- try { localStorage.setItem("hlTracker",JSON.stringify(state));if(syncChannel)syncChannel.postMessage({state}); }
+ try { localStorage.setItem(storage59(),JSON.stringify(state));if(syncChannel)syncChannel.postMessage({state}); }
  catch(e) { alert("Não foi possível guardar neste navegador. Usa Exportar progresso para criar uma cópia de segurança."); }
  render();
  Array.from(content.querySelectorAll('details')).forEach((d,i)=>{if(i<openDetails.length)d.open=openDetails[i]});
@@ -1170,9 +1174,9 @@ function render(){
  let {total,done}=countAll();document.getElementById("totalDone").textContent=done;document.getElementById("totalItems").textContent=total;let pct=total?Math.round(done/total*100):0;document.getElementById("percent").textContent=pct+"%";document.getElementById("globalBar").style.width=pct+"%"
 }
 document.getElementById("search").oninput=render;document.getElementById("filter").onchange=render;
-document.getElementById("export").onclick=()=>{let blob=new Blob([JSON.stringify({state,sections:sections.map(s=>s.title),exported:new Date().toISOString()},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hogwarts-legacy-progresso.json";a.click();URL.revokeObjectURL(a.href)};
+document.getElementById("export").onclick=()=>{let blob=new Blob([JSON.stringify({house:house59,state,sections:sections.map(s=>s.title),exported:new Date().toISOString()},null,2)],{type:"application/json"});let a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="hogwarts-legacy-progresso.json";a.click();URL.revokeObjectURL(a.href)};
 document.getElementById("importBtn").onclick=()=>document.getElementById("importFile").click();
-document.getElementById("importFile").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let obj=JSON.parse(r.result);state=obj.state||obj;save();alert("Progresso importado!")}catch{alert("Ficheiro inválido.")}};r.readAsText(f)};
+document.getElementById("importFile").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let obj=JSON.parse(r.result);if((obj.house||'Hufflepuff')!==house59){alert("Este ficheiro pertence a outra casa. Seleciona essa casa antes de importar.");return;}state=obj.state||obj;save();alert("Progresso importado!")}catch{alert("Ficheiro inválido.")}};r.readAsText(f)};
 document.getElementById("reset").onclick=()=>{if(confirm("Tens a certeza que queres apagar todo o progresso?")){state={};save()}};
 const displayTranslations = Object.assign({}, relationshipTranslations, {"The Path to Hogwarts": "O caminho para Hogwarts", "Welcome to Hogwarts": "Bem-vindo a Hogwarts", "Charms Class": "Aula de Encantamentos", "Defence Against the Dark Arts Class": "Aula de Defesa Contra as Artes das Trevas", "Weasley After Class": "Weasley depois da aula", "Professor Ronen’s Assignment": "Tarefa do Professor Ronen", "Welcome to Hogsmeade": "Bem-vindo a Hogsmeade", "The Locket’s Secret": "O segredo do medalhão", "Professor Hecat’s Assignment 1": "Tarefa da Professora Hecat 1", "Secrets of the Restricted Section": "Segredos da Secção Restrita", "Tomes and Tribulations": "Tomos e tribulações", "Herbology Class": "Aula de Herbologia", "Potions Class": "Aula de Poções", "The Girl from Uagadou": "A rapariga de Uagadou", "Trials of Merlin": "Provas de Merlin", "House-specific quest": "Prisioneira do amor — Hufflepuff", "Professor Hecat’s Assignment 2": "Tarefa da Professora Hecat 2", "Jackdaw’s Rest": "O descanso de Jackdaw", "Flying Class": "Aula de voo", "In the Shadow of the Undercroft": "À sombra da cripta", "The Room of Requirement": "A Sala das Necessidades", "The Map Chamber": "A Câmara do Mapa", "Percival Rackham’s Trial": "Prova de Percival Rackham", "Beasts Class": "Aula de Criaturas Mágicas", "The Caretaker’s Lunar Lament": "O lamento lunar do zelador", "The Helm of Urtkot": "O elmo de Urtkot", "In the Shadow of the Estate": "À sombra da propriedade", "The Elf, the Nab-Sack, and the Loom": "O elfo, o saco de captura e o tear", "Astronomy Class": "Aula de Astronomia", "Professor Garlick’s Assignment 1": "Tarefa da Professora Garlick 1", "The High Keep": "A fortaleza elevada", "Back on the Path": "De volta ao caminho", "Charles Rookwood’s Trial": "Prova de Charles Rookwood", "Fire and Vice": "Fogo e vício", "Professor Weasley’s Assignment": "Tarefa da Professora Weasley", "In the Shadow of the Mine": "À sombra da mina", "It’s All Gobbledegook": "Tudo em língua de duendes", "The Headmistress Speaks": "A diretora fala", "The Polyjuice Plot": "O plano da Poção Polissuco", "Niamh Fitzgerald’s Trial": "Prova de Niamh Fitzgerald", "In the Shadow of the Mountain": "À sombra da montanha", "Lodgok’s Loyalty": "A lealdade de Lodgok", "San Bakar’s Trial": "Prova de San Bakar", "Wand Mastery": "O domínio da varinha", "The Final Repository": "O repositório final", "Weasley’s Watchful Eye": "O olhar atento de Weasley", "The House Cup": "A Taça das Casas"});
 function translateVisible(){const walker=document.createTreeWalker(content,NodeFilter.SHOW_TEXT);let node;const pairs=Object.entries(displayTranslations).sort((a,b)=>b[0].length-a[0].length);while(node=walker.nextNode()){let t=node.nodeValue;for(const [en,pt] of pairs)t=t.split(en).join(pt);if(t!==node.nodeValue)node.nodeValue=t;}}
@@ -1199,6 +1203,26 @@ function routeView58(){content.replaceChildren();const h=document.createElement(
 const oldExtra58=renderExtra57;renderExtra57=function(){if(extra57==='Exploração por região'){routeView58();return;}oldExtra58();if(extra57==='menu'){extraButton57(content.querySelector('.guide-category-nav'),'🗺️ Exploração por região',()=>{route58=null;extra57='Exploração por região';render()});}if(extra57==='Criaturas mágicas'){const rows=content.querySelectorAll('label');rows.forEach((row,i)=>{if(i===1){row.style.display='none';return;}const p=document.createElement('small');p.textContent=beast58[i]||'';row.append(p);});const p=document.createElement('p');p.textContent='Captura com o saco de captura; alimenta e escova no viveiro. Para reprodução, coloca um macho e uma fêmea da mesma espécie no viveiro com recinto de reprodução. A Fénix não se reproduz. As variantes brilhantes têm um símbolo junto ao nome.';content.append(p);}};
 
 if(state['guide:extra57.Criaturas mágicas.1'])state['guide:extra57.Criaturas mágicas.0']=true;
+
+const houseData59={
+ Gryffindor:{icon:'🦁',color:'#a83240',room:'Torre de Gryffindor — entrada pelo retrato da Mulher Gorda, na Grande Escadaria',title:'A caça às páginas desaparecidas',steps:['Fala com Nick Quase Sem Cabeça junto à entrada do Grande Salão.','Segue Nick até à entrada das cozinhas; faz cócegas na pera do quadro.','Entra nas cozinhas e recolhe a carne assada pedida por Nick.','Acompanha Nick ao cemitério de Hogsmeade e fala com Sir Patrick Delaney-Podmore.','Participa no jogo das abóboras: usa Revelio para localizar a cabeça de Jackdaw e ataque básico para partir as abóboras indicadas.','Fala com Richard Jackdaw.']},
+ Hufflepuff:{icon:'🦡',color:'#b99a50',room:'Cave de Hufflepuff — entrada pelos barris junto às cozinhas',title:'Prisioneira do amor'},
+ Ravenclaw:{icon:'🦅',color:'#507cb5',room:'Torre de Ravenclaw — entrada pela porta com aldrava em forma de águia',title:'A relíquia de Ollivander',steps:['Fala com Gerbold Ollivander na loja de varinhas em Hogsmeade.','Segue para o Corujal, a sudoeste de Hogwarts.','Sobe as escadas do Corujal e usa Accio nos puxadores dos nichos para encontrar as estátuas de gralhas.','Procura também no piso superior; coloca as cinco estátuas nos pedestais vazios.','Fala com Richard Jackdaw.']},
+ Slytherin:{icon:'🐍',color:'#38805a',room:'Masmorras de Slytherin — entrada pela parede de pedra junto à Grande Escadaria inferior',title:'A última esperança de Scrope',steps:['Procura as notas de Scrope no pátio da Torre do Relógio e do outro lado da ponte.','Usa Accio ou Levioso numa caixa para alcançar a nota sobre a rocha; procura a nota na abóbora.','Encontra Scrope junto à água.','Segue a margem até à gruta de Apollonia Black; coloca a torrada no pedestal.','Examina o diário na gruta e fala com Richard Jackdaw.']}
+};
+const hd59=houseData59[house59];
+document.getElementById('houseLabel59').textContent=hd59.icon+' Casa: '+house59;
+for(const h of houses59){const b=document.createElement('button');b.textContent=houseData59[h].icon+' '+h+(h===house59?' ✓':'');b.style.borderColor=houseData59[h].color;b.onclick=()=>{if(h===house59)return;if(!confirm('Mudar para '+h+'? O progresso de '+house59+' fica guardado separadamente.'))return;localStorage.setItem('hlHouse59',h);location.reload();};document.getElementById('houseButtons59').appendChild(b);}
+if(house59!=='Hufflepuff'){
+ const q=storyChapters.flatMap(c=>c.quests).find(q=>q[0]==='House-specific quest');
+ q[2]=hd59.title+' — missão exclusiva de '+house59+'. Disponível após as Provas de Merlin, a partir do nível 5.';q[3]='Segue os objetivos abaixo até encontrares Richard Jackdaw.';
+ storyTitles47[q[0]]=hd59.title;displayTranslations[q[0]]=hd59.title;steps44[q[0]]=hd59.steps;missionDetails[q[0]]={counts:'Recolhas opcionais ainda não inventariadas para esta casa.',items:[],extras:[]};
+ const w=storyChapters.flatMap(c=>c.quests).find(q=>q[0]==='Welcome to Hogwarts');w[2]='Conhece os colegas na sala comum. '+hd59.room+'. Encontra a Professora Weasley à saída.';w[3]='Segue Weasley, recolhe a página indicada no tutorial e ativa a Chama de Flu.';
+ steps44[w[0]]=['Fala com os três colegas na sala comum','Encontra a Professora Weasley à saída','Recolhe a página indicada por Weasley com Revelio','Ativa a Chama de Flu indicada','Segue até ao encontro com o Professor Fig'];skipSteps47[w[0]]=[];
+ delete storyPagePlan[w[0]];delete missionDetails[w[0]];
+ storyCollectibles51.clear();for(const p of Object.values(storyPagePlan))for(const x of [...(p.required||[]),...(p.optional||[])])storyCollectibles51.add(x[0]);
+}
+
 build57();
 
 render();
