@@ -96,3 +96,5 @@ V39: navegacao dos desafios por tipo e regiao; IDs e dados anteriores mantidos. 
 V41: menu de baus e paginas por categoria e localizacao; IDs mantidos.
 
 V51: catálogo complementar filtrado por IDs partilhados; inventários incompletos mantidos.
+
+V58: agrupamento de pendentes por região, ampliação de objetivos e notas de criaturas. Não é inventário integral nem rota otimizada.
