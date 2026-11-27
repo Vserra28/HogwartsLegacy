@@ -1,0 +1,1 @@
+Missão Lenora inserida no capítulo 2, Aula de Encantamentos. IDs existentes side.27 e v18.minipuzzle.1.0 preservados. Sintaxe verificada; sem teste no navegador. Restantes missões secundárias ainda por ordenar e validar.
