@@ -313,6 +313,7 @@ function renderChapterJourney(){
  if(storySelectedMission!==null)content.appendChild(button('← Missões do capítulo',()=>{storySelectedMission=null;}));
  content.appendChild(grid);
  storyChapters.forEach((chapter,ci)=>{
+  if(house59==='Prologo'&&ci!==0)return;
   const chapterBox=document.createElement('section');chapterBox.className='group chapter-card';
   const chapterSummary=document.createElement('h3');
   let cDone=0;chapter.quests.forEach(q=>{if(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+chapter.quests.indexOf(q)])cDone++});
@@ -1118,10 +1119,20 @@ Array.from(categoryNav.children).forEach((btn,i)=>btn.classList.toggle('active',
 content.replaceChildren(categoryNav,categoryHost);
 }
 
+const prologueKey60='quest:the path to hogwarts';
+function isPrologue60(k){return k===prologueKey60||k==='guide:0.0'||/^guide:v(?:20\.mission|44\.steps)\.0\.0\./.test(k);}
+function read60(k){try{return JSON.parse(localStorage.getItem(k)||'{}')||{}}catch(_){return {}}}
 let house59=localStorage.getItem('hlHouse59')||'Hufflepuff';
+const oldProfile60=read60(house59==='Hufflepuff'?'hlTracker':'hlTracker:'+house59);
+if(!localStorage.getItem('hlHouse60Confirmed')){
+ const advanced=Object.keys(oldProfile60).some(k=>oldProfile60[k]&&!isPrologue60(k)&&!k.startsWith('migration:'));
+ if(advanced){localStorage.setItem('hlHouse60Confirmed','1');}
+ else {const draft=read60('hlTracker:prologue');for(const k of Object.keys(oldProfile60))if(isPrologue60(k)&&oldProfile60[k])draft[k]=true;localStorage.setItem('hlTracker:prologue',JSON.stringify(draft));house59='Prologo';}
+}
+if(localStorage.getItem('hlHouse59')==='Prologo')house59='Prologo';
 const houses59=['Gryffindor','Hufflepuff','Ravenclaw','Slytherin'];
-if(!houses59.includes(house59))house59='Hufflepuff';
-function storage59(){return house59==='Hufflepuff'?'hlTracker':'hlTracker:'+house59;}
+if(!houses59.includes(house59)&&house59!=='Prologo')house59='Hufflepuff';
+function storage59(){if(house59==='Prologo')return 'hlTracker:prologue';return house59==='Hufflepuff'?'hlTracker':'hlTracker:'+house59;}
 let state={};
 try { state=JSON.parse(localStorage.getItem(storage59())||"{}") || {}; } catch(e) { state={}; }
 storyChapters.forEach((ch,ci)=>ch.quests.forEach((q,qi)=>{if(state['guide:'+ci+'.'+qi])state['quest:'+normTask(q[0])]=true;}));
@@ -1210,10 +1221,23 @@ const houseData59={
  Ravenclaw:{icon:'🦅',color:'#507cb5',room:'Torre de Ravenclaw — entrada pela porta com aldrava em forma de águia',title:'A relíquia de Ollivander',steps:['Fala com Gerbold Ollivander na loja de varinhas em Hogsmeade.','Segue para o Corujal, a sudoeste de Hogwarts.','Sobe as escadas do Corujal e usa Accio nos puxadores dos nichos para encontrar as estátuas de gralhas.','Procura também no piso superior; coloca as cinco estátuas nos pedestais vazios.','Fala com Richard Jackdaw.']},
  Slytherin:{icon:'🐍',color:'#38805a',room:'Masmorras de Slytherin — entrada pela parede de pedra junto à Grande Escadaria inferior',title:'A última esperança de Scrope',steps:['Procura as notas de Scrope no pátio da Torre do Relógio e do outro lado da ponte.','Usa Accio ou Levioso numa caixa para alcançar a nota sobre a rocha; procura a nota na abóbora.','Encontra Scrope junto à água.','Segue a margem até à gruta de Apollonia Black; coloca a torrada no pedestal.','Examina o diário na gruta e fala com Richard Jackdaw.']}
 };
-const hd59=houseData59[house59];
-document.getElementById('houseLabel59').textContent=hd59.icon+' Casa: '+house59;
-for(const h of houses59){const b=document.createElement('button');b.textContent=houseData59[h].icon+' '+h+(h===house59?' ✓':'');b.style.borderColor=houseData59[h].color;b.onclick=()=>{if(h===house59)return;if(!confirm('Mudar para '+h+'? O progresso de '+house59+' fica guardado separadamente.'))return;localStorage.setItem('hlHouse59',h);location.reload();};document.getElementById('houseButtons59').appendChild(b);}
-if(house59!=='Hufflepuff'){
+const hd59=houseData59[house59]||{};
+function choose60(h){
+ if(house59==='Prologo'){
+  if(!state[prologueKey60]&&!state['guide:0.0'])return;
+  const target=h==='Hufflepuff'?'hlTracker':'hlTracker:'+h;
+  const dest=read60(target);for(const k of Object.keys(state))if(isPrologue60(k)&&state[k])dest[k]=true;
+  localStorage.setItem(target,JSON.stringify(dest));localStorage.setItem('hlHouse60Confirmed','1');
+ }else if(h===house59)return;else if(!confirm('Mudar para '+h+'? O progresso atual fica guardado separadamente.'))return;
+ localStorage.setItem('hlHouse59',h);location.reload();
+}
+function header60(){const label=document.getElementById('houseLabel59'),grid=document.getElementById('houseButtons59');grid.replaceChildren();
+ const pending=house59==='Prologo';const ready=!!(state[prologueKey60]||state['guide:0.0']);
+ label.textContent=pending?(ready?'🎩 Chapéu Selecionador — escolhe a tua casa':'Prólogo — casa ainda não escolhida'):hd59.icon+' Casa: '+house59;
+ if(pending&&!ready)return;
+ for(const h of houses59){const b=document.createElement('button');b.textContent=houseData59[h].icon+' '+h+(h===house59?' ✓':'');b.style.borderColor=houseData59[h].color;b.onclick=()=>choose60(h);grid.appendChild(b);}
+}
+if(house59!=='Hufflepuff'&&house59!=='Prologo'){
  const q=storyChapters.flatMap(c=>c.quests).find(q=>q[0]==='House-specific quest');
  q[2]=hd59.title+' — missão exclusiva de '+house59+'. Disponível após as Provas de Merlin, a partir do nível 5.';q[3]='Segue os objetivos abaixo até encontrares Richard Jackdaw.';
  storyTitles47[q[0]]=hd59.title;displayTranslations[q[0]]=hd59.title;steps44[q[0]]=hd59.steps;missionDetails[q[0]]={counts:'Recolhas opcionais ainda não inventariadas para esta casa.',items:[],extras:[]};
@@ -1224,7 +1248,8 @@ if(house59!=='Hufflepuff'){
 }
 
 build57();
-
+const renderBefore60=render;
+render=function(){header60();if(house59==='Prologo'){current=0;storySelectedChapter=0;storySelectedMission=0;renderBefore60();nav.replaceChildren();const n=document.createElement('button');n.textContent='📖 Prólogo';n.onclick=()=>render();nav.appendChild(n);return;}renderBefore60();};
 render();
 </script>
 <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js", {updateViaCache:"none"}).then(r=>r.update()).catch(() => {}));</script>
