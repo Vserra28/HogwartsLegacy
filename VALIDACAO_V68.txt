@@ -1,0 +1,1 @@
+Varinhas Cruzadas 1 e treino 1 associados à aula de Defesa; IDs side.13 e side.33 preservados. Sintaxe Node validada. Sem teste no navegador.
