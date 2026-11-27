@@ -322,7 +322,7 @@ function renderChapterJourney(){
   if(storySelectedChapter!==ci)return;
   if(!building57&&house59==='Prologo'&&ci>0){
    const msg=document.createElement('p');msg.textContent=ci===1?'Cerimónia do Chapéu Selecionador — escolhe a tua casa para continuar.':'Escolhe a tua casa no capítulo 2 para adaptar as missões.';chapterBox.appendChild(msg);
-   if(ci===1){const ready=!!(state[prologueKey60]||state['guide:0.0']);if(ready){const choices=document.createElement('div');choices.className='region-grid';for(const h of houses59){const b=button(houseData59[h].icon+' '+h,()=>choose60(h));b.style.borderColor=houseData59[h].color;choices.appendChild(b);}chapterBox.appendChild(choices);}else{chapterBox.appendChild(button('← Concluir o prólogo',()=>{storySelectedChapter=0;storySelectedMission=null;}));}}
+   if(ci===1){const choices=document.createElement('div');choices.className='region-grid';for(const h of houses59){const b=button(houseData59[h].icon+' '+h,()=>choose60(h));b.style.borderColor=houseData59[h].color;choices.appendChild(b);}chapterBox.appendChild(choices);}
    else chapterBox.appendChild(button('Ir para o capítulo 2',()=>{storySelectedChapter=1;storySelectedMission=null;}));
    content.appendChild(chapterBox);return;
   }
@@ -1227,12 +1227,11 @@ const houseData59={
 const hd59=houseData59[house59]||{};
 function choose60(h){
  if(house59==='Prologo'){
-  if(!state[prologueKey60]&&!state['guide:0.0'])return;
   const target=h==='Hufflepuff'?'hlTracker':'hlTracker:'+h;
   const dest=read60(target);for(const k of Object.keys(state))if(state[k])dest[k]=true;
   localStorage.setItem(target,JSON.stringify(dest));localStorage.setItem('hlHouse60Confirmed','1');
  }else if(h===house59)return;else if(!confirm('Mudar para '+h+'? O progresso atual fica guardado separadamente.'))return;
- localStorage.setItem('hlHouse59',h);sessionStorage.setItem('hlResume62','1');location.reload();
+ localStorage.setItem('hlHouse59',h);sessionStorage.setItem('hlResume63','1');location.reload();
 }
 function header60(){const label=document.getElementById('houseLabel59'),grid=document.getElementById('houseButtons59');grid.replaceChildren();
  const pending=house59==='Prologo';const ready=!!(state[prologueKey60]||state['guide:0.0']);
@@ -1253,7 +1252,7 @@ if(house59!=='Hufflepuff'&&house59!=='Prologo'){
 build57();
 const renderBefore60=render;
 render=function(){header60();renderBefore60();};
-if(sessionStorage.getItem('hlResume62')==='1'){sessionStorage.removeItem('hlResume62');current=0;storySelectedChapter=1;storySelectedMission=null;}
+if(sessionStorage.getItem('hlResume63')==='1'){sessionStorage.removeItem('hlResume63');current=0;storySelectedChapter=1;storySelectedMission=null;}
 render();
 </script>
 <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js", {updateViaCache:"none"}).then(r=>r.update()).catch(() => {}));</script>
