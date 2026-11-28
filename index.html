@@ -253,10 +253,9 @@ function missionChecklistFor(q,ci,qi,body){
  panel.appendChild(guideCheck('v68.lucan.duel','No duelo, usa Levioso para quebrar os escudos amarelos, ataques básicos para causar dano e Protego ou esquiva para te defenderes.'));
  panel.appendChild(guideCheck('side.13','Varinhas Cruzadas — Ronda 1: vence o duelo e termina a conversa com Lucan.'));
  const rh=document.createElement('h4');rh.textContent='📍 Recolhas no percurso de Varinhas Cruzadas';panel.appendChild(rh);
- for(const [id,label] of [["v73.clock.statue", "Estátua de Levioso — na zona dos duelos, a sudoeste da Chama de Flu do Pátio da Torre do Relógio, junto aos objetos amontoados. Lança Levioso na esfera."], ["v73.clock.flying", "Página voadora — olha para cima na sala dos duelos, junto ao mecanismo do relógio. Usa Accio."], ["v13.revelio.138", "Poço das quatro criaturas — sai da sala dos duelos para o pátio exterior e aproxima-te do poço de pedra. Revelio."], ["v13.revelio.147", "Mapa de Argyllshire — atravessa a ponte de madeira e procura o mapa na parede do átrio. Revelio."], ["v13.revelio.148", "Estátua de Lachlan — na base das escadas próximas do mapa de Argyllshire. Revelio."], ["v13.revelio.149", "Casas de banho assombradas — desce ao corredor das casas de banho e procura a última porta à esquerda. Revelio."], ["v73.clock.bathchest", "Baú normal — no interior da casa de banho seguinte à das casas de banho assombradas; usa Revelio."]])panel.appendChild(guideCheck(id,label));
- panel.appendChild(guideCheck('v74.clock.normal.1','Baú normal 1 — interior da sala dos duelos de Lucan, Pátio da Torre do Relógio. Usa Revelio; posição individual ainda por confirmar.'));
- panel.appendChild(guideCheck('v74.clock.normal.2','Baú normal 2 — segundo baú reportado na mesma sala dos duelos. Usa Revelio; posição individual ainda por confirmar.'));
- const pending=document.createElement('p');pending.className='guide-note';pending.textContent='Os baús atrás das portas do pêndulo pertencem a uma etapa posterior. Não os confundas com os baús normais.';panel.appendChild(pending);
+ for(const [id,label] of [["v73.clock.statue", "Estátua de Levioso — na zona dos duelos, a sudoeste da Chama de Flu do Pátio da Torre do Relógio, junto aos objetos amontoados. Lança Levioso na esfera."], ["v73.clock.flying", "Página voadora — olha para cima na sala dos duelos, junto ao mecanismo do relógio. Usa Accio."], ["v73.clock.bathchest", "Baú normal — no interior da casa de banho seguinte à das casas de banho assombradas; usa Revelio."]])panel.appendChild(guideCheck(id,label));
+ panel.appendChild(guideCheck('v74.clock.normal.1','Baú normal — interior da sala dos duelos de Lucan, Pátio da Torre do Relógio. Usa Revelio para o localizar.'));
+ const pending=document.createElement('p');pending.className='guide-note';pending.textContent='Quatro recolhas confirmadas nesta etapa. Não atravesses o portão interdito. As restantes páginas da zona ficam no Guia 100% até ser confirmado o acesso. Os baús atrás das portas do pêndulo pertencem a uma etapa posterior.';panel.appendChild(pending);
 
  body.appendChild(panel);
  }
@@ -1344,10 +1343,10 @@ for(let i=0;i<30;i++)storyCollectibles51.add('v30.eye.hogsmeade.'+i);
 for(let i=15;i<20;i++)storyCollectibles51.add('v18.minipuzzle.1.'+i);
 
 storyCollectibles51.add('v18.minipuzzle.1.0');
-storyCollectibles51.add("v13.revelio.138");
-storyCollectibles51.add("v13.revelio.147");
-storyCollectibles51.add("v13.revelio.148");
-storyCollectibles51.add("v13.revelio.149");
+
+
+
+
 
 build57();
 const renderBefore60=render;

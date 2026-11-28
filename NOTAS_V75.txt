@@ -1,0 +1,1 @@
+Quatro recolhas confirmadas pelo jogador. Segundo baú retirado da lista, sem apagar dados. Quatro páginas Revelio devolvidas ao catálogo complementar até confirmação de acesso. Sintaxe JS e ZIP verificados; sem teste no navegador.
