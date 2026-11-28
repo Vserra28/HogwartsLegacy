@@ -1457,12 +1457,12 @@ storyCollectibles51.add('v18.minipuzzle.1.0');
 // Depulso: Tarefa 1 do Professor Sharp (disponível após Jackdaw's Rest).
 // Alohomora I: The Caretaker's Lunar Lament.
 const mirrorAssignments86={
- 'Defence Against the Dark Arts Class':[5,6,8],
- 'Welcome to Hogsmeade':[7],
+ 'Welcome to Hogsmeade':[5,7],
+ 'The Locket’s Secret':[8],
  'The Helm of Urtkot':[9],
  'The Caretaker’s Lunar Lament':[3,10,11,12],
  'Astronomy Class':[14],
- 'The Polyjuice Plot':[13]
+ 'The Polyjuice Plot':[6,13]
 };
 const mirrorOriginal86=missionChecklistFor;
 missionChecklistFor=function(q,ci,qi,body){
@@ -1473,7 +1473,8 @@ missionChecklistFor=function(q,ci,qi,body){
  const ids=(mirrorAssignments86[q[0]]||[]).filter(i=>i!==0&&i!==1&&i!==4).filter(i=>metLenora||i!==5&&i!==6&&i!==8);
  if(!ids.length)return;
  const panel=document.createElement('details');panel.className='area78';
- const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas desta etapa';panel.append(h);
+ const h=document.createElement('summary');h.textContent='🪞 Desvios opcionais próximos — espelhos de mariposas';panel.append(h);
+ const note94=document.createElement('p');note94.className='guide-note';note94.textContent='Desvios opcionais: não fazem parte dos objetivos obrigatórios da missão. Faz apenas se já tiveres falado com Lenora e estiveres a passar pela área.';panel.append(note94);
  ids.forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
  body.append(panel);
 };

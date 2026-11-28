@@ -1,0 +1,1 @@
+v94: retirados espelhos Pátio do Viaduto, Grande Salão e Passagem Pungente da Aula de Defesa Contra as Artes das Trevas. Realocados como desvios opcionais: Viaduto -> Bem-vindo a Hogsmeade; Passagem Pungente -> O segredo do medalhão; Grande Salão -> A conspiração do Polissuco. Não são objetivos obrigatórios. IDs anteriores mantidos. Cache v94. Teste Android pendente.
