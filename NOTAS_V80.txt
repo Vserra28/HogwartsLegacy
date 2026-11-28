@@ -1,0 +1,1 @@
+v80: Histórico interno com History API e popstate. Progresso e conteúdos mantidos. Teste Android pendente.

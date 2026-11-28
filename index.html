@@ -1390,6 +1390,30 @@ build57();
 const renderBefore60=render;
 render=function(){const wasStory=document.body.classList.contains('story-screen');header60();renderBefore60();const isStory=current===0;document.body.classList.toggle('story-screen',isStory);if(isStory){const back=document.createElement('button');back.type='button';back.className='story-back77';back.textContent='← Voltar ao menu inicial';back.onclick=()=>{current=-1;render();};content.prepend(back);}if(wasStory!==isStory)window.scrollTo(0,0);};
 if(sessionStorage.getItem('hlResume63')==='1'){sessionStorage.removeItem('hlResume63');current=0;storySelectedChapter=1;storySelectedMission=null;}
+// Histórico de navegação interno (Android / PWA).
+const nav80Fields=()=>({current,storySelectedChapter,storySelectedMission,guideCategory,selectedRegion,selectedMini55,selectedDem54,selectedFlu54,selectedLoot,selectedLootRegion,selectedChallenge,selectedChallengeGroup,extra57,route58});
+function restore80(s){({current,storySelectedChapter,storySelectedMission,guideCategory,selectedRegion,selectedMini55,selectedDem54,selectedFlu54,selectedLoot,selectedLootRegion,selectedChallenge,selectedChallengeGroup,extra57,route58}=s);}
+const nav80Render=render;
+let nav80Stack=[],nav80Index=0,nav80Restoring=false;
+const nav80Key=s=>JSON.stringify(s);
+function nav80Record(s,replace=false){const entry={hlNav80:true,index:nav80Index,view:s};history[replace?'replaceState':'pushState'](entry,'');}
+const resumed80=nav80Fields();
+if(resumed80.current!==-1){current=-1;storySelectedChapter=null;storySelectedMission=null;nav80Stack.push(nav80Fields());nav80Record(nav80Stack[0],true);if(resumed80.current===0&&resumed80.storySelectedChapter!==null){nav80Index++;nav80Stack.push({...resumed80,storySelectedChapter:null,storySelectedMission:null});nav80Record(nav80Stack[nav80Index]);}restore80(resumed80);nav80Index++;nav80Stack.push(resumed80);nav80Record(resumed80);}else{nav80Stack.push(resumed80);nav80Record(resumed80,true);}
+render=function(){
+ nav80Render();
+ if(nav80Restoring)return;
+ const next=nav80Fields();
+ if(nav80Key(next)===nav80Key(nav80Stack[nav80Index]))return;
+ if(nav80Index>0&&nav80Key(next)===nav80Key(nav80Stack[nav80Index-1])){history.back();return;}
+ nav80Stack.splice(nav80Index+1);nav80Stack.push(next);nav80Index++;nav80Record(next);
+};
+window.addEventListener('popstate',e=>{
+ if(!e.state||!e.state.hlNav80)return;
+ nav80Index=e.state.index;nav80Stack[nav80Index]=e.state.view;
+ nav80Restoring=true;
+ try{restore80(e.state.view);nav80Render();window.scrollTo(0,0);}finally{nav80Restoring=false;}
+});
+
 render();
 </script>
 <script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js", {updateViaCache:"none"}).then(r=>r.update()).catch(() => {}));</script>
