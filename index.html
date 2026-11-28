@@ -360,7 +360,7 @@ optional84.append(a);}
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Torre de Ravenclaw';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.2.0','Busto de Ravenclaw — página Revelio — Na escadaria perto da Chama de Flu, lança Revelio diante do busto branco.'));
 a.append(guideCheck('v84.gobstones.extra.2.1','Batente de Ravenclaw — página Revelio — Na porta da sala comum com o grande corvo dourado, usa Revelio.'));
-a.append(guideCheck('v84.gobstones.extra.2.2','Espelho da mariposa — página — Procura o espelho na base da escadaria em espiral; usa Lumos e procura a mariposa no patamar superior. Regressa com ela ao espelho.'));
+a.append(guideCheck('v18.minipuzzle.1.1','Espelho da mariposa — página — Procura o espelho na base da escadaria em espiral; usa Lumos e procura a mariposa no patamar superior. Regressa com ela ao espelho.'));
 optional84.append(a);}
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Sala dos Troféus';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.3.0','Armadura de Troll — página Revelio — No corredor exterior, usa Revelio diante da armadura.'));
@@ -1423,6 +1423,37 @@ storyCollectibles51.add('v18.minipuzzle.1.0');
 
 
 
+// v86 — espelhos distribuídos cronologicamente. IDs antigos mantidos no progresso.
+const mirrorAssignments86={
+ 'Welcome to Hogwarts':[5,6,7],
+ 'Defence Against the Dark Arts Class':[8,14],
+ 'Weasley After Class':[9],
+ 'Professor Hecat’s Assignment 1':[10],
+ 'The Caretaker’s Lunar Lament':[3,11,12],
+ 'The Polyjuice Plot':[13]
+};
+const mirrorOriginal86=missionChecklistFor;
+missionChecklistFor=function(q,ci,qi,body){
+ mirrorOriginal86(q,ci,qi,body);
+ const ids=mirrorAssignments86[q[0]]||[];if(!ids.length)return;
+ const panel=document.createElement('details');panel.className='area78';
+ const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas acessíveis — '+ids.length;panel.append(h);
+ ids.forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
+ body.append(panel);
+};
+// Associar o progresso já assinalado em missões anteriores ao ID único do espelho.
+const mirrorAliases86={
+ 0:['v18.minipuzzle.1.0'],
+ 1:['v84.gobstones.extra.2.2'],
+ 2:['v13.mirrors.6'],
+ 4:['v81.library.moth']
+};
+for(const [i,aliases] of Object.entries(mirrorAliases86)){
+ const canonical='guide:v18.minipuzzle.1.'+i;
+ if(aliases.some(a=>state['guide:'+a])&&!state[canonical])state[canonical]=true;
+}
+// Esconder do Guia 100% os espelhos agora colocados na História Principal.
+for(let i=0;i<20;i++)storyCollectibles51.add('v18.minipuzzle.1.'+i);
 build57();
 const renderBefore60=render;
 render=function(){const wasStory=document.body.classList.contains('story-screen');header60();renderBefore60();const isStory=current===0;document.body.classList.toggle('story-screen',isStory);nav.style.display=current===-1?'':'none';if(current!==-1&&current!==0&&current!==-2&&current!==3){const back85=document.createElement('button');back85.type='button';back85.className='story-back77';back85.textContent='← Voltar ao menu inicial';back85.onclick=()=>{current=-1;render();};content.prepend(back85);}if(isStory){const back=document.createElement('button');back.type='button';back.className='story-back77';back.textContent='← Voltar ao menu inicial';back.onclick=()=>{current=-1;render();};content.prepend(back);}if(wasStory!==isStory)window.scrollTo(0,0);};
