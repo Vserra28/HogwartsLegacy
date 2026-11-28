@@ -1,0 +1,1 @@
+v82: removido o painel da Secção Restrita da missão Livros a voar das prateleiras, pois o acesso está bloqueado. As recolhas acessíveis na Biblioteca permanecem.
