@@ -47,7 +47,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 
 .region-menu{border:1px solid var(--border);border-radius:18px;padding:14px;background:var(--panel);margin:10px 0}.region-menu h2{margin:0 0 12px}.region-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px;width:100%}.region-grid button{display:flex;align-items:center;text-align:left;white-space:normal;overflow-wrap:anywhere;min-width:0;width:100%;min-height:76px;padding:12px;border:1px solid var(--border);border-radius:13px;background:var(--panel2);font-size:1rem;line-height:1.35}.region-grid button:focus-visible{outline:2px solid var(--gold)}
 body.story-screen header,body.story-screen .stats,body.story-screen .toolbar,body.story-screen #nav,body.story-screen main > .footer{display:none!important}body.story-screen .layout{display:block!important}body.story-screen #content{width:100%;max-width:none;min-width:0}.story-back77{margin-bottom:12px;width:100%;text-align:left}
-</style>
+.area78{margin:10px 0;border:1px solid var(--border);border-radius:12px;background:rgba(104,84,154,.10)}.area78>summary{cursor:pointer;padding:12px;color:var(--gold);font-weight:600}.area78>summary small{float:right;color:inherit;font-weight:400}.area78-inner{padding:0 12px 12px;min-width:0}.area78-inner .area78{margin:8px 0}</style>
 </head>
 <body>
 <header>
@@ -364,6 +364,34 @@ const assignmentDetails69=[
 ['Tarefa da Professora Weasley','Recolhe as páginas do Guia de Campo do porto subterrâneo e do livro de Transfiguração Intermédia na biblioteca e regressa à professora para concluir a tarefa.','Recompensa: aprende Transformação.']
 ];
 
+const openMissionAreas78=new Map();
+function areaDetails78(title,nodes,key){
+ const d=document.createElement('details');d.className='area78';d.open=openMissionAreas78.get(key)===true;
+ const h=document.createElement('summary');const caption=document.createElement('span');caption.textContent=title;const count=document.createElement('small');h.append(caption,count);d.append(h);const inner=document.createElement('div');inner.className='area78-inner';d.append(inner);nodes.forEach(n=>inner.append(n));
+ const refresh=()=>{const checks=[...inner.querySelectorAll('input[type=checkbox]')];count.textContent=checks.length?' '+checks.filter(c=>c.checked).length+'/'+checks.length:'';};refresh();d.addEventListener('change',refresh);d.addEventListener('toggle',()=>openMissionAreas78.set(key,d.open));h.addEventListener('click',()=>openMissionAreas78.set(key,!d.open));return d;
+}
+function collapseMission78(body,ci,qi){
+ const prefix=ci+'.'+qi+'.';
+ [...body.children].forEach((panel,i)=>{
+ if(panel.tagName!=='SECTION')return;
+ const heading=panel.querySelector(':scope > h4, :scope > h3');if(!heading)return;
+ const title=heading.textContent;heading.remove();
+ const children=[...panel.children];
+ const route=children.find(n=>n.tagName==='H4'&&n.textContent.includes('Recolhas no percurso de Varinhas Cruzadas'));
+ if(route){const rows=children.filter(n=>n.matches('label.quest-check'));const duel=rows.filter(n=>/v73\.clock\.(statue|flying)|v74\.clock\.normal\.1/.test(n.dataset.progressKey||''));const bath=rows.filter(n=>/v73\.clock\.bathchest|v13\.revelio\.149/.test(n.dataset.progressKey||''));route.remove();const anchor=children.find(n=>n.classList.contains('guide-note'));for(const [name,items,k] of [['Sala dos duelos',duel,'duel'],['Corredor e casas de banho',bath,'bath']])if(items.length)panel.insertBefore(areaDetails78(name,items,prefix+i+k),anchor||null);}
+ // Group consecutive location-labelled rows without changing their order or IDs.
+ const groupRows=(parent,key)=>{
+  const rows=[...parent.children];let run=[],name='',serial=0;
+  const flush=()=>{if(run.length){const first=run[0];parent.insertBefore(areaDetails78(name,[],key+'.'+serial++),first);const inner=first.previousElementSibling.querySelector('.area78-inner');run.forEach(r=>inner.append(r));const d=inner.parentElement;const checks=[...inner.querySelectorAll('input[type=checkbox]')];d.querySelector('summary small').textContent=checks.filter(c=>c.checked).length+'/'+checks.length;}run=[];};
+  for(const row of rows){if(!row.matches('label.quest-check')){flush();continue;}const t=row.textContent.trim();let loc=t.match(/^(?:Desvio \/ requisito: )?([^—:]{3,65})\s*[—:]/);let n=loc?loc[1].trim():'';if(/^(baú|página|desvio|semiviso|estátua|livro|objetivo|porta)/i.test(n))n='';if(!n){flush();continue;}if(n!==name){flush();name=n;}run.push(row);}flush();
+ };
+ if(title.includes('Recolhas e desvios')){const list=panel.querySelector('.mission-locations');if(list)groupRows(list,prefix+i+'.loc');}
+ if(title.includes('Páginas do Guia')){const kids=[...panel.children];let heading=null,rows=[];const flush=()=>{if(heading&&rows.length){const d=areaDetails78(heading.textContent,rows,prefix+i+'.pages.'+kids.indexOf(heading));heading.replaceWith(d);}rows=[];};for(const n of kids){if(n.classList.contains('mission-count')){flush();heading=n;}else if(n.matches('label.quest-check'))rows.push(n);else{flush();heading=null;}}flush();}
+ const d=areaDetails78(title,[...panel.children],prefix+i);panel.replaceWith(d);
+ });
+ [...body.querySelectorAll('details:not(.area78)')].forEach((d,i)=>{const h=d.querySelector(':scope > summary');if(!h)return;const title=h.textContent;const nodes=[...d.children].filter(n=>n!==h);const replacement=areaDetails78(title,nodes,prefix+'nested.'+i);d.replaceWith(replacement);if(title.includes('Baús de olho')){const b=replacement.querySelector('.quest-body');if(b){const rows=[...b.querySelectorAll(':scope > label.quest-check')];for(const region of ['Hogsmeade','Hogwarts']){const group=rows.filter(r=>r.textContent.trim().startsWith(region+' —'));if(group.length)b.append(areaDetails78(region,group,prefix+'eye.'+region));}}}});
+ const intro=[...body.children].filter(n=>n.tagName==='P'||n.tagName==='A'||n.matches('div.guide-note'));if(intro.length){const first=intro[0];const anchor=document.createComment('orientação');body.insertBefore(anchor,first);const d=areaDetails78('Orientação, requisitos e referências',intro,prefix+'intro');anchor.replaceWith(d);}
+}
 function renderChapterJourney(){
  content.innerHTML='';
  const intro=document.createElement('section');intro.className='guide-intro';
@@ -404,6 +432,7 @@ function renderChapterJourney(){
    progression43(q,body);
    optional69(ci,qi,body);
    const check=missionCheck.querySelector('input');check.onchange=()=>{const pending=[...body.querySelectorAll('input[type=checkbox]')].filter(x=>x!==check&&!x.checked).length;if(check.checked&&pending&&!confirm('Ainda tens '+pending+' tarefas ou recolhas identificadas por concluir. Queres marcar a missão como concluída?')){check.checked=false;return;}state['quest:'+normTask(q[0])]=check.checked;state['guide:'+ci+'.'+qi]=check.checked;save();};
+   collapseMission78(body,ci,qi);
    mission.appendChild(body);chapterBody.appendChild(mission);
   });
   chapterBox.appendChild(chapterBody);content.appendChild(chapterBox);

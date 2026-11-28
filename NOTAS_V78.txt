@@ -1,0 +1,1 @@
+História Principal: painéis recolhíveis por conteúdo; Varinhas Cruzadas subdividida por sala dos duelos e casas de banho. IDs e conteúdos mantidos. Cache v78. Sintaxe JS e ZIP verificados; teste visual pendente.
