@@ -1,0 +1,1 @@
+v84: Painéis opcionais recolhíveis por área durante Montes de Gobstones. 12 páginas/ações identificadas no percurso, com IDs novos estáveis; não são contagem exaustiva. Baús não validados não incluídos. Não se alteraram IDs de tarefas anteriores. Atenção: páginas pré-existentes noutros painéis podem não estar sincronizadas com estes novos IDs.

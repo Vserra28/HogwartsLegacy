@@ -347,7 +347,29 @@ function optionalCard71(id,n,info){
     add81('v81.library.moth','Espelho da mariposa — no canto sul do piso superior da Biblioteca, usa Lumos no espelho negro; encontra a mariposa no atril diante do retrato do Velho Bibliotecário, leva-a com Lumos e apaga-o diante do espelho para obter a página.');
     add81('v83.library.chest.mothalcove','Baú normal — piso superior da Biblioteca, no recanto onde se encontra o espelho da mariposa. Abre o baú antes de saíres da Biblioteca (confirmado durante o jogo).');
     const note81=document.createElement('p');note81.className='guide-note';note81.textContent='Os cinco livros de Cressida são diferentes destas três páginas. Baú do recanto do espelho confirmado nesta fase. O mapa da Biblioteca assinala quatro baús normais no total, mas não foi possível validar individualmente o acesso e a localização dos restantes três; não os marques como disponíveis nesta missão.';extras81.append(note81);
-    d.append(extras81);add('Usa Revelio para destacar os livros. A página voadora da biblioteca é uma recolha diferente.');}if(i===23){add('🔓 Desbloqueio: conclui Weasley depois das aulas.');add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
+    d.append(extras81);add('Usa Revelio para destacar os livros. A página voadora da biblioteca é uma recolha diferente.');}if(i===23){add('🔓 Desbloqueio: conclui Weasley depois das aulas.');add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));
+const optional84=document.createElement('details');optional84.className='area78';const head84=document.createElement('summary');head84.textContent='🧭 Recolhas opcionais durante o percurso (por área)';optional84.append(head84);
+{const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Pátio da Transfiguração';a.append(h);
+a.append(guideCheck('v84.gobstones.extra.0.0','Fonte do Dragão Alado — página Revelio — Junto à fonte central do pátio, lança Revelio.'));
+a.append(guideCheck('v84.gobstones.extra.0.1','Estátua de Levioso — página — Na arcada sudeste, procura a estátua à esquerda após atravessar a passagem; usa Levioso.'));
+optional84.append(a);}
+{const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Sala de Adivinhação e vigas';a.append(h);
+a.append(guideCheck('v84.gobstones.extra.1.0','Modelo de Quiromancia — página Revelio — Sobe até à Sala de Adivinhação e lança Revelio junto ao modelo.'));
+a.append(guideCheck('v84.gobstones.extra.1.1','Página voadora — vigas de madeira — Perto da Chama de Flu da Sala de Adivinhação, entra na zona das vigas e usa Accio na página voadora.'));
+optional84.append(a);}
+{const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Torre de Ravenclaw';a.append(h);
+a.append(guideCheck('v84.gobstones.extra.2.0','Busto de Ravenclaw — página Revelio — Na escadaria perto da Chama de Flu, lança Revelio diante do busto branco.'));
+a.append(guideCheck('v84.gobstones.extra.2.1','Batente de Ravenclaw — página Revelio — Na porta da sala comum com o grande corvo dourado, usa Revelio.'));
+a.append(guideCheck('v84.gobstones.extra.2.2','Espelho da mariposa — página — Procura o espelho na base da escadaria em espiral; usa Lumos e procura a mariposa no patamar superior. Regressa com ela ao espelho.'));
+optional84.append(a);}
+{const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Sala dos Troféus';a.append(h);
+a.append(guideCheck('v84.gobstones.extra.3.0','Armadura de Troll — página Revelio — No corredor exterior, usa Revelio diante da armadura.'));
+a.append(guideCheck('v84.gobstones.extra.3.1','Armadura de Centauro — página Revelio — No corredor exterior, usa Revelio diante da armadura de centauro.'));
+a.append(guideCheck('v84.gobstones.extra.3.2','Armadura de Elfo Doméstico — página Revelio — No corredor exterior, usa Revelio diante da pequena armadura.'));
+a.append(guideCheck('v84.gobstones.extra.3.3','Cofre do Cálice de Fogo — página Revelio — No interior da Sala dos Troféus, lança Revelio diante do cofre ornamentado.'));
+a.append(guideCheck('v84.gobstones.extra.3.4','Sala dos Troféus — página Revelio — No interior da Sala dos Troféus, procura a página Revelio junto às exposições centrais.'));
+optional84.append(a);}
+const caveat84=document.createElement('p');caveat84.textContent='Estas recolhas são opcionais, não fazem parte dos seis Gobstones. Se já recolheste uma página numa etapa anterior, não precisas de a recolher novamente. Baús normais nesta rota: localização e acesso ainda não validados; não foram inventados.';optional84.append(caveat84);d.append(optional84);add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
  d.appendChild(guideCheck(id,'Concluir missão — '+n));return d;
 }
 function optional69(ci,qi,body){
