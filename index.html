@@ -442,6 +442,31 @@ function collapseMission78(body,ci,qi){
  [...body.querySelectorAll('details:not(.area78)')].forEach((d,i)=>{const h=d.querySelector(':scope > summary');if(!h)return;const title=h.textContent;const nodes=[...d.children].filter(n=>n!==h);const replacement=areaDetails78(title,nodes,prefix+'nested.'+i);d.replaceWith(replacement);if(title.includes('Baús de olho')){const b=replacement.querySelector('.quest-body');if(b){const rows=[...b.querySelectorAll(':scope > label.quest-check')];for(const region of ['Hogsmeade','Hogwarts']){const group=rows.filter(r=>r.textContent.trim().startsWith(region+' —'));if(group.length)b.append(areaDetails78(region,group,prefix+'eye.'+region));}}}});
  const intro=[...body.children].filter(n=>n.tagName==='P'||n.tagName==='A'||n.matches('div.guide-note'));if(intro.length){const first=intro[0];const anchor=document.createComment('orientação');body.insertBefore(anchor,first);const d=areaDetails78('Orientação, requisitos e referências',intro,prefix+'intro');anchor.replaceWith(d);}
 }
+// v91: completion is computed from the current set of individual tasks, not just a saved mission flag.
+const missionTasks91=new Map();
+function missionKey91(ci,qi){return ci+'.'+qi;}
+function effectiveMission91(ci,qi,q){
+ const old=!!(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi]);
+ const tasks=missionTasks91.get(missionKey91(ci,qi));
+ return old && (!tasks || tasks.every(k=>!!state[k]));
+}
+function auditMission91(ci,qi,q){
+ const temp=document.createElement('div');
+ // Build the same mission contents used in the visible mission screen.
+ missionChecklistFor(q,ci,qi,temp);
+ progression43(q,temp);
+ optional69(ci,qi,temp);
+ const ids=[...new Set([...temp.querySelectorAll('label[data-progress-key]')]
+  .map(el=>el.dataset.progressKey)
+  .filter(k=>k!=='quest:'+normTask(q[0])&&k!=='guide:'+ci+'.'+qi))];
+ missionTasks91.set(missionKey91(ci,qi),ids);
+ // Do not change any individual checkbox, only invalidate stale completion flags.
+ if(ids.some(k=>!state[k])&&(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi])){
+  state['quest:'+normTask(q[0])]=false;
+  state['guide:'+ci+'.'+qi]=false;
+  try{localStorage.setItem(storage59(),JSON.stringify(state));}catch(e){}
+ }
+}
 function renderChapterJourney(){
  content.innerHTML='';
  const intro=document.createElement('section');intro.className='guide-intro';
@@ -457,7 +482,7 @@ function renderChapterJourney(){
  storyChapters.forEach((chapter,ci)=>{
   const chapterBox=document.createElement('section');chapterBox.className='group chapter-card';
   const chapterSummary=document.createElement('h3');
-  let cDone=0;chapter.quests.forEach(q=>{if(state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+chapter.quests.indexOf(q)])cDone++});
+  let cDone=0;chapter.quests.forEach((q,qi)=>{auditMission91(ci,qi,q);if(effectiveMission91(ci,qi,q))cDone++});
   chapterSummary.textContent=chapter.chapter+' — '+cDone+'/'+chapter.quests.length+' missões concluídas';chapterBox.appendChild(chapterSummary);
   totalMissions+=chapter.quests.length;doneMissions+=cDone;
   if(storySelectedChapter===null){grid.appendChild(button(chapterSummary.textContent,()=>{storySelectedChapter=ci;storySelectedMission=null;}));return;}
@@ -470,18 +495,18 @@ function renderChapterJourney(){
   }
   const chapterBody=document.createElement('div');chapterBody.className=storySelectedMission===null?'region-grid':'quest-body';
   chapter.quests.forEach((q,qi)=>{
-   if(storySelectedMission===null){const done=state['quest:'+normTask(q[0])]||state['guide:'+ci+'.'+qi];chapterBody.appendChild(button((done?'✓ ':'')+(qi+1)+'. '+(storyTitles47[q[0]]||q[0]),()=>{storySelectedMission=qi;}));return;}
+   if(storySelectedMission===null){const done=effectiveMission91(ci,qi,q);chapterBody.appendChild(button((done?'✓ ':'')+(qi+1)+'. '+(storyTitles47[q[0]]||q[0]),()=>{storySelectedMission=qi;}));return;}
    if(storySelectedMission!==qi)return;
    const mission=document.createElement('section');mission.className='quest-card';
    const summary=document.createElement('h3');summary.textContent=(qi+1)+'. '+(storyTitles47[q[0]]||q[0])+' · '+q[1];mission.appendChild(summary);
    const body=document.createElement('div');body.className='quest-body';
    const desc=document.createElement('p');desc.textContent=q[2];body.appendChild(desc);
    const note=document.createElement('div');note.className='guide-note';note.textContent='Orientação da missão: '+q[3];body.appendChild(note);
-   const missionCheck=guideCheck(ci+'.'+qi,'Marcar missão como concluída',q[0]);body.appendChild(missionCheck);
+   const missionCheck=guideCheck(ci+'.'+qi,'Marcar missão como concluída',q[0]);missionCheck.querySelector('input').checked=effectiveMission91(ci,qi,q);body.appendChild(missionCheck);
    missionChecklistFor(q,ci,qi,body);
    progression43(q,body);
    optional69(ci,qi,body);
-   const check=missionCheck.querySelector('input');check.onchange=()=>{const pending=[...body.querySelectorAll('input[type=checkbox]')].filter(x=>x!==check&&!x.checked).length;if(check.checked&&pending&&!confirm('Ainda tens '+pending+' tarefas ou recolhas identificadas por concluir. Queres marcar a missão como concluída?')){check.checked=false;return;}state['quest:'+normTask(q[0])]=check.checked;state['guide:'+ci+'.'+qi]=check.checked;save();};
+   const check=missionCheck.querySelector('input');check.onchange=()=>{const pending=[...body.querySelectorAll('input[type=checkbox]')].filter(x=>x!==check&&!x.checked).length;if(check.checked&&pending){alert('Ainda tens '+pending+' tarefas ou recolhas por concluir. A missão só ficará a 100% quando todas estiverem assinaladas.');check.checked=false;return;}state['quest:'+normTask(q[0])]=check.checked;state['guide:'+ci+'.'+qi]=check.checked;save();};
    collapseMission78(body,ci,qi);
    mission.appendChild(body);chapterBody.appendChild(mission);
   });
