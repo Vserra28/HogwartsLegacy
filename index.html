@@ -1425,21 +1425,25 @@ storyCollectibles51.add('v18.minipuzzle.1.0');
 
 
 // v86 — espelhos distribuídos cronologicamente. IDs antigos mantidos no progresso.
+// v88: associar puzzles apenas depois de adquiridos os feitiços necessários.
+// Depulso: Tarefa 1 do Professor Sharp (disponível após Jackdaw's Rest).
+// Alohomora I: The Caretaker's Lunar Lament.
 const mirrorAssignments86={
- 'Welcome to Hogwarts':[5,6,7],
- 'Defence Against the Dark Arts Class':[8,14],
- 'Weasley After Class':[9],
- 'Professor Hecat’s Assignment 1':[10],
- 'The Caretaker’s Lunar Lament':[3,11,12],
+ 'Welcome to Hogwarts':[5,6],
+ 'Defence Against the Dark Arts Class':[8],
+ 'Welcome to Hogsmeade':[7],
+ 'The Helm of Urtkot':[9],
+ 'The Caretaker’s Lunar Lament':[3,10,11,12],
+ 'Astronomy Class':[14],
  'The Polyjuice Plot':[13]
 };
 const mirrorOriginal86=missionChecklistFor;
 missionChecklistFor=function(q,ci,qi,body){
  mirrorOriginal86(q,ci,qi,body);
- const ids=mirrorAssignments86[q[0]]||[];if(!ids.length)return;
+ const ids=(mirrorAssignments86[q[0]]||[]).filter(i=>i!==0&&i!==1&&i!==4);if(!ids.length)return;
  const panel=document.createElement('details');panel.className='area78';
  const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas desta etapa';panel.append(h);
- ids.filter(i=>i!==0&&i!==1&&i!==4).forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
+ ids.forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
  body.append(panel);
 };
 // Associar o progresso já assinalado em missões anteriores ao ID único do espelho.

@@ -1,0 +1,1 @@
+v88: Mapa de Argyllshire (espelho 9) transferido de Weasley After Class para The Helm of Urtkot, após desbloqueio de Depulso pela Tarefa 1 do Professor Sharp. Espelhos 3, 10, 11 e 12 na etapa do Zelador (Alohomora I); espelho 14 na Aula de Astronomia; espelho 13 em The Polyjuice Plot. IDs das checkboxes preservados. Sem teste em Android.
