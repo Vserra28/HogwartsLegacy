@@ -1,0 +1,1 @@
+v93: Porta de Aritmância retirada da Aula de Encantamentos e a do Salão Central retirada da missão Cressida; ambas passam para Montes de Gobstones, depois do painel da Sala de Adivinhação com as regras e três portas. IDs v90.arith.* mantidos. Restantes portas sem alteração. Cache v93. Teste Android pendente.

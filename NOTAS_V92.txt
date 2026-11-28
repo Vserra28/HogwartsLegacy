@@ -1,0 +1,1 @@
+v92: retirados espelhos Pátio do Viaduto e Grande Salão de Bem-vindo a Hogwarts. Reposicionados após a introdução de Lenora, na Aula de Defesa Contra as Artes das Trevas, e exibidos após contacto com Lenora. Preservados IDs de progresso; cache v92. Restantes espelhos requerem auditoria de acessibilidade.

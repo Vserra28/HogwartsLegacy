@@ -234,7 +234,6 @@ const skipExtras47={"Defence Against the Dark Arts Class":[0],"The Path to Hogwa
 function missionChecklistFor(q,ci,qi,body){
  const ref=document.createElement('a');ref.href='https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/';ref.target='_blank';ref.rel='noopener';ref.textContent='Guia de referência das missões (localizações ainda em revisão)';body.appendChild(ref);
 
- if(q[0]==='Charms Class')arithPanel90(body,'charms');
  if(q[0]==='The Caretaker’s Lunar Lament'){arithPanel90(body,'faculty');arithPanel90(body,'transfiguration');}
  if(q[0]==='The Helm of Urtkot'){arithPanel90(body,'great');arithPanel90(body,'bell');arithPanel90(body,'grand');}
  const stepBox=document.createElement("section");stepBox.className="mission-collection-panel";const stepTitle=document.createElement("h4");stepTitle.textContent="📖 Objetivos passo a passo";stepBox.appendChild(stepTitle);(steps44[q[0]]||[]).forEach((label,i)=>{if(!(skipSteps47[q[0]]||[]).includes(i))stepBox.appendChild(guideCheck("v44.steps."+ci+"."+qi+"."+i,label))});body.appendChild(stepBox);
@@ -363,7 +362,7 @@ function optionalCard71(id,n,info){
     add81('v81.library.moth','Espelho da mariposa — no canto sul do piso superior da Biblioteca, usa Lumos no espelho negro; encontra a mariposa no atril diante do retrato do Velho Bibliotecário, leva-a com Lumos e apaga-o diante do espelho para obter a página.');
     add81('v83.library.chest.mothalcove','Baú normal — piso superior da Biblioteca, no recanto onde se encontra o espelho da mariposa. Abre o baú antes de saíres da Biblioteca (confirmado durante o jogo).');
     const note81=document.createElement('p');note81.className='guide-note';note81.textContent='Os cinco livros de Cressida são diferentes destas três páginas. Baú do recanto do espelho confirmado nesta fase. O mapa da Biblioteca assinala quatro baús normais no total, mas não foi possível validar individualmente o acesso e a localização dos restantes três; não os marques como disponíveis nesta missão.';extras81.append(note81);
-    d.append(extras81);arithPanel90(d,'central');add('Usa Revelio para destacar os livros. A página voadora da biblioteca é uma recolha diferente.');}if(i===23){add('🔓 Desbloqueio: conclui Weasley depois das aulas.');add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));
+    d.append(extras81);add('Usa Revelio para destacar os livros. A página voadora da biblioteca é uma recolha diferente.');}if(i===23){add('🔓 Desbloqueio: conclui Weasley depois das aulas.');add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));
 const optional84=document.createElement('details');optional84.className='area78';const head84=document.createElement('summary');head84.textContent='🧭 Recolhas opcionais durante o percurso (por área)';optional84.append(head84);
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Pátio da Transfiguração';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.0.0','Fonte do Dragão Alado — página Revelio — Junto à fonte central do pátio, lança Revelio.'));
@@ -372,7 +371,7 @@ optional84.append(a);}
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Sala de Adivinhação e vigas';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.1.0','Modelo de Quiromancia — página Revelio — Sobe até à Sala de Adivinhação e lança Revelio junto ao modelo.'));
 a.append(guideCheck('v84.gobstones.extra.1.1','Página voadora — vigas de madeira — Perto da Chama de Flu da Sala de Adivinhação, entra na zona das vigas e usa Accio na página voadora.'));
-arithPanel90(a,'divination');optional84.append(a);}
+arithPanel90(a,'divination');arithPanel90(a,'charms');arithPanel90(a,'central');optional84.append(a);}
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Torre de Ravenclaw';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.2.0','Busto de Ravenclaw — página Revelio — Na escadaria perto da Chama de Flu, lança Revelio diante do busto branco.'));
 a.append(guideCheck('v84.gobstones.extra.2.1','Batente de Ravenclaw — página Revelio — Na porta da sala comum com o grande corvo dourado, usa Revelio.'));
@@ -1458,8 +1457,7 @@ storyCollectibles51.add('v18.minipuzzle.1.0');
 // Depulso: Tarefa 1 do Professor Sharp (disponível após Jackdaw's Rest).
 // Alohomora I: The Caretaker's Lunar Lament.
 const mirrorAssignments86={
- 'Welcome to Hogwarts':[5,6],
- 'Defence Against the Dark Arts Class':[8],
+ 'Defence Against the Dark Arts Class':[5,6,8],
  'Welcome to Hogsmeade':[7],
  'The Helm of Urtkot':[9],
  'The Caretaker’s Lunar Lament':[3,10,11,12],
@@ -1469,7 +1467,11 @@ const mirrorAssignments86={
 const mirrorOriginal86=missionChecklistFor;
 missionChecklistFor=function(q,ci,qi,body){
  mirrorOriginal86(q,ci,qi,body);
- const ids=(mirrorAssignments86[q[0]]||[]).filter(i=>i!==0&&i!==1&&i!==4);if(!ids.length)return;
+ // v92: a visita inicial aos espelhos só aparece depois de falar com Lenora.
+ // As entradas anteriores continuam com os mesmos IDs para preservar progresso.
+ const metLenora=Boolean(state['guide:v67.lenora.start']||state['guide:v18.minipuzzle.1.0']||state['guide:side.27']);
+ const ids=(mirrorAssignments86[q[0]]||[]).filter(i=>i!==0&&i!==1&&i!==4).filter(i=>metLenora||i!==5&&i!==6&&i!==8);
+ if(!ids.length)return;
  const panel=document.createElement('details');panel.className='area78';
  const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas desta etapa';panel.append(h);
  ids.forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
