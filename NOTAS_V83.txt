@@ -1,0 +1,1 @@
+v83: adicionada caixa individual para o baú normal confirmado pelo jogador no recanto do espelho da mariposa, piso superior da Biblioteca, durante Livros a voar das prateleiras. Outros três baús do mapa não classificados como acessíveis sem confirmação. Secção Restrita continua excluída. IDs anteriores mantidos.
