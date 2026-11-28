@@ -1,0 +1,1 @@
+História Principal em ecrã próprio; botão de regresso ao menu inicial. Dados e identificadores mantidos.

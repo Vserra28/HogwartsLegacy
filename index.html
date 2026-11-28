@@ -46,6 +46,7 @@ button{background:var(--panel2);color:var(--text);border:1px solid var(--border)
 
 
 .region-menu{border:1px solid var(--border);border-radius:18px;padding:14px;background:var(--panel);margin:10px 0}.region-menu h2{margin:0 0 12px}.region-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px;width:100%}.region-grid button{display:flex;align-items:center;text-align:left;white-space:normal;overflow-wrap:anywhere;min-width:0;width:100%;min-height:76px;padding:12px;border:1px solid var(--border);border-radius:13px;background:var(--panel2);font-size:1rem;line-height:1.35}.region-grid button:focus-visible{outline:2px solid var(--gold)}
+body.story-screen header,body.story-screen .stats,body.story-screen .toolbar,body.story-screen #nav,body.story-screen main > .footer{display:none!important}body.story-screen .layout{display:block!important}body.story-screen #content{width:100%;max-width:none;min-width:0}.story-back77{margin-bottom:12px;width:100%;text-align:left}
 </style>
 </head>
 <body>
@@ -1358,7 +1359,7 @@ storyCollectibles51.add('v18.minipuzzle.1.0');
 
 build57();
 const renderBefore60=render;
-render=function(){header60();renderBefore60();};
+render=function(){const wasStory=document.body.classList.contains('story-screen');header60();renderBefore60();const isStory=current===0;document.body.classList.toggle('story-screen',isStory);if(isStory){const back=document.createElement('button');back.type='button';back.className='story-back77';back.textContent='← Voltar ao menu inicial';back.onclick=()=>{current=-1;render();};content.prepend(back);}if(wasStory!==isStory)window.scrollTo(0,0);};
 if(sessionStorage.getItem('hlResume63')==='1'){sessionStorage.removeItem('hlResume63');current=0;storySelectedChapter=1;storySelectedMission=null;}
 render();
 </script>
