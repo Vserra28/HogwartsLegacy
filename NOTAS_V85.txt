@@ -1,0 +1,1 @@
+v85: Guia 100% abre menu independente; categorias abrem ecrã separado com botão voltar. As restantes secções abrem sem menu principal persistente e com voltar. História Principal inalterada. Histórico Android e IDs mantidos.\n
