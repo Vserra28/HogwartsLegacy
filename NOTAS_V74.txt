@@ -1,0 +1,1 @@
+Baús da Torre do Relógio: dois normais reportados, posições por confirmar; baús do pêndulo na etapa Professor Weasley. IDs novos onde não foi confirmada correspondência. Sem teste no navegador.

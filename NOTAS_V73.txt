@@ -1,0 +1,1 @@
+Sete recolhas no percurso de Varinhas Cruzadas. Dois baús da sala dos duelos por confirmar. IDs Revelio reutilizados do catálogo; três novos IDs sem correspondência confirmada. Sem teste no navegador.

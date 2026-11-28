@@ -234,24 +234,30 @@ function missionChecklistFor(q,ci,qi,body){
  const ref=document.createElement('a');ref.href='https://www.powerpyx.com/hogwarts-legacy-walkthrough-all-quests/';ref.target='_blank';ref.rel='noopener';ref.textContent='Guia de referência das missões (localizações ainda em revisão)';body.appendChild(ref);
 
  const stepBox=document.createElement("section");stepBox.className="mission-collection-panel";const stepTitle=document.createElement("h4");stepTitle.textContent="📖 Objetivos passo a passo";stepBox.appendChild(stepTitle);(steps44[q[0]]||[]).forEach((label,i)=>{if(!(skipSteps47[q[0]]||[]).includes(i))stepBox.appendChild(guideCheck("v44.steps."+ci+"."+qi+"."+i,label))});body.appendChild(stepBox);
- if(q[0]==='Charms Class'){
+ if(q[0]==='Defence Against the Dark Arts Class'){
  const panel=document.createElement('section');panel.className='mission-collection-panel';
  const h=document.createElement('h4');h.textContent='🦋 Missão secundária — Como uma traça para o quadro';panel.appendChild(h);
- const p=document.createElement('p');p.textContent='Após as primeiras aulas, quando a missão estiver disponível, visita o Salão Central antes de resolveres os outros espelhos. Não é um requisito obrigatório para os restantes espelhos.';panel.appendChild(p);
+ const p=document.createElement('p');p.textContent='Após a Aula de Defesa Contra as Artes das Trevas, visita o Salão Central antes de resolveres os outros espelhos. Não é um requisito obrigatório para os restantes espelhos.';panel.appendChild(p);
  panel.appendChild(guideCheck('v67.lenora.start','Fala com Lenora Everleigh junto ao espelho negro no Salão Central, no Anexo da Biblioteca.'));
  panel.appendChild(guideCheck('v67.lenora.lumos','Lança Lumos diante do espelho para revelar a pista.'));
  panel.appendChild(guideCheck('v18.minipuzzle.1.0','Desce as escadas em direção à sala de Poções; procura a mariposa na parede junto à estátua de Gregory, o Bajulador. Atrai-a com Lumos, regressa ao espelho, apaga Lumos e recolhe a página.'));
  panel.appendChild(guideCheck('side.27','Volta a falar com Lenora no Salão Central para concluir a missão secundária.'));
  body.appendChild(panel);
  }
- if(q[0]==='Defence Against the Dark Arts Class'){const p=document.createElement('p');p.className='guide-note';p.textContent='🦋 Antes do espelho da torre, recomenda-se a missão de Lenora no Salão Central, indicada na Aula de Encantamentos do capítulo 2, assim que estiver disponível.';body.appendChild(p);}
+ if(q[0]==='Defence Against the Dark Arts Class'){const p=document.createElement('p');p.className='guide-note';p.textContent='🦋 Antes do espelho da torre, recomenda-se a missão de Lenora no Salão Central, indicada nesta etapa.';body.appendChild(p);}
  if(q[0]==='Defence Against the Dark Arts Class'){
  const panel=document.createElement('section');panel.className='mission-collection-panel';
  const h=document.createElement('h4');h.textContent='⚔️ Missões secundárias — após a aula';panel.appendChild(h);
- const p=document.createElement('p');p.textContent='Depois da aula de Hecat, segue para a Ala Sul, Pátio da Torre do Relógio. Procura Lucan Brattleby junto à zona de duelos. Faz cada atividade quando Lucan a disponibilizar; se ainda não estiver disponível, regressa após avançar na história.';panel.appendChild(p);
+ const p=document.createElement('p');p.textContent='Depois da aula de Hecat, segue para a Ala Sul, Pátio da Torre do Relógio. Procura Lucan Brattleby junto à zona de duelos. Realiza aqui a primeira ronda; as restantes rondas surgem nas etapas próprias.';panel.appendChild(p);
  panel.appendChild(guideCheck('v68.lucan.start','Fala com Lucan Brattleby e aceita Varinhas Cruzadas — Ronda 1.'));
  panel.appendChild(guideCheck('v68.lucan.duel','No duelo, usa Levioso para quebrar os escudos amarelos, ataques básicos para causar dano e Protego ou esquiva para te defenderes.'));
  panel.appendChild(guideCheck('side.13','Varinhas Cruzadas — Ronda 1: vence o duelo e termina a conversa com Lucan.'));
+ const rh=document.createElement('h4');rh.textContent='📍 Recolhas no percurso de Varinhas Cruzadas';panel.appendChild(rh);
+ for(const [id,label] of [["v73.clock.statue", "Estátua de Levioso — na zona dos duelos, a sudoeste da Chama de Flu do Pátio da Torre do Relógio, junto aos objetos amontoados. Lança Levioso na esfera."], ["v73.clock.flying", "Página voadora — olha para cima na sala dos duelos, junto ao mecanismo do relógio. Usa Accio."], ["v13.revelio.138", "Poço das quatro criaturas — sai da sala dos duelos para o pátio exterior e aproxima-te do poço de pedra. Revelio."], ["v13.revelio.147", "Mapa de Argyllshire — atravessa a ponte de madeira e procura o mapa na parede do átrio. Revelio."], ["v13.revelio.148", "Estátua de Lachlan — na base das escadas próximas do mapa de Argyllshire. Revelio."], ["v13.revelio.149", "Casas de banho assombradas — desce ao corredor das casas de banho e procura a última porta à esquerda. Revelio."], ["v73.clock.bathchest", "Baú normal — no interior da casa de banho seguinte à das casas de banho assombradas; usa Revelio."]])panel.appendChild(guideCheck(id,label));
+ panel.appendChild(guideCheck('v74.clock.normal.1','Baú normal 1 — interior da sala dos duelos de Lucan, Pátio da Torre do Relógio. Usa Revelio; posição individual ainda por confirmar.'));
+ panel.appendChild(guideCheck('v74.clock.normal.2','Baú normal 2 — segundo baú reportado na mesma sala dos duelos. Usa Revelio; posição individual ainda por confirmar.'));
+ const pending=document.createElement('p');pending.className='guide-note';pending.textContent='Os baús atrás das portas do pêndulo pertencem a uma etapa posterior. Não os confundas com os baús normais.';panel.appendChild(pending);
+
  body.appendChild(panel);
  }
  const pages=storyPagePlan[q[0]]||{};
@@ -330,7 +336,7 @@ const gobstoneSteps71=["Fala com Zenobia junto à base das escadas.", "Pátio da
 function optionalCard71(id,n,info){
  const d=document.createElement('details');d.className='group';const title=document.createElement('summary');title.textContent=n;d.appendChild(title);
  const add=t=>{const p=document.createElement('p');p.textContent=t;d.appendChild(p)};
- const m=/^side\.(\d+)$/.exec(id);if(m){const i=Number(m[1]),a=sideDetails71[i];if(a){add('👤 Personagem / início: '+a[0]);add('📍 Localização: '+a[1]);add('Objetivo: '+a[2]);}if(i===23){add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
+ const m=/^side\.(\d+)$/.exec(id);if(m){const i=Number(m[1]),a=sideDetails71[i];if(a){add('👤 Personagem / início: '+a[0]);add('📍 Localização: '+a[1]);add('Objetivo: '+a[2]);}if(i===19){add('🔓 Desbloqueio: conclui as aulas de Encantamentos e Defesa Contra as Artes das Trevas. Nível indicado: 2. Feitiço: Accio.');add('🔥 Chama de Flu: Salão Central (Anexo da Biblioteca). Cressida está sentada num banco no patamar acima das entradas da biblioteca.');const books=['Fala com Cressida no Salão Central.','Livro 1 — centro da biblioteca, piso térreo. Accio.','Livro 2 — entre as estantes laterais do piso térreo. Accio.','Livro 3 — outras estantes laterais do piso térreo. Accio.','Livro 4 — entre as estantes do piso superior, de um lado. Accio.','Livro 5 — entre as estantes do lado oposto do piso superior. Accio.','Regressa a Cressida e entrega os cinco livros.'];books.forEach((t,j)=>d.appendChild(guideCheck('v72.cressida.'+j,t)));add('Usa Revelio para destacar os livros. A página voadora da biblioteca é uma recolha diferente.');}if(i===23){add('🔓 Desbloqueio: conclui Weasley depois das aulas.');add('🪄 Accio • Nível indicado: 3 • Chama de Flu: Torre de Defesa Contra as Artes das Trevas');gobstoneSteps71.forEach((t,j)=>d.appendChild(guideCheck('v71.gobstones.'+j,t)));add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
  d.appendChild(guideCheck(id,'Concluir missão — '+n));return d;
 }
 function optional69(ci,qi,body){
@@ -339,7 +345,7 @@ function optional69(ci,qi,body){
  Object.entries(relationships).forEach(([n,qs],k)=>qs.forEach((v,i)=>{const a=relationSchedule69[k][i];if(a[0]===ci&&a[1]===qi)entries.push(['rel.'+n+'.'+i,relationshipTranslations[v]||v,'Relação — '+n]);}));
  for(const [c,q,i] of assignmentSchedule69)if(c===ci&&q===qi)entries.push(['assignment.'+i,assignmentDetails69[i][0],assignmentDetails69[i].slice(1).join(' ')]);
  if(ci===8&&qi===0)entries.push(['side.57','Tratar dos próprios assuntos — loja assombrada de Hogsmeade','Secundária da atualização de verão; procura Penny em Hogsmeade no inverno.']);
- if(!entries.length)return;const panel=document.createElement('section');panel.className='group';const h=document.createElement('h3');h.textContent='🧭 Missões opcionais — depois desta etapa';panel.appendChild(h);const p=document.createElement('p');p.textContent='Realiza estas missões após esta etapa. As sequências de relacionamento, os níveis mínimos e os requisitos não confirmados individualmente ainda necessitam de validação.';panel.appendChild(p);for(const [id,n,info] of entries)panel.appendChild(optionalCard71(id,n,info));body.appendChild(panel);
+ if(!entries.length)return;const panel=document.createElement('section');panel.className='group';const h=document.createElement('h3');h.textContent='🧭 Missões opcionais — depois desta etapa';panel.appendChild(h);const p=document.createElement('p');p.textContent='As missões com requisitos confirmados indicam o desbloqueio no respetivo painel. As restantes etapas ainda estão em revisão.';panel.appendChild(p);for(const [id,n,info] of entries)panel.appendChild(optionalCard71(id,n,info));body.appendChild(panel);
 }
 
 const assignmentDetails69=[
@@ -415,6 +421,15 @@ function progression43(q,body){
  const name=q[0]; const add=(t)=>{const p=document.createElement('p');p.className='guide-note';p.textContent=t;body.appendChild(p)};
  if(spells[name])add('🪄 Feitiços aprendidos: '+spells[name]);if(notes[name])add('🔓 Progressão: '+notes[name]);
  const groups={"Secrets of the Restricted Section":[...Array.from({length:15},(_,i)=>i),15,16,17,19,20,21,22,23,24,25,28],"The Map Chamber":[18],"The Caretaker’s Lunar Lament":[26,29],"Professor Weasley’s Assignment":[27]};
+ if(name==='Professor Weasley’s Assignment'){
+ const panel=document.createElement('section');panel.className='mission-collection-panel';const h=document.createElement('h4');h.textContent='🕰️ Torre do Relógio — portas do pêndulo';panel.appendChild(h);
+ const p=document.createElement('p');p.textContent='Requisitos: Alohomora I e Glacius ou Arresto Momentum (tarefas de Kogawa). Na Ala Sul, parte da Chama de Flu do Pátio da Torre do Relógio. Imobiliza o pêndulo quando estiver alinhado com o símbolo da porta pretendida.';panel.appendChild(p);
+ panel.appendChild(guideCheck('v74.clock.unicorn','Porta do unicórnio — rés do chão, junto à zona de duelos; abre a porta com o pêndulo imobilizado e recolhe o baú de coleção.'));
+ panel.appendChild(guideCheck('v74.clock.double.1','Porta da criatura de duas cabeças — nos pisos superiores, abre a porta correspondente e recolhe o primeiro baú de coleção.'));
+ panel.appendChild(guideCheck('v74.clock.double.2','Segundo baú reportado na sala da criatura de duas cabeças — verifica a sala; tipo e posição individual por confirmar.'));
+ panel.appendChild(guideCheck('v74.clock.final','Porta do último símbolo — parte superior da torre; abre a porta correspondente e recolhe o baú grande.'));
+ body.appendChild(panel);
+ }
  if(!groups[name])return;
  const d=document.createElement('details');d.className='quest-card';const h=document.createElement('summary');h.textContent='👁 Baús de olho — '+groups[name].length+' locais a visitar';d.appendChild(h);
  const b=document.createElement('div');b.className='quest-body';const p=document.createElement('p');p.textContent='Percurso sugerido após esta etapa, não obrigatório. Confirma o acesso; usa Desilusão fora do campo de visão. As marcações são partilhadas com Baús e páginas.';b.appendChild(p);
@@ -1329,6 +1344,11 @@ for(let i=0;i<30;i++)storyCollectibles51.add('v30.eye.hogsmeade.'+i);
 for(let i=15;i<20;i++)storyCollectibles51.add('v18.minipuzzle.1.'+i);
 
 storyCollectibles51.add('v18.minipuzzle.1.0');
+storyCollectibles51.add("v13.revelio.138");
+storyCollectibles51.add("v13.revelio.147");
+storyCollectibles51.add("v13.revelio.148");
+storyCollectibles51.add("v13.revelio.149");
+
 build57();
 const renderBefore60=render;
 render=function(){header60();renderBefore60();};
