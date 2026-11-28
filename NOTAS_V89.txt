@@ -1,0 +1,1 @@
+v89: acrescentada página de Levioso no corredor entre a Torre de Ravenclaw e a Grande Escadaria à missão Montes de Gobstones, com checkbox individual. A estátua do Pátio da Transfiguração permanece separada. IDs existentes mantidos.
