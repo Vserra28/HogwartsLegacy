@@ -1,0 +1,1 @@
+v87: baú normal confirmado junto à mariposa de Ravenclaw, na missão Montes de Gobstones; painel da Sala dos Troféus esclarece que o espelho do Gabinete do Diretor requer Alohomora e não é desta etapa; proteção contra repetição de espelhos já atribuídos a missões secundárias; identificadores existentes mantidos. Outros baús não confirmados não foram acrescentados.

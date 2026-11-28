@@ -361,6 +361,7 @@ optional84.append(a);}
 a.append(guideCheck('v84.gobstones.extra.2.0','Busto de Ravenclaw — página Revelio — Na escadaria perto da Chama de Flu, lança Revelio diante do busto branco.'));
 a.append(guideCheck('v84.gobstones.extra.2.1','Batente de Ravenclaw — página Revelio — Na porta da sala comum com o grande corvo dourado, usa Revelio.'));
 a.append(guideCheck('v18.minipuzzle.1.1','Espelho da mariposa — página — Procura o espelho na base da escadaria em espiral; usa Lumos e procura a mariposa no patamar superior. Regressa com ela ao espelho.'));
+a.append(guideCheck('v87.ravenclaw.moth.chest','Baú normal — Torre de Ravenclaw, patamar superior junto às pinturas, no local onde encontraste a mariposa do espelho (confirmado durante o jogo).'));
 optional84.append(a);}
 {const a=document.createElement('details');a.className='area78';const h=document.createElement('summary');h.textContent='Sala dos Troféus';a.append(h);
 a.append(guideCheck('v84.gobstones.extra.3.0','Armadura de Troll — página Revelio — No corredor exterior, usa Revelio diante da armadura.'));
@@ -369,7 +370,7 @@ a.append(guideCheck('v84.gobstones.extra.3.2','Armadura de Elfo Doméstico — p
 a.append(guideCheck('v84.gobstones.extra.3.3','Cofre do Cálice de Fogo — página Revelio — No interior da Sala dos Troféus, lança Revelio diante do cofre ornamentado.'));
 a.append(guideCheck('v84.gobstones.extra.3.4','Sala dos Troféus — página Revelio — No interior da Sala dos Troféus, procura a página Revelio junto às exposições centrais.'));
 optional84.append(a);}
-const caveat84=document.createElement('p');caveat84.textContent='Estas recolhas são opcionais, não fazem parte dos seis Gobstones. Se já recolheste uma página numa etapa anterior, não precisas de a recolher novamente. Baús normais nesta rota: localização e acesso ainda não validados; não foram inventados.';optional84.append(caveat84);d.append(optional84);add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
+const caveat84=document.createElement('p');caveat84.textContent='Estas recolhas são opcionais, não fazem parte dos seis Gobstones. O baú junto à mariposa de Ravenclaw está confirmado. Outros baús nesta rota continuam sem acesso/localização individual validado. O espelho no corredor do Gabinete do Diretor, acima da Sala dos Troféus, exige atravessar um portão fechado com Alohomora: não pertence a esta etapa.';optional84.append(caveat84);d.append(optional84);add('Recompensa: 180 XP e cabo de varinha.');}}else if(id.startsWith('rel.')){add('👤 '+info.replace('Relação — ',''));add('📍 Local exato desta etapa ainda não validado; consulta a carta e o marcador da missão.');}else{add(info);}
  d.appendChild(guideCheck(id,'Concluir missão — '+n));return d;
 }
 function optional69(ci,qi,body){
@@ -1437,8 +1438,8 @@ missionChecklistFor=function(q,ci,qi,body){
  mirrorOriginal86(q,ci,qi,body);
  const ids=mirrorAssignments86[q[0]]||[];if(!ids.length)return;
  const panel=document.createElement('details');panel.className='area78';
- const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas acessíveis — '+ids.length;panel.append(h);
- ids.forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
+ const h=document.createElement('summary');h.textContent='🪞 Espelhos de mariposas desta etapa';panel.append(h);
+ ids.filter(i=>i!==0&&i!==1&&i!==4).forEach(i=>panel.append(guideCheck('v18.minipuzzle.1.'+i,miniLists[1].items[i]+' Usa Lumos no espelho, encontra a mariposa, regressa e apaga Lumos para obter a página.')));
  body.append(panel);
 };
 // Associar o progresso já assinalado em missões anteriores ao ID único do espelho.
